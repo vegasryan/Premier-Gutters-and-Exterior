@@ -1,0 +1,1 @@
+(()=>{const form=document.getElementById("service-area-hero-form");form&&form.addEventListener("submit",e=>{if(form.checkValidity())return;e.preventDefault(),form.classList.add("was-submitted");const first=form.querySelector(".sah-field :invalid");first&&first.focus()})})();

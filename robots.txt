@@ -1,0 +1,3 @@
+# Not launched yet: the domain still points at the old site. Opened on launch day.
+User-agent: *
+Disallow: /

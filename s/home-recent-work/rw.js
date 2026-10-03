@@ -1,0 +1,1 @@
+(()=>{const root=document.getElementById("home-recent-work");if(!root||!("IntersectionObserver"in window))return;const io=new IntersectionObserver(entries=>{entries.some(e=>e.isIntersecting)&&(io.disconnect(),root.querySelectorAll('img[loading="lazy"]').forEach(img=>{img.loading="eager"}))},{rootMargin:"1000px 0px"});io.observe(root)})();

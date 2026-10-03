@@ -1,0 +1,5 @@
+# Premier Gutters and Exterior: a plain static site, no build step. Netlify Forms picks up the forms named
+# "estimate" (data-netlify="true", honeypot "company"); set the form notification to DeeAnn's email in Netlify.
+[build]
+  publish = "."
+  command = ""
