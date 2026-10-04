@@ -1,1 +1,0 @@
-(()=>{const mq=window.matchMedia("(max-width: 700px)"),lists=document.querySelectorAll("#site-footer .fe-acc"),set=()=>lists.forEach(d=>{d.open=!mq.matches,d.querySelector("summary").tabIndex=mq.matches?0:-1});lists.forEach(d=>d.querySelector("summary").addEventListener("click",e=>{mq.matches||e.preventDefault()})),set(),mq.addEventListener("change",set)})();

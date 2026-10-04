@@ -1,1 +1,0 @@
-(()=>{const form=document.getElementById("about-estimate-form");form&&form.addEventListener("submit",e=>{if(form.checkValidity())return;e.preventDefault(),form.classList.add("was-submitted");const first=form.querySelector(".abh-field :invalid");first&&first.focus()})})();
