@@ -1,0 +1,735 @@
+/* Premier Gutters and Exterior v2: the theme. Vegas's picks of 4 Oct 2026, locked (see ../direction/index.html).
+   This is the only source of colour, type, corners and buttons for the site. A section adds layout with these tokens;
+   it never adds a colour, a font size, a radius or a button style of its own.
+
+   Colour: Big sky. No white backgrounds: page #EEF2F7, bands #E1E8F2. White is for the nav and cards only.
+   Type: Libre Franklin only. Eight sizes, one job each: 64 / 40 / 22 / 20 / 18 / 16 / 15 / 13.
+   Buttons: two (Vegas, 4 Oct): the first site's green, with an edge, a light ring and a fade, for the estimate, and a
+   white button made the same way, its edge darkening into its foot, for the call. Capitals, weight 900. */
+
+@font-face {
+  font-family: 'Libre Franklin';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(fonts/libre-franklin-100-900.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------- tokens ---------- */
+:root {
+  /* backgrounds */
+  --nav: #FFFFFF;         /* the header, its menu, the phone call bar */
+  --surface: #FFFFFF;     /* cards */
+  --page: #EEF2F7;        /* every page background */
+  --band: #E1E8F2;        /* every other section */
+  --field-bg: #F8FAFC;    /* inputs, the dropdown, choices */
+  --line: #CDD7E5;        /* dividers */
+  --field-line: #7A89A8;  /* field outlines (3.3:1) */
+  /* type colours (Vegas, 4 Oct: "i like A"): headings in our deep navy, the ink the Purewash way (purewashatx.com's stylesheet
+     has one ink, the blue of its dark sections, and the rest of its type is that ink with white added); the eyebrow in her logo
+     navy; the text people read in charcoal with a little blue. Navy otherwise only for what you can click. Before: charcoal
+     headings #181E2C, and the eyebrow in the heading colour with a short navy bar under it. The pairings tried are on
+     boards/type-colour-now.html */
+  --heading: #16213A;     /* headings (h1 to h3, form titles, the eyebrow tag's face): an ink dark blue since 5 Oct (Vegas: "our typography
+                             looks too blue it needs to be an ink dark blue", then "ship this" on boards/eyebrow-style.html, Ink).
+                             OKLCH .25 / .05 / 266, between the deep navy #1A2A5E it replaced (chroma .095) and the old charcoal
+                             #181E2C (.029); 14.2:1 on the page, white words on it 16:1 */
+  --ink: #2F3544;         /* everything people read: 10.9:1 on the page */
+  --muted: #5C6375;       /* captions, names, help text: 5.3:1 on the page, 4.9 on a band */
+  --label: #16213A;       /* group labels (.label, the menus' Gutters and Exterior): the ink, with the headings, since 5 Oct. A
+                             section's eyebrow is a tag in the heading colour (below). Before: #3951A5 with a dash (5 Oct
+                             morning), #24397E plain (4 Oct) */
+  --link-text: var(--heading); /* text links with an arrow (View all services, Read all of our Google reviews): the heading
+                             colour (Vegas, 4 Oct: "it should match the headers color") */
+  --head: #24397E;        /* her logo navy: links inside sentences, the call button, icons, the closing band */
+  --link: #24397E;
+  /* action: her logo green, with white words since Vegas, 4 Oct ("have both use white text"; they were dark navy). The button is
+     her exact green (--act) since 5 Oct; --act-lo, --act-hi and --act-ring are the 4 Oct fade's values, kept for the boards that
+     show it (boards/secondary.html, boards/type-colour-now.html). --act-edge is the green button's pressed ring */
+  --act: #54B445; --act-lo: #43A434; --act-hi: #62C152; --act-edge: #348926; --act-ring: rgb(255 255 255 / .4);
+  --on-act: #0F1A38; --act-words: #FFFFFF; --star: #54B445;   /* --on-act stays the deepest navy: the keycap's edge on navy, the chosen chip */
+  /* the 4 Oct white second button's values (Vegas: "have the mvp use this white button as the secondary", refs/buttons/r4): a
+     white face fading to --call-foot, an edge running --call-edge into --call-edge-foot, the light --call-ring inside it. The
+     button is blue since 5 Oct (--second, below); these stay because the four how-it-works cards are made of them and the
+     review cards' face reads --call and --call-foot. --call-words is read by nothing now */
+  --call: #FFFFFF; --call-foot: #EDF1F8; --call-edge: #CBD5E5; --call-edge-foot: #B3C0D6; --call-ring: rgb(255 255 255 / .9);
+  --call-words: var(--head);   /* navy words: 10.7:1 on the white, 9.5:1 at the foot, on every ground */
+  /* the soft pair (Vegas, 5 Oct 2026: "ship this pair to all the sites buttons", from /refs round 5, refs/buttons/r5, the board's
+     3 Soft, blue, ?way=c3b). New tokens only: every --act-* and --call-* value above stays as it is, because the review cards,
+     the how-it-works cards and the chip read them (the white cards are made of the white button's tokens). */
+  --act-shadow: 52 137 38;      /* her deep green (--act-edge) as rgb: the shadow under the green button */
+  --second: #24397E;            /* the blue second button's face (5 Oct, until it went white the same evening), her logo navy; white
+                                   words 10.7:1. It stays: the navy review card (home-why-premier) reads --second and --second-shadow */
+  --second-up: #3951A5;         /* the blue button on navy grounds, the focus blue; kept for boards/buttons.html */
+  --second-words: #FFFFFF;
+  --second-shadow: 26 42 94;    /* the deep navy (--dark-2) as rgb */
+  /* the second button since 6 Oct (Vegas: "ship that new secondary button", from boards/secondary-white.html, after the white Schedule
+     Service button in a Dribbble HVAC hero, shot 27428633): a white key with a thin grey edge and a darker ledge along its foot */
+  --btn2: #FFFFFF;              /* its face, on every ground */
+  --btn2-foot: #F3F5F9;         /* the face's last few pixels, a touch darker, as on the shot */
+  --btn2-words: #16213A;        /* the headings' ink, fixed here so the heroes' charcoal headings don't change it; 16:1 on white */
+  --btn2-edge: #DDE3EC;         /* the thin line at its outer edge (the shot's line sits 12 steps under its bar; this, under our page) */
+  --btn2-ledge: #B3BFD3;        /* the ledge along its foot, which the edge darkens into as it comes down the sides */
+  /* the Google review chip: the white button's face and steel edge, as its own values, so a change to the white button
+     leaves the chip alone (Vegas, 4 Oct: "google reviews chip should not be affected by this") */
+  --chip-face: #FFFFFF; --chip-foot: #EDF1F8; --chip-edge: #CBD5E5; --chip-edge-foot: #B3C0D6;
+  /* navy: the closing band, the footer, the shade over photos */
+  --dark: #24397E; --dark-2: #1A2A5E; --on-dark: #FFFFFF; --on-dark-muted: #CBD5EC;
+  --logo-blue: #001768;   /* her logo's darkest blue, its most common deep blue (sampled from img/premier-gutters-logo-720.webp, 6 Oct): the
+                             What we do cards' photo tint */
+  --focus: #3951A5; --focus-dark: #54B445; --err: #A3241B;
+  --shadow: 22 33 63;     /* rgb of the ink, for tinted shadows */
+
+  /* type: Libre Franklin, eight sizes */
+  --f: "Libre Franklin", "Franklin Gothic Medium", Arial, sans-serif;
+  --h1: clamp(40px, 4.4vw, 64px);   /* page heading: 700, capitals, +.02em */
+  --h2: clamp(28px, 2.8vw, 40px);   /* section heading: 700, capitals, +.02em */
+  --h3: 22px;                       /* small heading: 700, sentence case */
+  --lede: 20px;                     /* lead lines and quotes */
+  --body: 18px;                     /* text */
+  --ui: 16px;                       /* menu, buttons, labels, fields, footer */
+  --cap: 15px;                      /* captions, names, help text */
+  --small: 13px;                    /* small capital labels */
+
+  /* layout */
+  --wrap: 1216px;
+  --pad: clamp(20px, 4vw, 48px);
+  --edge: var(--pad);               /* where words start from the screen edge; 68px at 1440 from 1240 up (below) */
+  --sec: clamp(64px, 8vw, 104px);
+  --r: 4px;                         /* the one corner: buttons, fields, cards, photos */
+  --r-btn: 12px;                    /* every button's corner: the green one (Vegas, 4 Oct: "this is our primary button ... ship this
+                                       everywhere") and the call button ("rounded just like the primary") */
+  --btn-h: 46px;                    /* every button's height, the nav's (Vegas, 4 Oct: "make that the sitewide primary cta no
+                                       exceptions for primary"); 44px on phones, below */
+  --btn-px: 22px;                   /* and its side padding; 16px on phones, 12px under 375px */
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 100px; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 400 var(--body)/1.6 var(--f); overflow-wrap: break-word; }   /* a long email address breaks rather than widening the page */
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--link); text-underline-offset: .18em; text-decoration-thickness: 1.5px; }
+a:hover { text-decoration-thickness: 2.5px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.sec--dark :focus-visible, .site-ftr :focus-visible { outline-color: var(--focus-dark); }
+h1, h2, h3 { margin: 0; color: var(--heading); font-family: var(--f); text-wrap: balance; }
+h1 { font-size: var(--h1); line-height: 1; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; }
+h2 { font-size: var(--h2); line-height: 1.05; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; }
+h3 { font-size: var(--h3); line-height: 1.25; font-weight: 700; letter-spacing: -.005em; }
+p { margin: 0; }
+.wrap { margin-inline: var(--edge); }   /* the page column starts and ends on --edge, with the header's logo (MVP, 4 Oct) */
+.sec { padding-block: var(--sec); }
+.sec--band { background: var(--band); }
+.sec--dark { background: var(--dark); color: var(--on-dark); }
+.sec--dark h2, .sec--dark h3 { color: var(--on-dark); }
+.lede, .sec-lede { font-size: var(--lede); line-height: 1.5; max-width: 60ch; }
+.sec-lede { color: var(--muted); margin-top: 14px; }
+.sec--dark .sec-lede { color: var(--on-dark-muted); }
+.muted { color: var(--muted); }
+.caption { font-size: var(--cap); color: var(--muted); }
+.label { font: 700 var(--small)/1.2 var(--f); letter-spacing: .08em; text-transform: uppercase; color: var(--label, var(--muted)); }
+.sec--dark .label { color: var(--on-dark-muted); }
+/* a section's eyebrow: the tag (Vegas, 5 Oct: "ship this", from boards/eyebrow-style.html: Tag, our capitals, in the heading
+   colour). From his Dribbble find, Avenor's "Property Features" (dribbble.com/shots/27469731), measured off his screenshot: a small
+   filled tag in the heading colour with white words, an even pad (the capitals centred, a hair less on the right for the letter
+   spacing after the last letter), a 4px corner, no edge, ring or shadow. The find's gap to the heading (1.15 of the heading's
+   capitals) came in a little (Vegas, 5 Oct: "needs to be moved a tiny bit closer to the header"): 22px under a 40px heading, 16px
+   under the phones' 28px. Our own eyebrow type inside: 13px capitals, 700, +.08em. Not in the
+   heroes, not on the service cards' photos. On navy it turns over: a white face, heading-colour words. It replaced the dash
+   before the words (5 Oct morning), which replaced the plain eyebrow (4 Oct). */
+main .label { display: inline-block; }
+main section:not([id$="-hero"]) .label:not(.hs-card .label) { padding: 7.5px 10px 8px 11px; border-radius: var(--r);
+  background: var(--heading); color: #FFFFFF; line-height: 1; margin-bottom: var(--tag-gap, 22px); }
+main section.sec--dark:not([id$="-hero"]) .label:not(.hs-card .label),
+main section:not([id$="-hero"]) .sec--dark .label:not(.hs-card .label) { background: #FFFFFF; color: var(--heading); }
+@media (max-width: 760px) { :root { --tag-gap: 16px; } }
+/* The hero keeps the type colours it had (Vegas, 4 Oct: "dont change hero at all"): the deep navy headings and the eyebrow colour are for
+   the sections below it. Every hero section's id ends in -hero: the home page's, the contact page's and each service page's */
+section[id$="-hero"] { --heading: #181E2C; --label: #181E2C; --link-text: #181E2C; }
+.i { width: 1em; height: 1em; fill: currentColor; flex: none; }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 12px; top: 12px; z-index: 50; background: var(--surface); padding: 8px 12px; }
+
+/* ---------- buttons: two ----------
+   The soft pair (Vegas, 5 Oct 2026: "ship this pair to all the sites buttons", from /refs round 5, refs/buttons/r5, the board's
+   "3 Soft, blue": http://premier-buttons-combos.idea.localhost:8787/?way=c3b). After Dribbble 10897497, 21022928 and 27643230:
+   flat faces, a 1px light along the top, a soft shadow in the face's own deep colour, no edge, no fade, no ring.
+   - The green button (.btn--act: the estimate, the header's phone number, the forms' full-width button, the products tabs) is her
+     exact green #54B445, flat, with a 1px white light along its top (38%) and a soft shadow in her deep green. Pointed at, it rises
+     1px, goes 8% lighter and lengthens its shadow (Vegas's hover rule, 4 Oct: "just lift it up and have it tinted lighter on the
+     primary"); pressed, it goes down 2px and a 1.5px deep green ring takes the shadow's place. White words (Vegas, 4 Oct), 2.6:1
+     on her green: under the 4.5:1 a 16px label needs, kept for the brand. One primary, no exceptions (Vegas, 4 Oct).
+   - The second button (.btn--call: "Explore services" on the service heroes, the footer's call and the call buttons further down the
+     pages) is a white key (Vegas, 6 Oct: "build me a secondary button like the white sehdule servive button in their nav. with our
+     shape and typography", after Dribbble 27428633, an HVAC hero by JA. Parvez for Wingly; then "ship that new secondary button";
+     board boards/secondary-white.html). As the shot draws it, measured on its full-size image: a white face going a touch darker at
+     its foot; a thin light grey line right at the outer edge, no white rim outside it; a darker grey ledge 2px along the foot (the
+     shot's at our height), the line turning into the ledge's grey as it comes down the sides so it wraps round the ledge (Vegas:
+     "the border overlaps the shadow without being darker" of a try where it didn't); no soft shadow. Ink words (#16213A, 16:1), our
+     12px corner, 46px height and capitals. Built as the 4 Oct white button's edge was: the border is transparent (1px, 2px at the
+     foot) and a border-box layer shows through it, the edge's grey darkening into the ledge's over the last few pixels, under the
+     white face's padding-box layer; the padding takes back the pixel the thinner side border gives up, so it is every button's
+     size. Pointed at, it rises 1px; pressed, the face goes down 1px onto a 1px ledge, like a key. The same on every ground. It
+     replaced the white button with a hairline and a soft shadow (5 Oct night), the blue one (5 Oct evening) and the 4 Oct white
+     button with a steel edge.
+   - On navy grounds the green button's shadow goes black, since a navy shadow does not show on navy.
+   - The --act-*, --call-* and --second-* values above stay as they were: the how-it-works cards are made of the --call ones, the
+     review cards read --call, --call-foot, --second and --second-shadow, and the boards that show the earlier pairs read the rest.
+   Both share the theme's size (--btn-h), padding (--btn-px), 12px corner (--r-btn) and a 2px transparent border, so nothing
+   moved when they changed. Buttons are theme-only: no section sets their colours. */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: var(--btn-h); padding: 0 var(--btn-px);
+  border: 2px solid transparent; border-radius: var(--r-btn); font: 900 var(--ui)/1 var(--f); letter-spacing: .05em; text-transform: uppercase;
+  text-decoration: none; white-space: nowrap; cursor: pointer; }
+.btn .i { width: 1.15em; height: 1.15em; }
+/* an arrow after a button's words (.i--after: Explore services in the service heroes; Vegas, 6 Oct: "add an arrow to this button in
+   the heros") slides 3px right when pointed at, as the text links' arrows and the footer's call arrow do */
+.btn .i--after { transition: transform .18s var(--ease); }
+@media (hover: hover) { .btn:hover .i--after { transform: translateX(3px); } }
+@media (prefers-reduced-motion: reduce) { .btn .i--after { transition: none; } }
+.btn--act { border-color: transparent; color: var(--act-words); background: var(--act);
+  --btn-lit: inset 0 1px 0 rgb(255 255 255 / .38);
+  --btn-sh: 0 10px 18px -8px rgb(var(--act-shadow) / .6); --btn-sh-up: 0 14px 22px -8px rgb(var(--act-shadow) / .6);
+  box-shadow: var(--btn-lit), var(--btn-sh);
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease), filter .2s var(--ease); }
+@media (hover: hover) {
+  .btn--act:hover { transform: translateY(-1px); filter: brightness(1.08); box-shadow: var(--btn-lit), var(--btn-sh-up); }
+}
+.btn--act:active { transform: translateY(2px); filter: none; box-shadow: var(--btn-lit), 0 0 0 1.5px var(--act-edge); }
+.btn--call { color: var(--btn2-words); border-color: transparent; border-width: 1px 1px 2px; padding: 0 calc(var(--btn-px) + 1px);
+  background: linear-gradient(to bottom, var(--btn2) calc(100% - 8px), var(--btn2-foot)) padding-box,
+    linear-gradient(to bottom, var(--btn2-edge) calc(100% - 9px), var(--btn2-ledge) calc(100% - 3px)) border-box;
+  --btn-lit: 0 0 #0000; --btn-sh: 0 0 #0000; --btn-sh-up: 0 0 #0000;   /* no shadow; kept as properties so a board can set one */
+  box-shadow: var(--btn-lit), var(--btn-sh);
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+@media (hover: hover) {
+  .btn--call:hover { transform: translateY(-1px); box-shadow: var(--btn-lit), var(--btn-sh-up); }
+}
+.btn--call:active { transform: none; border-width: 2px 1px 1px; }   /* the face down 1px onto a 1px ledge */
+/* navy grounds (the service heroes' panel, the navy bands, the footer's panels): the green button's shadow goes black, since a navy
+   shadow does not show on navy. Set as properties so the hover and press rules above need no second copy. A white form card inside a
+   navy band (.estimate-card) puts the green button back on a light ground, so it resets after. */
+:is(.sec--dark, .site-ftr) .btn--act { --btn-sh: 0 10px 18px -8px rgb(0 0 0 / .45); --btn-sh-up: 0 14px 22px -8px rgb(0 0 0 / .45); }
+.estimate-card .btn--act { --btn-sh: 0 10px 18px -8px rgb(var(--act-shadow) / .6); --btn-sh-up: 0 14px 22px -8px rgb(var(--act-shadow) / .6); }
+.btn--block { width: 100%; }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: .55; cursor: not-allowed; transform: none; filter: none; }
+@media (prefers-reduced-motion: reduce) { .btn--act:hover, .btn--call:hover { transform: none; } }
+@media (forced-colors: active) { .btn { border-color: ButtonText; } }
+
+/* text links that lead to a page */
+.arrow-link { display: inline-flex; align-items: center; gap: 8px; font: 800 var(--ui)/1.2 var(--f); color: var(--link-text, var(--link)); text-decoration: none; }
+.arrow-link .i { width: 18px; height: 18px; color: var(--link-arrow, currentColor); transition: transform .18s var(--ease); }
+.arrow-link { text-transform: uppercase; }  /* RULE (Vegas, 5 Oct): every text link with an arrow is in caps, same size and weight as before; new ones too */
+.arrow-link:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+.arrow-link:hover .i { transform: translateX(3px); }
+.sec--dark .arrow-link { color: var(--on-dark); }
+
+.stars { display: inline-flex; gap: 2px; color: var(--star); }
+.stars .i { width: 18px; height: 18px; }
+
+/* ---------- the Google review chip: the keycap ----------
+   Her rating, "5.0 from 36 Google reviews", linking to her Google reviews: in every hero under the line (on the navy
+   panel) and under the homepage reviews heading (on the band). Vegas, 4 Oct: "show me a board of a 3d google review chip
+   we can use", then "ship 3" (the gloss chip), then "ship 5 instead" (refs/chip/r1, option 5): Dribbble's raised-lip
+   pills (23369774, 26121743), made like the review cards' ledge.
+   - The face: the white button's white, fading to its off-white foot.
+   - The edge: the white button's steel, darkening down the sides into a 4px ledge along the foot, a step darker again;
+     a bright line along the top; a soft navy shadow. The ledge is inside the 40px, so the chip takes the room it did.
+   - Pointed at, it lifts 1px onto a longer shadow; pressed, it sinks 2.5px onto its ledge (the ledge goes to 1.5px).
+   - Google's G keeps its own colours. A section places the chip (its margins, its grid cell); its look is only here,
+     like the buttons'. */
+.g-chip { display: inline-flex; align-items: center; gap: 12px; width: max-content; max-width: 100%; height: 40px; padding: 0 18px 0 13px;
+  border: solid transparent; border-width: 1.5px 1.5px 4px; border-radius: var(--r-pill);
+  background: linear-gradient(180deg, var(--chip-face) 0%, var(--chip-foot) 100%) padding-box,
+    linear-gradient(180deg, var(--chip-edge) 0%, var(--chip-edge-foot) 55%, color-mix(in oklab, var(--chip-edge-foot) 80%, #000) 100%) border-box;
+  box-shadow: inset 0 1.5px 0 var(--chip-face), 0 10px 16px -12px rgb(var(--shadow) / .55);
+  font: 500 var(--ui)/1 var(--f); color: var(--heading); text-decoration: none; white-space: nowrap;
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+.g-chip b, .g-chip strong { font-weight: 800; color: var(--heading); }
+.g-chip svg { flex: none; width: 18px; height: 18px; }
+@media (hover: hover) {
+  .g-chip:hover { transform: translateY(-1px); text-decoration: none;
+    box-shadow: inset 0 1.5px 0 var(--chip-face), 0 14px 20px -12px rgb(var(--shadow) / .55); }
+}
+.g-chip:active { transform: translateY(2.5px); border-bottom-width: 1.5px;
+  box-shadow: inset 0 1.5px 0 var(--chip-face), 0 4px 8px -6px rgb(var(--shadow) / .55); }
+@media (prefers-reduced-motion: reduce) { .g-chip:hover, .g-chip:active { transform: none; } }
+@media (forced-colors: active) { .g-chip { border-color: LinkText; } }
+
+/* ---------- the estimate form: the glass form ----------
+   Vegas, 4 Oct: "yes lets use the glass form dont change whats inside it" (the homepage hero's form, which is the first
+   site's card: "i need the form to be like the one in premier-gutters-mvp ... with the glass border to it and the
+   sizing"). Every estimate form takes its look; what is inside each form (its title, fields, help lines, button and
+   their order) stays its own.
+   - The card: white, a 6px frosted ring outside it (backdrop blur; the ring sits outside, so the card keeps its place),
+     14px corners, a soft navy shadow. On the light page the ring is tinted blue so it shows; on navy, frosted white.
+   - The title 28px; labels 16px, medium, in the heading colour.
+   - The fields: flat 48px boxes in the page colour, no outline, 12px corners, medium 18px words; pointed at, a faint blue
+     ring; focused, white with the focus ring and a soft halo. */
+.estimate-card { margin-inline: -6px; padding: 28px 32px 26px; color: var(--ink); background: var(--surface) padding-box;
+  border: 6px solid color-mix(in srgb, var(--focus) 18%, transparent); border-radius: 14px; box-shadow: 0 30px 50px -30px rgb(var(--shadow) / .55);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1); backdrop-filter: blur(10px) saturate(1.1); }
+.sec--dark .estimate-card { border-color: color-mix(in srgb, var(--band) 24%, transparent); }
+/* the form's title in capitals, as the headings are set (Vegas, 6 Oct: "ship that caps to the free estimate change and for other forms",
+   from boards/form-caps.html): every estimate form, the home hero's "Get a free estimate:", the contact hero's and the closing panels'
+   "Tell us about your project:" and the draft forms'. The two heroes set their own title spacing (.hh-form .form-title, -.012em), so the
+   second selector outranks it. Measured: one line at 1440, 390 and 360 for "GET A FREE ESTIMATE:"; the longer title takes two on phones. */
+.estimate-card .form-title { margin-bottom: 18px; font: 700 28px/1.2 var(--f); letter-spacing: .02em; text-transform: uppercase; color: var(--heading); }
+.estimate-card.hh-form .form-title { letter-spacing: .02em; }
+.estimate-card .btn--block { margin-top: 8px; }
+.field-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0 16px; }
+.field { display: grid; gap: 5px; margin-bottom: 14px; }
+.field label, .chips legend { font: 500 var(--ui)/22px var(--f); color: var(--heading); }
+.field input, .select select { width: 100%; height: 48px; min-height: 48px; padding: 0 16px 0 18px; border: 0; border-radius: 12px;
+  background-color: var(--page); color: var(--ink); font: 500 var(--body)/22px var(--f); box-shadow: none;
+  transition: background-color .15s var(--ease), box-shadow .15s var(--ease); }
+@media (hover: hover) {
+  .field input:hover, .select select:hover { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--focus) 35%, transparent); }
+}
+.field input:focus-visible, .select select:focus-visible { outline: none; background-color: var(--surface);
+  box-shadow: inset 0 0 0 2px var(--focus), 0 0 0 4px color-mix(in srgb, var(--focus) 16%, transparent); }
+.field input:autofill { box-shadow: inset 0 0 0 60px var(--page); -webkit-text-fill-color: var(--ink); }
+.field .help { font-size: var(--cap); color: var(--muted); }
+.field-err { font-size: var(--cap); color: var(--err); }
+.field--err input { box-shadow: inset 0 0 0 2px var(--err); }
+.select { position: relative; display: block; }
+.select select { padding-right: 42px; appearance: none; cursor: pointer; }
+.select .i { position: absolute; right: 14px; top: 50%; width: 16px; height: 16px; margin-top: -8px; color: var(--head); pointer-events: none; }
+.chips { border: 0; padding: 0; margin: 2px 0 18px; }
+.chips legend { padding: 0; margin-bottom: 8px; }
+.chip-set { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.chip span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border: 1.5px solid var(--field-line); border-radius: var(--r);
+  font: 400 var(--ui)/1 var(--f); color: var(--ink); background: var(--field-bg); transition: background-color .15s var(--ease); }
+.chip input:hover + span { background: var(--band); }
+.chip input:checked + span { background: var(--act); border-color: var(--act); color: var(--on-act); font-weight: 700; }
+.chip input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+/* ---------- a review ---------- */
+.review blockquote { margin: 0; font-size: var(--lede); line-height: 1.5; color: var(--ink); }
+.review .by { margin-top: 10px; font-size: var(--cap); color: var(--muted); }
+.sec--dark .review blockquote { color: var(--on-dark); }
+.sec--dark .review .by { color: var(--on-dark-muted); }
+
+/* ---------- question and answer ---------- */
+.qa { border-bottom: 1.5px solid var(--line); }
+.qa summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px 0; cursor: pointer; }
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary .i { width: 22px; height: 22px; color: var(--head); transition: transform .2s var(--ease); }
+.qa[open] summary .i { transform: rotate(45deg); }
+.qa .ans { padding: 0 44px 22px 0; max-width: 64ch; }
+
+/* ---------- the header (every page) ----------
+   A white bar that floats over the top of every page, after Vegas's Roofar reference (picked 4 Oct 2026). It replaces
+   theme.css's header block, .mnav and .callbar. Theme tokens only, plus the bar's own measurements and two corners
+   (the :root block below; the corners can move to the token block).
+
+   Vegas's calls (4 Oct): rounded like the reference (a 12px bar, fully round link marks in it); one button, green, and
+   it is the phone number; the current page and hover as a tint with navy words; Home kept. The buttons are the site's
+   buttons, entirely from theme.css's .btn and its --btn-h, --btn-px and --r-btn (Vegas: "one primary, no exceptions"),
+   so the header sets neither their size nor their corners. It sets only its green number's words: 18px in the same button (Vegas, 4
+   Oct: "i meant in the nav larger").
+
+   The bar is one piece: the Services menu and the phone menu grow out of it, under one outline and one shadow, the way
+   a downspout drops from the gutter with no seam. Both menus are <details>, so they open without JavaScript; header.js
+   adds Escape, a click outside and one open at a time.
+
+   Width: Purewash's (Vegas, 5 Oct: "ship the new width plus glass"): at most 1240px wide, centred, and 16px in from each side
+   below that, down to 390px phones (8px in under 390, where 16 crowds the logo into the green number); the logo 24px into the
+   bar (12px on phones, as far in as the menu button). It was as wide as the
+   homepage hero's panel (12px in, at most 1680px; 8px on phones), with the logo on --edge. The bar is glass (below).
+
+   Heroes: the header keeps --nav-clear of space at the top of the page. A photo hero runs under the bar with
+   margin-top: calc(-1 * var(--nav-clear)) and starts its words at calc(var(--nav-clear) + its own gap). */
+
+:root {
+  --nav-top: 16px;                                   /* the bar's distance from the top of the page */
+  --nav-h: 76px;                                     /* the bar's height */
+  --nav-side: 16px;                                  /* the bar's edges sit at least this far in (Purewash's width, 5 Oct) */
+  --nav-max: 1240px;                                 /* and it is no wider than this, centred */
+  --nav-x: max(var(--nav-side), (100vw - var(--nav-max)) / 2);  /* where the bar's left edge falls */
+  --nav-lead: 24px;                                  /* the logo, this far into the bar (Purewash's 24px); 12px on phones */
+  --nav-in: 16px;                                    /* the bar's right end, so the button sits nested in it */
+  --nav-clear: calc(var(--nav-top) + var(--nav-h));  /* top of the page to the bar's bottom edge: 92px, 68px on phones */
+  --r-panel: 12px;                                   /* the bar, its menus and the call bar (MAIN: shared with the hero and footer panels) */
+  --r-pill: 999px;                                   /* the link marks and the menu button in the bar */
+}
+
+html { scroll-padding-top: calc(var(--bar-h, 0px) + var(--nav-clear) + 16px); }
+
+.site-hdr { position: sticky; top: var(--bar-h, 0px); z-index: 36; height: var(--nav-clear); padding-top: var(--nav-top); pointer-events: none; }
+.hdr-bar { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center;
+  column-gap: 20px; pointer-events: auto;
+  width: min(100% - 2 * var(--nav-side), var(--nav-max)); height: var(--nav-h);
+  margin-inline: auto; border-radius: var(--r-panel);
+  --nav: rgb(255 255 255 / .72); isolation: isolate; }   /* the glass: --nav for the bar's layer (below) and the menus */
+
+/* glass (Vegas, 5 Oct: "ship the new width plus glass", from boards/nav-glass.html, after Purewash's nav, purewashatx.com, measured
+   in Chrome and read from its stylesheet): white at 72% over the page behind it, blurred 14px and saturated 1.5x; a 1px white edge
+   at 65%, a 1px white light along the inside of its top, a soft shadow under it. The glass is a layer behind the bar (::before),
+   not the bar itself, so the Services menu and the phone menu, which hang from the bar, are glass over the page too (a backdrop
+   filter on the bar would hide the page from them; isolation keeps the layer above the phone menu's scrim). The bar's old
+   drop-shadow filter is gone: a shadow under a see-through bar shows through it. With a menu open the bar keeps only its light,
+   so its shadow doesn't fall across the menu. Where someone asks for less transparency the bar and menus are plain white. */
+.hdr-bar::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  background: var(--nav); border: 1px solid rgb(255 255 255 / .65);
+  -webkit-backdrop-filter: blur(14px) saturate(1.5); backdrop-filter: blur(14px) saturate(1.5);
+  box-shadow: 0 12px 34px -16px rgb(var(--shadow) / .35), inset 0 1px 0 rgb(255 255 255 / .7); }
+.hdr-bar:has(details[open])::before { box-shadow: inset 0 1px 0 rgb(255 255 255 / .7); }
+.svc-menu, .mnav-sheet { -webkit-backdrop-filter: blur(14px) saturate(1.5); backdrop-filter: blur(14px) saturate(1.5);
+  box-shadow: 0 12px 34px -16px rgb(var(--shadow) / .35); }
+@media (prefers-reduced-transparency: reduce) { .hdr-bar { --nav: #FFFFFF; } }
+
+.brand { grid-column: 1; justify-self: start; display: block; margin-left: var(--nav-lead); border-radius: var(--r); }
+.brand img { width: auto; height: calc(var(--nav-h) - 16px); }
+
+/* the links: centred on the bar */
+.nav { grid-column: 2; align-self: stretch; }
+.nav-list, .svc-menu ul, .mnav-sheet ul { margin: 0; padding: 0; list-style: none; }
+.nav-list { display: flex; height: 100%; gap: 2px; }
+.nav-list > li { position: relative; display: flex; align-items: center; }
+.nav-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px; border-radius: var(--r-pill);
+  font: 600 var(--ui)/1 var(--f); color: var(--ink); text-decoration: none; white-space: nowrap; cursor: pointer;
+  transition: background-color .15s var(--ease), color .15s var(--ease); }
+.nav-link:hover, .nav-svc[open] > .nav-link { color: var(--link); background: var(--page); }
+.nav-link[aria-current], .nav-svc.is-current > .nav-link { color: var(--link); background: var(--band); }
+.nav-svc > summary { list-style: none; }
+.nav-svc > summary::-webkit-details-marker, .mnav > summary::-webkit-details-marker, .mnav-svc > summary::-webkit-details-marker { display: none; }
+.nav-svc .caret { width: 14px; height: 14px; color: var(--head); transition: transform .18s var(--ease); }
+.nav-svc[open] .caret { transform: rotate(180deg); }
+
+/* the Services menu: hangs from the bar's bottom edge under Services, one white piece with it */
+.svc-menu { position: absolute; top: 100%; left: -16px; display: grid; grid-template-columns: auto auto; gap: 4px 44px;
+  padding: 4px 28px 24px; background: var(--nav); border-radius: 0 0 var(--r-panel) var(--r-panel); }
+.svc-menu::before, .svc-menu::after { content: ""; position: absolute; top: 0; width: var(--r-panel); height: var(--r-panel); }
+.svc-menu::before { right: 100%; background: radial-gradient(circle at 0 100%, transparent calc(var(--r-panel) - .5px), var(--nav) var(--r-panel)); }
+.svc-menu::after { left: 100%; background: radial-gradient(circle at 100% 100%, transparent calc(var(--r-panel) - .5px), var(--nav) var(--r-panel)); }
+.svc-group .label { margin: 14px 0 6px; }
+.svc-menu a:not(.arrow-link) { display: flex; align-items: center; min-height: 40px;
+  margin-inline: -12px; padding: 0 12px; border-radius: var(--r-pill); font: 600 var(--ui)/1.2 var(--f); color: var(--ink);
+  text-decoration: none; white-space: nowrap; transition: background-color .15s var(--ease), color .15s var(--ease); }
+.svc-menu a:not(.arrow-link):hover { color: var(--link); background: var(--page); }
+.svc-menu a[aria-current] { color: var(--link); background: var(--band); }
+.svc-all { grid-column: 1 / -1; justify-self: start; margin-top: 14px; }
+.svc-all[aria-current] { text-decoration: underline; text-decoration-thickness: 2px; }
+
+/* the one button: green, the phone number, nested in the bar's end */
+.hdr-cta { grid-column: 3; justify-self: end; display: flex; align-items: center; gap: 10px; margin-right: var(--nav-in); }
+/* The header's green number, its words larger in the same button (Vegas, 4 Oct: "show me the phone number cta in the
+   hero with larger text font button same size", then "i meant in the nav larger").
+   - The words go from the buttons' 16px to 18px (17px under 375px), with the letter spacing from .05em to .02em.
+   - The button keeps its size at every width: the theme's height (--btn-h) and the width it has now, 209px on desktop,
+     195 on phones, 187 under 375px and 160 under 351px. The bigger words take their room from the side padding (and on
+     phones the icon's gap); the icon keeps its size.
+   - Its face, corners and hover are the theme's. The other green buttons (the forms, the estimate cards) keep the
+     theme's 16px words. */
+.hdr-cta .btn--act { font-size: 18px; letter-spacing: .02em; padding-inline: 17px; }
+.hdr-cta .btn--act .i { width: calc(1.15 * var(--ui)); height: calc(1.15 * var(--ui)); }   /* 18.4px, as at 16px words */
+@media (max-width: 760px) {
+  .hdr-cta .btn--act { gap: 6px; padding-inline: 12px; }
+}
+@media (max-width: 374px) {
+  .hdr-cta .btn--act { font-size: 17px; }
+}
+@media (max-width: 350px) {
+  .hdr-cta .btn--act { padding-inline: 11px; }   /* the theme hides the icon here */
+}
+
+/* the phone menu: the bar itself grows down into it */
+.mnav, .menu-btn { display: none; }
+.menu-btn .i { width: 24px; height: 24px; }
+.mnav .i-x, .mnav[open] .i-menu { display: none; }
+.mnav[open] .i-x { display: block; }
+/* its sheet: the first site's phone menu, in this theme (Vegas, 4 Oct: "use our coloring font and everything but the
+   display from [premier-gutters-mvp] where its more condensed and has less info being spit at you after its clicked").
+   Five full-width rows, the current one tinted; Services opens its two groups in a page-coloured panel under it, with
+   All services at the foot. Rows are the bar's link marks (--r-pill, the tint with navy words), at the lede size;
+   services at the text size; group labels the theme's .label. */
+.mnav-sheet { position: absolute; top: 100%; left: 0; right: 0; display: block; padding: 2px var(--nav-in) var(--nav-in);
+  max-height: calc(100dvh - var(--bar-h, 0px) - var(--nav-clear) - var(--nav-top)); overflow-y: auto; overscroll-behavior: contain;
+  background: var(--nav); border-radius: 0 0 var(--r-panel) var(--r-panel); }
+.hdr-bar:has(.mnav[open]) { border-radius: var(--r-panel) var(--r-panel) 0 0; }
+.mnav-list { display: grid; gap: 2px; }
+.mnav-link { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 0 20px;
+  border-radius: var(--r-pill); font: 600 var(--lede)/1 var(--f); color: var(--ink); text-decoration: none; cursor: pointer; list-style: none;
+  transition: background-color .15s var(--ease), color .15s var(--ease); }
+.mnav-link:hover, .mnav-svc[open] > .mnav-link { color: var(--link); background: var(--page); }
+.mnav-link[aria-current], .mnav-svc.is-current > .mnav-link { color: var(--link); background: var(--band); }
+.mnav-link .caret { width: 18px; height: 18px; color: var(--head); transition: transform .18s var(--ease); }
+.mnav-svc[open] .caret { transform: rotate(180deg); }
+.mnav-sub { margin-top: 4px; padding: 6px 6px 8px; border-radius: var(--r-panel); background: var(--page); }
+.mnav-sub .svc-group .label { margin: 12px 14px 4px; }
+.mnav-sub .svc-group:first-child .label { margin-top: 8px; }
+.mnav-sub ul a { display: flex; align-items: center; min-height: 48px; padding: 0 14px; border-radius: var(--r-pill);
+  font: 600 var(--body)/1.2 var(--f); color: var(--ink); text-decoration: none; transition: background-color .15s var(--ease), color .15s var(--ease); }
+.mnav-sub ul a:hover { color: var(--link); background: var(--surface); }
+.mnav-sub ul a[aria-current] { color: var(--link); background: var(--band); }
+.mnav-sub .svc-all { display: flex; justify-self: stretch; margin: 6px 8px 0; padding: 14px 6px 6px; box-shadow: 0 -1px 0 var(--line); }
+
+@media (max-width: 1240px) {
+  .nav { display: none; }
+  .mnav { display: block; }
+  .menu-btn { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: var(--r-pill);
+    color: var(--head); box-shadow: inset 0 0 0 1.5px var(--line); cursor: pointer; list-style: none;
+    transition: background-color .15s var(--ease); }
+  .menu-btn:hover, .mnav[open] .menu-btn { background: var(--page); }
+}
+
+@media (max-width: 760px) {
+  :root { --nav-top: 8px; --nav-h: 60px; --nav-in: 12px; --nav-lead: 12px; }
+  .hdr-bar { column-gap: 8px; }
+  .hdr-cta { gap: 8px; }
+  .menu-btn { width: 44px; height: 44px; }
+}
+/* under 390px Purewash's 16px sides leave the logo and the green number touching (they overlapped by 12px at 320, 1px apart at
+   360), so the bar steps back out to the old 8px: 4px apart at 320, 17 at 360, 24 at 375 */
+@media (max-width: 389px) { :root { --nav-side: 8px; } }
+
+/* ---------- no phone call bar ----------
+   Vegas, 4 Oct 2026: "no sticky bottom buttons on the phone at all for any page". The floating call bar is gone; on
+   phones the call is the header's green number and the estimate is in the menu and at the end of each page. */
+
+/* while the phone menu is open: the page holds still and dims, and a tap on it closes the menu */
+html.mnav-open { overflow: hidden; }
+html.mnav-open .site-hdr::before { content: ""; position: fixed; inset: 0; background: rgb(var(--shadow) / .4); pointer-events: auto; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .nav-svc[open] .svc-menu, .mnav[open] .mnav-sheet { animation: hdr-drop .18s var(--ease); }
+  @keyframes hdr-drop { from { clip-path: inset(0 -24px 100% -24px); } to { clip-path: inset(0 -24px -24px -24px); } }
+}
+
+/* ---------- the footer (every page) ----------
+   The first MVP's footer E (shipped there 3 Oct 2026; its layout from SolaceUI's footer on 21st.dev), in this theme:
+   a brand panel a third wide (the logo at the top; the line, the socials and the copyright at the foot) beside a links
+   panel (four columns; then the call and the email; then the legal links). Two rounded navy panels on the page, set in
+   from its edges. Phones: the panels stacked, the call and the email first, the three link lists folded into their
+   headings. Vegas, 4 Oct: "ship that no button A" (DESIGN1's footer A, design/footer-cta/): no estimate button, since each
+   page's closing estimate sits just above; Reach us on the link columns' grid from 1240px; the real Instagram and Facebook
+   logos (Simple Icons, CC0) and Reach us's phone and envelope in Phosphor's bold. */
+.site-ftr { --ft-edge: max(18px, (100vw - 1652px) / 2); --ft-hair: rgb(203 213 236 / .25);
+  padding: var(--ft-edge); background: var(--page); color: var(--on-dark); font: 400 var(--ui)/1.5 var(--f); }
+@media (min-width: 1240px) { .site-ftr { --ft-edge: max(32px, (100vw - 1652px) / 2); } }
+:where(.site-ftr) p { margin: 0; }
+:where(.site-ftr) ul { margin: 0; padding: 0; list-style: none; }
+.ft-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 16px; }
+.ft-brand { display: flex; flex-direction: column; justify-content: space-between; gap: 40px; padding: 40px 36px 32px;
+  border-radius: var(--r-panel); background: var(--dark-2); }
+.ft-logo { display: block; align-self: flex-start; }
+.ft-logo img { width: 140px; height: auto; }
+.ft-line { max-width: 30ch; font-size: var(--body); line-height: 1.6; color: var(--on-dark-muted); }
+.ft-social { display: flex; gap: 6px; margin: 18px 0 0 -7px; }
+.ft-social a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--r); color: var(--on-dark); transition: opacity .2s var(--ease); }
+.ft-social a:hover { opacity: .8; }
+.ft-social .i { width: 30px; height: 30px; }
+.ft-copy { margin-top: 14px; font-size: var(--cap); color: var(--on-dark-muted); }
+.ft-links { display: flex; flex-direction: column; padding: 40px 44px 28px; border-radius: var(--r-panel); background: var(--dark-2); }
+.ft-cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 28px; }
+.ft-h { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 18px; list-style: none;
+  font: 700 var(--small)/1.2 var(--f); letter-spacing: .08em; text-transform: uppercase; color: var(--on-dark-muted); }
+.ft-h::-webkit-details-marker { display: none; }
+.ft-caret { display: none; flex: none; width: 18px; height: 18px; fill: currentColor; transition: transform .2s var(--ease); }
+.ft-col li + li { margin-top: 13px; }
+.site-ftr .ft-col a, .site-ftr .ft-addr a, .site-ftr .ft-legal a { color: var(--on-dark); text-decoration: underline 1px transparent;
+  text-underline-offset: 4px; transition: text-decoration-color .2s var(--ease); }
+.site-ftr .ft-col a:hover, .site-ftr .ft-addr a:hover, .site-ftr .ft-legal a:hover { text-decoration-color: currentColor; }
+.ft-addr { font-style: normal; }
+.ft-hours { margin-top: 13px; line-height: 1.6; color: var(--on-dark-muted); }
+.ft-reach { margin-top: 40px; }
+.ft-reach .ft-h { margin-bottom: 14px; }
+.ft-reach-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 30px; }
+.site-ftr .ft-line-link { display: inline-flex; align-items: center; gap: 10px; font: 700 var(--body)/1.3 var(--f); color: var(--on-dark); text-decoration: none; }
+.site-ftr .ft-line-link:hover { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.ft-line-link .i { width: 22px; height: 22px; color: var(--on-dark-muted); }
+@media (min-width: 1240px) {
+  /* "Reach us" on the link columns' grid: the number under Gutters, the email under Exterior (Vegas, 4 Oct: "have the
+     'reach us' part arranged better", "show me A with no button at all", then "ship that no button A") */
+  .ft-reach-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 28px; }
+  .ft-reach-row .ft-tel { grid-column: 1; white-space: nowrap; }   /* at 1240 the column is 150px and the number 157: it runs into the gap, never wraps */
+  .ft-reach-row .ft-mail { grid-column: 2 / span 3; }
+}
+.ft-legal { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 24px; margin-top: 30px; padding-top: 20px;
+  border-top: 1px solid var(--ft-hair); font-size: var(--cap); color: var(--on-dark-muted); }
+.ft-legal nav { display: flex; flex-wrap: wrap; gap: 6px 24px; }
+@media (max-width: 1239px) {
+  .ft-card { grid-template-columns: minmax(0, 1fr); }
+  .ft-brand { flex-direction: row; align-items: flex-end; flex-wrap: wrap; gap: 24px 40px; padding: 32px; }
+  .ft-brand-foot { flex: 1 1 320px; }
+}
+@media (max-width: 900px) {
+  .ft-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; }
+}
+@media (max-width: 700px) {
+  .ft-card { gap: 12px; }
+  .ft-brand { flex-direction: column; align-items: flex-start; padding: 28px 22px 24px; }
+  .ft-brand-foot { flex: none; }
+  .ft-links { padding: 24px 20px 22px; }
+  .ft-cols { grid-template-columns: minmax(0, 1fr); row-gap: 0; order: 2; }
+  .ft-reach { order: 1; margin-top: 0; margin-bottom: 22px; }
+  .ft-legal { order: 3; flex-direction: column; align-items: flex-start; margin-top: 18px; }
+  .ft-reach-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .site-ftr .ft-mail { font-size: var(--ui); }
+  .ft-mail span { overflow-wrap: anywhere; }
+  .ft-col { border-top: 1px solid var(--ft-hair); }
+  .ft-col .ft-h { margin: 0; padding: 16px 0; cursor: pointer; }
+  .ft-caret { display: block; }
+  .ft-acc[open] .ft-caret { transform: rotate(180deg); }
+  .ft-acc ul { padding-bottom: 16px; }
+  .ft-visit { padding-bottom: 6px; }
+  .ft-visit .ft-h { cursor: default; }
+}
+
+/* ---------- the footer, Avenor's (every page; shipped 5 Oct 2026) ----------
+   Vegas, 5 Oct, on the homepage preview (premier-v2-services-avenor, design/home-services-avenor/): Avenor's footer (Dribbble 27469731,
+   "use the style of the avenor reference"), "give the footer the ink color these use" (DESIGN1's How an installation works cards),
+   "have the logo graphic in the footer filled in like the card reference", "ship these changes to this page. and then have the form
+   and footer on all the other pages too"; then, the same night, "have the words premier in the bottom below the privacy policy and
+   other elements. there should be a line above those things like in this reference [Dribbble 27467852, Edushade] ... the words along
+   the bottom shouldnt fit they should be cropped slightly from the bottom", "have the ready for seamless gutters part more centered
+   around calling [premier-v2-contact-footer's footer] use this. no email in that part it should be along the bottom after facebook",
+   and "ask the mvp agent for the new white secondary to use in the footer, same size as this button. and then ship this".
+   mvp/build.py footer() writes it (.site-ftr.fw); the rules above for .site-ftr, .ft-cols, .ft-col, .ft-h, .ft-caret, .ft-acc,
+   .ft-addr, .ft-hours and .ft-visit still serve it (the columns and their phone accordions); .ft-card, .ft-brand, .ft-links, .ft-reach
+   and .ft-legal are the first footer's, no longer written.
+   - One panel in the ink (--heading #16213A), on the footer's own edges (--ft-edge), the panel corner; the words on --edge from 1241px
+     (36px inside), 48px below, 22px on phones.
+   - At its top left "Prefer to call?" (400 at the H2's size, as Avenor's question), the footer's line, and the second button (.btn--call,
+     white with ink words, the theme's size) "Call 806-829-2622" with the arrow; at the right the four link columns.
+   - A ghost of her logo's roof behind them (DESIGN1's filled mark, /img/premier-roof-mark.webp: white at 3%, oversized, from 36% across,
+     cut by the panel's edge), as DESIGN1's hover cards draw it on the same ink.
+   - Edushade's foot: a hairline (white at 15%) over the legal line (the copyright, Instagram, Facebook and the email at the left, the
+     legal links and the credit at the right), then PREMIER in the heading style (700, capitals, +.02em) as wide as the panel's inside,
+     the link home, its capitals cut about 9% by the panel's bottom edge (no bottom padding; the word pulled .075em under it).
+   - .fw--joined (a page that ends with the closing contact panel, design/closing-contact/): no gap above it, square top corners and
+     a hairline (white at 13%) where the panel's photo fades into the ink. */
+.fw-panel { position: relative; isolation: isolate; overflow: hidden; container-type: inline-size; display: flex; flex-direction: column;
+  padding: 48px 48px 0; border-radius: var(--r-panel); background: var(--heading); }
+@media (min-width: 1241px) { .fw-panel { padding-inline: calc(var(--edge) - var(--ft-edge)); } }   /* 36px: the words on --edge */
+.fw-panel::before { content: ""; position: absolute; z-index: -1; left: 36%; bottom: 3%; width: 80%; aspect-ratio: 1198 / 560;
+  background: url(img/premier-roof-mark.webp) left top / 100% 100% no-repeat; opacity: .03; pointer-events: none; }
+.fw--joined { padding-top: 0; }
+.fw--joined .fw-panel { border-radius: 0 0 var(--r-panel) var(--r-panel); border-top: 1px solid rgb(255 255 255 / .13); }
+.fw-top { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 40px 56px; }   /* the columns wide enough for the hours and "Window replacement" on one line */
+.fw-title { font: 400 var(--h2)/1.15 var(--f); letter-spacing: -.01em; color: var(--on-dark); text-wrap: balance; }
+.fw-line { max-width: 36ch; margin-top: 18px; font-size: var(--body); line-height: 1.6; color: var(--on-dark-muted); }
+.fw-btn { margin-top: 30px; }
+.fw-btn .i { transition: transform .18s var(--ease); }
+@media (hover: hover) { .fw-btn:hover .i { transform: translateX(3px); } }   /* the site's arrows nudge right */
+.fw-cols { column-gap: 28px; }
+.fw-legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-top: clamp(40px, 4.5cqw, 64px);
+  padding-top: 32px; border-top: 1px solid rgb(255 255 255 / .15); font-size: var(--cap); color: var(--on-dark-muted); }
+.fw-legal p { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.site-ftr .fw-legal a { color: var(--on-dark-muted); text-decoration: underline 1px transparent; text-underline-offset: 4px;
+  transition: color .2s var(--ease), text-decoration-color .2s var(--ease); }
+.site-ftr .fw-legal a:hover { color: var(--on-dark); text-decoration-color: currentColor; }
+.site-ftr .fw-mail { overflow-wrap: anywhere; }
+/* the wordmark: PREMIER as wide as the panel's inside (100cqw); 4.87 is its width in ems at 700 with +.02em, measured in Chrome */
+.fw-mark { display: block; margin-top: clamp(40px, 5cqw, 72px); color: var(--on-dark); text-decoration: none; }
+.fw-mark span { display: block; margin-bottom: -.075em; font: 700 calc(100cqw / 4.87)/.74 var(--f); letter-spacing: .02em;
+  text-transform: uppercase; white-space: nowrap; margin-right: -.02em; }
+.fw-mark:focus-visible { outline-offset: -6px; }   /* inside: the panel's foot cuts the word */
+@media (max-width: 1100px) { .fw-top { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 700px) {
+  .fw-panel { padding: 32px 22px 0; }
+  .fw-cols { margin-top: 8px; }
+  .fw-legal { flex-direction: column; margin-top: 32px; padding-top: 22px; }
+  .fw-mark { margin-top: 32px; }
+}
+
+/* ---------- smaller screens ---------- */
+@media (min-width: 1241px) {
+  /* the first site's edge: its panels sit max(32px, (100vw - 1652px) / 2) in, and words start 36px inside them
+     (the footer's panels use the same; 68px at 1440). Sections line their words up on --edge. */
+  :root { --edge: calc(max(32px, (100vw - 1652px) / 2) + 36px); }
+}
+@media (max-width: 760px) {
+  body { font-size: 17px; }   /* the bottom room for the call bar is in the header block */
+  .estimate-card { margin-inline: -4px; padding: 24px 20px 22px; border-width: 4px; }   /* the glass form on phones, as the homepage's */
+  .estimate-card .form-title { font-size: 24px; }
+}
+
+/* very small phones (350px and under): the long capitalised words (INSTALLATION, REPLACEMENT) still fit the column */
+@media (max-width: 350px) { :root { --h1: 34px; --h2: 26px; } }
+/* buttons on phones: every button the same at each width, the nav's: 44px tall with 16px sides; 12px sides under 375px,
+   so the call bar's two fit at 360; under 350px the green button without its icon */
+@media (max-width: 760px) { :root { --btn-h: 44px; --btn-px: 16px; } .btn { gap: 8px; } }
+@media (max-width: 374px) { :root { --btn-px: 12px; } }
+@media (max-width: 350px) { .btn--act .i { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* ---------- the footer, 6 Oct 2026 ----------
+   Shipped from the homepage preview premier-v2-services-avenor (design/home-services-avenor/, its README has every measurement and
+   take; Vegas: "ok ship to mvp all pages have the contact forms match the spec", after "keep this spec"). build.py footer() writes the
+   markup and the etch filter (#fw-etch). Over the 5 Oct footer above:
+   - her name as the title, in capitals (Vegas: "business name in the footer should be all caps"), the theme's small heading (22px, 700),
+     one line, smaller where the column is narrower than its 18.5em; beside the columns, centred on their headers (from their shared
+     baseline, down by half the difference of the capitals' heights, Libre Franklin's .742em); the line under it on the first row of
+     links there, 22px under the name when stacked; her Instagram and Facebook as their brand glyphs under the line (Graphy's footer),
+     44px targets; no call button (the form above has it);
+   - the colours turned over (Vegas: "all the headers in the bright white and a more lower tone color for the individual links and
+     bios"): her name and the column headers white; the links, the line, the address, the hours and the icons in the light blue-grey,
+     a link turning white when pointed at;
+   - PREMIER and her roof etched into the ink (Structura's look: the face a touch darker, a soft inner shadow along the top edges, the
+     face fading toward the foot), the roof beside the word as tall as its capitals and a tenth past the panel's edge, the row in its own
+     space under the legal line (the roof's ghost behind the columns moved into it);
+   - on phones the roof alone, large and etched, behind the words at the bottom right (Vegas: "for mobile view have a large etch of the
+     logo in the bottom right area no words", "no ring on the mobile engraving and have the text normal not moved because of it"). */
+.fw-call { container-type: inline-size; }
+.fw-brand { font: 700 min(var(--h3), 100cqi / 18.5)/1.25 var(--f); letter-spacing: -.005em; white-space: nowrap; color: var(--on-dark); }
+.fw-brand-name { text-transform: uppercase; letter-spacing: .02em; }
+.fw-call .fw-line { max-width: 31em; margin-top: 0; text-wrap: pretty; }
+@media (min-width: 1101px) {
+  .fw-top { align-items: baseline; }   /* the name gives its column the baseline; the column, pulled up past the headers', is the one moved */
+  .fw-call { margin-top: -40px; }
+  .fw-brand { translate: 0 calc(.371em - 4.823px); margin-bottom: calc(19.29px - .3254em); }
+}
+@media (max-width: 1100px) { .fw-brand { margin-bottom: calc(14.56px - .25em); } }
+.fw-social { display: flex; margin: 9px 0 0 -10px; }   /* the first glyph on the words' edge, 24px under the line */
+.fw-social a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--r); transition: color .2s var(--ease); }
+.fw-social .i { width: 29.6px; height: 29.6px; }   /* the glyph 24px inside its viewBox's 2.8 margin */
+.site-ftr .fw-brand-name, .site-ftr .ft-h { color: var(--on-dark); }
+.site-ftr :is(.ft-col a, .ft-addr a, .fw-call .fw-line, .ft-hours, .fw-social a) { color: var(--on-dark-muted); }
+.site-ftr :is(.ft-col a, .ft-addr a, .fw-social a):hover { color: var(--on-dark); }
+.fw-panel::before { content: none; }   /* the roof's ghost: now beside PREMIER */
+.fw-panel { --lk-pad: 48px; }   /* the panel's right padding (above), which the row runs to */
+@media (min-width: 1241px) { .fw-panel { --lk-pad: calc(var(--edge) - var(--ft-edge)); } }
+@media (max-width: 700px) { .fw-panel { --lk-pad: 22px; } }
+.fw-mark { margin-top: clamp(16px, 2cqw, 28px); color: #000; }   /* the shapes drawn opaque for the filter to read; it sets the colours */
+.fw-mark span { --lk-h: .742; --lk-g: .14; --lk-cut: .1;   /* the roof as tall as the capitals, .14em after the word, a tenth past the edge */
+  font-size: calc((100cqw + var(--lk-pad)) / (4.87 + var(--lk-g) + (1 - var(--lk-cut)) * var(--lk-h) * 1198 / 560)); margin-right: 0; }
+.fw-mark span::after { content: ""; display: inline-block; height: calc(var(--lk-h) * 1em); aspect-ratio: 1198 / 560;
+  margin-left: calc(var(--lk-g) * 1em); vertical-align: baseline; background: currentColor;
+  -webkit-mask: url(img/premier-roof-mark.webp) 0 0 / 100% 100% no-repeat; mask: url(img/premier-roof-mark.webp) 0 0 / 100% 100% no-repeat; }
+.fw-panel .fw-mark span { filter: url(#fw-etch); padding: .1em var(--lk-pad, 0px) 0 0; margin-top: -.1em; margin-right: calc(-1 * var(--lk-pad, 0px));
+  -webkit-mask: linear-gradient(#000 .337em, rgb(0 0 0 / .1) .777em); mask: linear-gradient(#000 .337em, rgb(0 0 0 / .1) .777em); }
+@media (max-width: 700px) {
+  .fw-panel { padding-bottom: 32px; }   /* the words end 32px over the foot; the roof lies behind them */
+  .fw-panel .fw-mark span { display: none; }
+  .fw-panel .fw-mark { position: absolute; z-index: -1; right: -8.5cqw; bottom: calc(-.06 * 85cqw * 560 / 1198); width: 85cqw; margin: 0;
+    filter: url(#fw-etch); -webkit-mask: linear-gradient(#000 45%, rgb(0 0 0 / .3) 100%); mask: linear-gradient(#000 45%, rgb(0 0 0 / .3) 100%); }
+  .fw-panel .fw-mark::before { content: ""; display: block; aspect-ratio: 1198 / 560; background: #000;
+    -webkit-mask: url(img/premier-roof-mark.webp) 0 0 / 100% 100% no-repeat; mask: url(img/premier-roof-mark.webp) 0 0 / 100% 100% no-repeat; }
+}
+
+/* ---------- the estimate forms, 6 Oct 2026 ----------
+   Every estimate form in the closing panel's look (Vegas, 6 Oct: "ok ship to mvp all pages have the contact forms match the spec", the
+   spec being the preview's Own + glass border): the card's white at 86% over its blur, no shadow, inside the theme's glass ring; the
+   names over 1px lines in place of the boxes; a focused line thicker, in ink, never blue ("no blue line when form field is selected").
+   The title and the names keep the theme's type (above). The hero forms and the closing panels set the rest in their own section.css
+   (mvp/sections/home-hero, contact-hero; design/closing-contact/contact.css); this covers the draft forms too. */
+.estimate-card { background: rgb(255 255 255 / .86) padding-box; box-shadow: none; }
+.estimate-card .field { gap: 4px; }
+.estimate-card :is(.field input, .select select) { height: 40px; min-height: 40px; padding: 0; border-radius: 0; background: transparent;
+  box-shadow: inset 0 -1px 0 rgb(22 33 58 / .28); }   /* the line: the heading ink at 28% */
+.estimate-card .select select { padding-right: 26px; }
+.estimate-card .select .i { right: 2px; color: var(--heading); }
+@media (hover: hover) {
+  .estimate-card :is(.field input, .select select):hover { box-shadow: inset 0 -1px 0 rgb(22 33 58 / .5); }
+}
+.estimate-card :is(.field input, .select select):focus-visible { outline: none; background: transparent; box-shadow: inset 0 -2px 0 var(--heading); }
+.estimate-card .field input:autofill { box-shadow: inset 0 0 0 60px var(--surface), inset 0 -1px 0 rgb(22 33 58 / .28); }
