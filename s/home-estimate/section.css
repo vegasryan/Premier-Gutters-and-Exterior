@@ -22,10 +22,11 @@
    through it, flat 48px fields, the green button), the hero's fields in its rows of three and two, titled "Tell us about your
    project:". No quotes (the shot has none; each section's two are kept in its proof). Stacked under 1180px, as the hero's form. */
 
-.sec.ec { --ec-edge: max(18px, (100vw - 1652px) / 2); --ec-ink: 22 33 58; padding-bottom: 0; background: transparent; }   /* --ec-ink:
+.sec.ec { --ec-edge: max(12px, (100vw - 1680px) / 2); --ec-ink: 22 33 58; padding-bottom: 0; background: transparent; }   /* --ec-ink:
    the theme's ink (--heading, #16213A) as rgb, the footer's colour, for the cast and the fade (Vegas: "have the blend adjusted to
    match that"); it was the footer navy, #1A2A5E */
-@media (min-width: 1240px) { .sec.ec { --ec-edge: max(32px, (100vw - 1652px) / 2); } }   /* the footer's --ft-edge */
+@media (max-width: 760px) { .sec.ec { --ec-edge: 8px; } }   /* the footer's --ft-edge: the heroes' edges since 6 Oct (Vegas, 6 Oct: "show me the footer with the same padding spacing as the hero", then "ship it"; boards/footer-edge.html);
+   it was 32px in from 1240px and 18px below, at most 1652px wide */
 
 .ec-panel { position: relative; isolation: isolate; container-type: inline-size; margin-inline: var(--ec-edge); overflow: hidden;
   border-radius: var(--r-panel) var(--r-panel) 0 0; background: var(--heading); }
@@ -37,9 +38,8 @@
     linear-gradient(to right, rgb(var(--ec-ink) / .62) 0, rgb(var(--ec-ink) / .5) 40%, rgb(var(--ec-ink) / .38) 70%, rgb(var(--ec-ink) / .38) 100%); }
 
 .ec-in { display: grid; grid-template-columns: minmax(0, 1fr) 44cqi; column-gap: clamp(40px, 6vw, 112px); align-items: start;   /* the form 44% of the panel, as the shot's */
-  padding: clamp(56px, 6vw, 84px) 48px clamp(64px, 6.5vw, 96px); }
+  padding: clamp(56px, 6vw, 84px) calc(var(--edge) - var(--ec-edge)) clamp(64px, 6.5vw, 96px); }   /* the words on --edge at every width, as the footer's */
 .ec-words { max-width: 30em; }
-@media (min-width: 1241px) { .ec-in { padding-inline: calc(var(--edge) - var(--ec-edge)); } }   /* 36px: the words on --edge, as every section's */
 .ec-words .sec-lede { margin-top: 18px; color: rgb(255 255 255 / .9); }
 .ec-call { margin: 28px 0 0; font: 500 var(--body)/1.4 var(--f); color: var(--on-dark); }
 .ec-call a { color: inherit; font-weight: 800; text-decoration: underline 1.5px; text-underline-offset: 5px; }
@@ -53,7 +53,7 @@
 .ec-row2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
 @media (max-width: 1179px) {
-  .ec-in { grid-template-columns: minmax(0, 1fr); row-gap: 36px; padding: 48px 48px 56px; }   /* the footer's 48px, so the words line up */
+  .ec-in { grid-template-columns: minmax(0, 1fr); row-gap: 36px; padding-block: 48px 56px; }
   .ec-form { max-width: 640px; }
   /* stacked, the photo sits behind the words and the form's top; the navy takes over under them */
   .ec-panel::before { background:
@@ -67,7 +67,7 @@
     linear-gradient(to bottom, rgb(var(--ec-ink) / .55) 0, rgb(var(--ec-ink) / .62) 24%, rgb(var(--ec-ink) / .92) 38%, var(--heading) 46%); }
 }
 @media (max-width: 700px) {
-  .ec-in { padding: 36px 22px 40px; }   /* the footer's 22px on phones */
+  .ec-in { padding-block: 36px 40px; }
 }
 
 /* ---------- 6 Oct 2026: layout 5 with its own form in the hero card's glass border ----------
@@ -94,9 +94,12 @@
     linear-gradient(to right, rgb(var(--ec-ink) / .76) 0, rgb(var(--ec-ink) / .66) 40%, rgb(var(--ec-ink) / .4) 70%, rgb(var(--ec-ink) / .38) 100%); }
 }
 .ec-words { container-type: inline-size; }
-.ec-reach { font-size: min(var(--body), 100cqi / 18.4); }   /* the email is 18.1em at 800 */
-.ec-reach a { display: block; width: fit-content; overflow-wrap: anywhere; text-decoration: none; transition: opacity .2s var(--ease); }
-.ec-reach a:hover { opacity: .8; }
+.ec-reach { font-size: min(var(--body), 100cqi / 18.4); }   /* the email was 18.1em at 800; at 400 it is narrower */
+/* the number and the email in the regular weight, underlined (Vegas, 6 Oct: "show me these not bold but normal font underlined", then "ship all that";
+   mvp/boards/contact-reach.html): 400, a 1px underline 5px under the words, thickening to 2px when pointed at. They were 800 with no underline, fading
+   to .8 when pointed at */
+.ec-reach a { display: block; width: fit-content; overflow-wrap: anywhere; font-weight: 400; text-decoration: underline 1px; text-underline-offset: 5px; }
+.ec-reach a:hover { text-decoration-thickness: 2px; }
 .ec-reach a + a { margin-top: 10px; }
 .ec .ec-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; margin: 0; padding: 34px 34px 30px;
   border: 6px solid color-mix(in srgb, var(--band) 24%, transparent); border-radius: 14px; background: rgb(255 255 255 / .86) padding-box;

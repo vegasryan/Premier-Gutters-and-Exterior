@@ -9,7 +9,8 @@ them.
 links in the header going nowhere (the call button still calls). The other pages are not here yet, so links outside
 the header that point to them show Netlify's not-found page. The page is noindex.
 
-Written by `deploy/netlify-home/ship.py --push` in that project; don't edit these files by hand.
+Written by `deploy/netlify-home/ship.py --push` in that project; don't edit these files by hand. Its pushes carry `[skip netlify]`
+unless run with `--netlify`, so the repo can be ahead of the live Netlify page (a production deploy costs 15 credits).
 
 The first site's files are in this repo's history (before 4 Oct), and its source is ~/Desktop/DeeAnn Gutters
 (site/production/export.py).
