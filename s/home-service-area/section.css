@@ -12,7 +12,7 @@
    the town names in the capitals of the FAQ's questions (the theme's H3 type, 22px, 700, +.02em, 18px on phones); the site's header line
    for the rules (1px, the ink at 30%: the FAQ rows', Recent work's and What we do's); her photo at the right with the panel corner, as tall
    as the words. Left out, as he asked: the numbers, the plus signs, the count, the line over the towns, the note with its pin, the button,
-   the photo's caption and arrow, and the foot line. Nothing moves.
+   the photo's caption and arrow, and the foot line. Nothing moved in take 1 (take 4's hover is below).
 
    Take 2 (Vegas, same day): "needs a better pic" (make.py's PHOTOS: the shipped one is its DEFAULT, placed by the object-position make.py
    writes below) and "no image for mobile for this section": from 900px down, where the section is one column, there is no photo. */
@@ -36,8 +36,17 @@
 @media (pointer: coarse) { .hsa-all { position: relative; } .hsa-all::after { content: ''; position: absolute; inset: -12px -8px; } }
 
 /* her photo, the other side: as tall as the words, the panel corner, cropped to fit */
-.hsa-photo { position: relative; margin: 0; overflow: hidden; border-radius: var(--r-panel); background: var(--line); }
+.hsa-photo { position: relative; isolation: isolate; margin: 0; overflow: hidden; border-radius: var(--r-panel); background: var(--line); }
 .hsa-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 20% 0%; }
+
+/* a mouse over the photo (Vegas, 6 Oct: "add a hover to image for desktop"): the site's photo hover, Recent work's number for number (right above
+   this section): the frame lifts 4px with a soft shadow and the photo zooms 4% inside it; nothing under reduced motion or on a touch screen */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hsa-photo { transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+  .hsa-photo img { transition: transform .7s var(--ease); }
+  .hsa-photo:hover { z-index: 1; transform: translateY(-4px); box-shadow: 0 16px 24px -16px rgb(var(--shadow) / .5); }
+  .hsa-photo:hover img { transform: scale(1.04); }
+}
 
 /* 900px and under: one column, the words and the towns only ("no image for mobile"; the picture is lazy, so it is never loaded there) */
 @media (max-width: 900px) {
