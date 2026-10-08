@@ -8,7 +8,9 @@
    "no line between header and description. have it under description"), then the address, the email and the number in one type ("have office, phone, email all the same
    typography"; "swap phone number and email"), and the hours on one plain line under the number ("Mon to Fri, 9am to 5pm should be one line not bolded"; "dont say closed line
    its implied"). No button ("no green button or button at all in this section"). On a phone the words stop at the address and the map takes the room ("for mobile remove
-   everything under address to make room for the map"), and the pin stands without the business's name ("remove the name of the business from above the pin on mobile only").
+   everything under address to make room for the map"), and the business's name comes off the pin ("remove the name of the business from above the pin on mobile only"); since
+   8 Oct 2026 "Our office" stands over the pin there in its place ("for mobile above the pin in the office map sections, on all pages it appears, add "our office" above the
+   pin, give it the same animation same timing as the pin on hover/click"): the name's type, inside the piece that lifts, so it moves with the pin as one.
 
    The map: OpenStreetMap data drawn by design/about-office/tools/render_hair.py (palette 'dark', label_mode 'beside': every street name a hair off its road, no road cut), one
    3200 x 1000 picture at a fixed scale, never scaled; the pin and the names are HTML over it. The pin's hover: her name and the pin lift 10px as one piece with a small shadow on the
@@ -77,6 +79,7 @@
 .ob-pin .i { width: 44px; height: 44px; }
 .ob-pin-name { font: 700 var(--cap)/1.2 var(--f); color: var(--on-dark); white-space: nowrap;
   text-shadow: 0 0 2px var(--heading), 0 0 2px var(--heading), 0 0 5px var(--heading), 0 0 5px var(--heading); }   /* a soft halo in the ground colour that follows the letters: no box, no cut */
+.ob-pin-name--short { display: none; }   /* "Our office": phones only (below), in the name's place and type, in the same lifting piece */
 @media (hover: hover) {
   .ob-pin:hover .ob-pin-name { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
 }
@@ -98,11 +101,12 @@
   .obb-panel { width: auto; padding: var(--ob-py) max(20px, var(--ob-x)) 12px; }
   .obb-panel::before { content: none; }
 }
-/* phones: the words stop at the address, the map takes the room, and the pin stands without the business's name */
+/* phones: the words stop at the address, the map takes the room, and the pin carries "Our office" in place of the business's name (8 Oct 2026) */
 @media (max-width: 760px) {
   .obb-blk > :not(:first-child) { display: none; }
   .obb-map { height: clamp(330px, 90vw, 460px); }
-  .ob-pin-name { display: none; }
+  .ob-pin-name--full { display: none; }
+  .ob-pin-name--short { display: block; }
 }
 
 /* ---------- the white card (.ob--white), every member since 7 Oct 2026 ----------

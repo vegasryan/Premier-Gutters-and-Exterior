@@ -118,7 +118,7 @@ addEventListener('DOMContentLoaded', () => {
           <span>Office&nbsp;hours: Monday&nbsp;to&nbsp;Friday, 9am&nbsp;to&nbsp;5pm</span></p>
       </div>
     </div>
-    <form class="estimate-card hh-form" action="#" novalidate aria-labelledby="contact-hero-form-title">
+    <form name="estimate" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" class="estimate-card hh-form" novalidate aria-labelledby="contact-hero-form-title"><input type="hidden" name="form-name" value="estimate"><input type="hidden" name="page" value="/contact/"><p hidden style="display:none"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <h2 class="form-title" id="contact-hero-form-title">Tell us about your project:</h2>
       <div class="field-row hh-row3">
         <div class="field"><label for="ch-name">Name</label><input id="ch-name" name="name" autocomplete="name" required aria-describedby="ch-name-err">
@@ -218,8 +218,8 @@ addEventListener('DOMContentLoaded', () => {
        It sends nowhere yet, like the homepage hero's form. */
     const form = sec.querySelector('.hh-form');
     form.addEventListener('submit', (e) => {
+      if (form.checkValidity()) return;   // every box right: it posts to Netlify Forms (deploy/netlify-home/ship.py)
       e.preventDefault();
-      if (form.checkValidity()) return;
       form.classList.add('was-submitted');
       const first = form.querySelector('input:invalid, select:invalid');
       if (first) first.focus();
@@ -240,7 +240,8 @@ addEventListener('DOMContentLoaded', () => {
         <span class="ob-st obbw820 obbh224 obsw276 obsh236" style="--x:1629.7px;--y:580.1px;--r:-55deg">Urbana Ave</span>
         <span class="ob-st obbw732 obbh424 obsw188 obsh844" style="--x:1584.8px;--y:337.8px;--r:15.6deg">78th St</span>
         <a class="ob-pin" href="https://www.google.com/maps/dir/?api=1&amp;destination=Premier%20Gutters%20and%20Exterior%2C%208228%20Valencia%20Ave%2C%20Lubbock%2C%20TX%2079424" target="_blank" rel="noopener" tabindex="-1"><span class="ob-pin-lift">
-          <span class="ob-pin-name">Premier Gutters and Exterior</span>
+          <span class="ob-pin-name ob-pin-name--full">Premier Gutters and Exterior</span>
+          <span class="ob-pin-name ob-pin-name--short">Our office</span>
           <svg class="i" viewBox="0 0 256 256" aria-hidden="true"><path class="ob-pin-fill" d="M128,16a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Z"/><circle class="ob-pin-dot" cx="128" cy="104" r="24"/><use href="/img/icons.svg#i-pin"/></svg>
         </span></a>
       </div>

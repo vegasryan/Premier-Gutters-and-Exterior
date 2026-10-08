@@ -248,7 +248,7 @@ addEventListener('DOMContentLoaded', () => {
       <li class="hav-card" style="--hav-x: 30%">
         <div class="hav-ph"><img src="/s/gutter-repair-hail/img/tan-gutter-on-fascia-roof-corner-clouds-wide-960.webp" srcset="/s/gutter-repair-hail/img/tan-gutter-on-fascia-roof-corner-clouds-wide-640.webp 640w, /s/gutter-repair-hail/img/tan-gutter-on-fascia-roof-corner-clouds-wide-960.webp 960w, /s/gutter-repair-hail/img/tan-gutter-on-fascia-roof-corner-clouds-wide-1280.webp 1280w" sizes="(max-width: 760px) 560px, (max-width: 1199px) 50vw, 660px" width="1280" height="875" alt="A tan gutter on the fascia at a roof corner, the soffit under it, against a cloudy blue sky." loading="lazy" decoding="async"></div>
         <div class="hav-words">
-          <h2><span class="hav-tag">Rotted fascia behind the gutter</span></h2>
+          <h2><span class="hav-tag">Rotted fascia<span class="hav-tail"> behind the gutter</span></span></h2>
           <p>Your gutters hang on the fascia, the board along the edge of your roof, and when it rots the gutter sags or pulls away. We replace the rotted fascia, so your gutter has something solid to hang on again.</p>
           <a class="hav-more" href="/fascia-and-soffit/">Fascia and soffit repair <svg class="i" aria-hidden="true"><use href="/img/icons.svg#i-arrow"/></svg></a>
         </div>
@@ -509,11 +509,11 @@ addEventListener('DOMContentLoaded', () => {
         <p class="sec-lede">We come out to your house, look at the roof line, measure it and give you a price, all at no charge.</p>
         <p class="ec-call ec-reach"><a href="tel:+18068292622">806-829-2622</a><a href="mailto:info@premierguttersandexterior.com">info@<wbr>premierguttersandexterior.com</a></p>
       </div>
-      <form class="estimate-card ec-form" action="#" onsubmit="return false" aria-labelledby="ec-form-title">
+      <form name="estimate" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" class="estimate-card ec-form" aria-labelledby="ec-form-title"><input type="hidden" name="form-name" value="estimate"><input type="hidden" name="page" value="/gutter-repair/"><p hidden style="display:none"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
         <h3 class="form-title" id="ec-form-title">Tell us about your project:</h3>
         <div class="field-row ec-row3">
-          <div class="field"><label for="ec-name">Name</label><input id="ec-name" name="name" autocomplete="name"></div>
-          <div class="field"><label for="ec-phone">Phone</label><input id="ec-phone" name="phone" autocomplete="tel" type="tel" inputmode="tel"></div>
+          <div class="field"><label for="ec-name">Name</label><input id="ec-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="ec-phone">Phone</label><input id="ec-phone" name="phone" autocomplete="tel" type="tel" inputmode="tel" required></div>
           <div class="field"><label for="ec-email">Email (optional)</label><input id="ec-email" name="email" autocomplete="email" type="email"></div>
         </div>
         <div class="field-row ec-row2">

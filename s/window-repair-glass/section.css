@@ -132,7 +132,9 @@
 
 /* Eyebrow titles (.hav--brow; Vegas, 8 Oct 2026, on #window-repair-glass: "i dont want them to feel so empty inside maybe have ther fade on the top
    and bottom so there is content spread out more in the cards", then "show me the top part using the eyebrow design for the header", then "ship",
-   for the members whose card titles are H2s; preview design/hav-card-inside). The words split into two plates with her photo clear between them:
+   for the members whose card titles are H2s; preview design/hav-card-inside; and on Replacing old gutters, whose titles are H3s, Vegas: "give this
+   section the eyebrow title look ... like this" with a screenshot of #gutter-repair-hail, so the rules take either). The words split into two plates
+   with her photo clear between them:
    - at the top, the card's title as the site's section eyebrow, theme.css's tag in its form for dark ground (a white face, ink words; 13px capitals,
      700, +.08em, the 4px corner, 28.5px tall on one line as the theme's). The face is on the title's span (.hav-tag, written by family.py) with
      box-decoration-break, so a title that wraps on a phone stacks as two tags hugging their words, 4px apart, never one wide block;
@@ -146,7 +148,7 @@
 .hav--brow .hav-words { display: grid; grid-template-rows: auto minmax(var(--hav-mid), 1fr) auto auto; padding: 20px; }
 .hav--brow .hav-words > p { grid-row: 3; margin-top: 0; }
 .hav--brow .hav-more { grid-row: 4; }
-.hav--brow .hav-card h2 { justify-self: start; max-width: 100%; font: 700 var(--small)/32px var(--f); letter-spacing: .08em; }
+.hav--brow .hav-card :is(h2, h3) { justify-self: start; max-width: 100%; font: 700 var(--small)/32px var(--f); letter-spacing: .08em; }
 .hav--brow .hav-tag { padding: 6px 10px 6.5px 11px; border-radius: var(--r); background: #FFFFFF; color: var(--heading);
   -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .hav--brow .hav-card::after { background:
@@ -163,5 +165,10 @@
 @media (max-width: 760px) {
   .hav--brow { --hav-mid: 48px; }
   .hav--brow .hav-words { padding: 16px; }
+  /* a title's phones-only short form (family.py MEMBERS short=): the words around it hidden here, kept in the page (Vegas, 8 Oct 2026, on
+     "Rotted fascia behind the gutter": "shortened down to rotted fascia so it can fit on one line", then Black streaks and Gutter guards) */
+  .hav-tail { display: none; }
 }
+.hav-alt { display: none; }   /* a phones-only title in words of its own (family.py MEMBERS short=, "Insurance claim help") */
+@media (max-width: 760px) { .hav-long { display: none; } .hav-alt { display: inline; } }
 @media (forced-colors: active) { .hav--brow .hav-tag { border: 1px solid CanvasText; } }

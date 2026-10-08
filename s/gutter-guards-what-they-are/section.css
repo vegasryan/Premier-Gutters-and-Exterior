@@ -1,4 +1,4 @@
-/* #gutter-guards-what-they-are: What seamless gutters are's design (its live section.css, copied whole by design/guards-what-they-are/make.py). */
+/* #gutter-guards-what-they-are: What seamless gutters are's design (its live section.css, copied whole by design/guards-what-they-are/make.py), then this section's phone photo rule. */
 /* #gutter-guards-what-they-are, "What seamless gutters are": SHIPPED 7 Oct 2026.
 
    Vegas built it up over one day: his AISUN screenshot (Dribbble 27432829: "has our normal layouts header but the images like this");
@@ -59,4 +59,12 @@
   .wsg-ph img { transition: transform .7s var(--ease); }
   .wsg-ph:hover { z-index: 1; transform: translateY(-4px); box-shadow: 0 16px 24px -16px rgb(var(--shadow) / .5); }
   .wsg-ph:hover img { transform: scale(1.04); }
+}
+
+/* What gutter guards are, phones: the one photo shown is the big one (its phone source, the cost cards' "The guard you pick" cut; Vegas, 8 Oct 2026:
+   "for the one pic that shows on mobile ... have it be the pic seen in the guard you pick image in what gutter guards cost section"), not the third */
+@media (max-width: 760px) {
+  #gutter-guards-what-they-are .wsg-ph:last-child { display: none; }
+  #gutter-guards-what-they-are .wsg-ph--wide { display: block; aspect-ratio: 4 / 5; }
+  #gutter-guards-what-they-are .wsg-ph--wide img { object-position: 50% 50%; }
 }

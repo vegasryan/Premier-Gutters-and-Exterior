@@ -115,7 +115,10 @@
 /* A line under each card's title, as the How it works cards have theirs (Vegas, take 3: "add line under header", the card's): white at 45%,
    12px under the title and over its line, the How it works card's numbers. The script gives every title the tallest one's height, so the
    lines sit level across the cards. */
-#gutter-guards-cost .wd-card h3 { padding-bottom: 12px; border-bottom: 1px solid rgb(255 255 255 / .45); }
+#gutter-guards-cost .wd-card h3 { padding-bottom: 12px; border-bottom: 1px solid rgb(255 255 255 / .45);
+  display: grid; align-content: end; }   /* the words sit on the line: a title the script makes as tall as the tallest one grows upward from
+  its line, never floating over it (Vegas, 8 Oct 2026, on Signs your fascia needs repair: "the line should be right below the header so move
+  the header to right above the line") */
 #gutter-guards-cost .wd-words > p { margin-top: 12px; }
 
 /* Hover (Vegas, 8 Oct 2026: "Add hover animation to all cards that dont have it"): the homepage card's own lift and shadow, from its

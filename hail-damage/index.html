@@ -124,7 +124,7 @@ addEventListener('DOMContentLoaded', () => {
     </div>
   </div>
 </section>
-<section id="hail-damage-what-hail-does" class="sec hav" aria-labelledby="hail-damage-what-hail-does-title">
+<section id="hail-damage-what-hail-does" class="sec hav hav--brow" aria-labelledby="hail-damage-what-hail-does-title">
   <div class="hav-in">
     <div class="hav-head">
       <div class="hav-title">
@@ -137,7 +137,7 @@ addEventListener('DOMContentLoaded', () => {
       <li class="hav-card" style="--hav-x: 68%">
         <div class="hav-ph"><img src="/s/hail-damage-what-hail-does/img/gutter-repair-bronze-corner-limestone-wide-960.webp" srcset="/s/hail-damage-what-hail-does/img/gutter-repair-bronze-corner-limestone-wide-640.webp 640w, /s/hail-damage-what-hail-does/img/gutter-repair-bronze-corner-limestone-wide-960.webp 960w, /s/hail-damage-what-hail-does/img/gutter-repair-bronze-corner-limestone-wide-1280.webp 1280w" sizes="(max-width: 760px) 560px, (max-width: 1199px) 50vw, 660px" width="1280" height="875" alt="A bronze gutter wrapping a limestone corner under a gray shingle hip roof." loading="lazy" decoding="async"></div>
         <div class="hav-words">
-          <h3><a href="/gutter-repair/">Gutter repair</a></h3>
+          <h3><a href="/gutter-repair/"><span class="hav-tag">Gutter repair</span></a></h3>
           <p>Hail dents gutters and downspouts. We repair the damage, or replace a run with a new seamless gutter formed on site.</p>
           <span class="hav-more" aria-hidden="true">Read more <svg class="i"><use href="/img/icons.svg#i-arrow"/></svg></span>
         </div>
@@ -145,7 +145,7 @@ addEventListener('DOMContentLoaded', () => {
       <li class="hav-card" style="--hav-x: 42%">
         <div class="hav-ph"><img src="/s/hail-damage-what-hail-does/img/window-replacement-black-window-limestone-wide-960.webp" srcset="/s/hail-damage-what-hail-does/img/window-replacement-black-window-limestone-wide-640.webp 640w, /s/hail-damage-what-hail-does/img/window-replacement-black-window-limestone-wide-960.webp 960w, /s/hail-damage-what-hail-does/img/window-replacement-black-window-limestone-wide-1280.webp 1280w" sizes="(max-width: 760px) 560px, (max-width: 1199px) 50vw, 660px" width="1280" height="875" alt="A black-framed window in a limestone wall under two dormers." loading="lazy" decoding="async"></div>
         <div class="hav-words">
-          <h3><a href="/window-replacement/">Window replacement</a></h3>
+          <h3><a href="/window-replacement/"><span class="hav-tag">Window replacement</span></a></h3>
           <p>Hail breaks window glass and tears screens. We measure and install new windows.</p>
           <span class="hav-more" aria-hidden="true">Read more <svg class="i"><use href="/img/icons.svg#i-arrow"/></svg></span>
         </div>
@@ -153,7 +153,7 @@ addEventListener('DOMContentLoaded', () => {
       <li class="hav-card" style="--hav-x: 45%">
         <div class="hav-ph"><img src="/s/hail-damage-what-hail-does/img/fascia-soffit-tan-gutter-corner-wide-960.webp" srcset="/s/hail-damage-what-hail-does/img/fascia-soffit-tan-gutter-corner-wide-640.webp 640w, /s/hail-damage-what-hail-does/img/fascia-soffit-tan-gutter-corner-wide-960.webp 960w, /s/hail-damage-what-hail-does/img/fascia-soffit-tan-gutter-corner-wide-1280.webp 1280w" sizes="(max-width: 760px) 560px, (max-width: 1199px) 50vw, 660px" width="1280" height="875" alt="A tan gutter corner and downspout under the soffit and fascia, against a blue sky." loading="lazy" decoding="async"></div>
         <div class="hav-words">
-          <h3><a href="/fascia-and-soffit/">Fascia and soffit repair</a></h3>
+          <h3><a href="/fascia-and-soffit/"><span class="hav-tag">Fascia and soffit repair</span></a></h3>
           <p>Hail can dent and crack fascia, the board your gutters hang on. We replace damaged fascia, so your gutters stay firmly attached.</p>
           <span class="hav-more" aria-hidden="true">Read more <svg class="i"><use href="/img/icons.svg#i-arrow"/></svg></span>
         </div>
@@ -161,7 +161,7 @@ addEventListener('DOMContentLoaded', () => {
       <li class="hav-card" style="--hav-x: 55%">
         <div class="hav-ph"><img src="/s/hail-damage-what-hail-does/img/siding-grey-two-story-balcony-wide-960.webp" srcset="/s/hail-damage-what-hail-does/img/siding-grey-two-story-balcony-wide-640.webp 640w, /s/hail-damage-what-hail-does/img/siding-grey-two-story-balcony-wide-960.webp 960w, /s/hail-damage-what-hail-does/img/siding-grey-two-story-balcony-wide-1280.webp 1280w" sizes="(max-width: 760px) 560px, (max-width: 1199px) 50vw, 660px" width="1280" height="875" alt="A two-story building with gray siding and a covered balcony." loading="lazy" decoding="async"></div>
         <div class="hav-words">
-          <h3><a href="/siding/">Siding</a></h3>
+          <h3><a href="/siding/"><span class="hav-tag">Siding</span></a></h3>
           <p>Hail can crack siding, and strong wind can damage it too. We repair or replace it in vinyl, engineered wood or metal.</p>
           <span class="hav-more" aria-hidden="true">Read more <svg class="i"><use href="/img/icons.svg#i-arrow"/></svg></span>
         </div>
@@ -176,10 +176,14 @@ addEventListener('DOMContentLoaded', () => {
       var sec = document.getElementById('hail-damage-what-hail-does'), grid = sec && sec.querySelector('.hav-grid');
       if (!grid) return;
       var ps = [].slice.call(grid.querySelectorAll('.hav-words > p'));
+      var cards = [].slice.call(grid.querySelectorAll('.hav-card'));   // eyebrow titles: each card's top and foot plates, for its two fades
       function level() {
         ps.forEach(function (p) { p.style.minHeight = ''; });
         var h = Math.max.apply(null, ps.map(function (p) { return Math.ceil(p.getBoundingClientRect().height); }));
         ps.forEach(function (p) { p.style.minHeight = h + 'px'; });
+        cards.forEach(function (c) { var r = c.getBoundingClientRect();
+          c.style.setProperty('--hav-t', Math.round(c.querySelector('h3').getBoundingClientRect().bottom - r.top + 12) + 'px');
+          c.style.setProperty('--hav-f', Math.round(r.bottom - c.querySelector('.hav-words > p').getBoundingClientRect().top + 20) + 'px'); });
       }
       level();
       if (window.ResizeObserver) new ResizeObserver(level).observe(grid);
@@ -518,11 +522,11 @@ addEventListener('DOMContentLoaded', () => {
         <p class="sec-lede">We come out to your house, look at the roof line, measure it and give you a price, all at no charge.</p>
         <p class="ec-call ec-reach"><a href="tel:+18068292622">806-829-2622</a><a href="mailto:info@premierguttersandexterior.com">info@<wbr>premierguttersandexterior.com</a></p>
       </div>
-      <form class="estimate-card ec-form" action="#" onsubmit="return false" aria-labelledby="ec-form-title">
+      <form name="estimate" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" class="estimate-card ec-form" aria-labelledby="ec-form-title"><input type="hidden" name="form-name" value="estimate"><input type="hidden" name="page" value="/hail-damage/"><p hidden style="display:none"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
         <h3 class="form-title" id="ec-form-title">Tell us about your project:</h3>
         <div class="field-row ec-row3">
-          <div class="field"><label for="ec-name">Name</label><input id="ec-name" name="name" autocomplete="name"></div>
-          <div class="field"><label for="ec-phone">Phone</label><input id="ec-phone" name="phone" autocomplete="tel" type="tel" inputmode="tel"></div>
+          <div class="field"><label for="ec-name">Name</label><input id="ec-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="ec-phone">Phone</label><input id="ec-phone" name="phone" autocomplete="tel" type="tel" inputmode="tel" required></div>
           <div class="field"><label for="ec-email">Email (optional)</label><input id="ec-email" name="email" autocomplete="email" type="email"></div>
         </div>
         <div class="field-row ec-row2">
