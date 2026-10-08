@@ -1,0 +1,61 @@
+/* #gutter-installation-what-seamless, "What seamless gutters are": SHIPPED 7 Oct 2026.
+
+   Vegas built it up over one day: his AISUN screenshot (Dribbble 27432829: "has our normal layouts header but the images like this");
+   the facts' placements turned down ("i dont like below or inside"); /refs round 7 (refs/seamless/r7) and its takes; then option 6:
+   "show me the description under the header with no eyebrow like the seciton below it", "add the line under the description and an
+   eyebrow", "slim down the description and make it one description", and, after four ways of labelling the photos, "just remove the
+   image labels and ship. for mobile only have the third image shown no swipe".
+
+   - The header: the tag, the H2, one description under it (the theme's .sec-lede: 14px under, 60ch), and a hairline under that, 32px
+     each side (24 on phones), the hairline of What we do and How an installation works.
+   - The row: AISUN's, measured off his screenshot (1,518 wide: 750 + 18 + 366 + 18 + 366, all 520 tall): four equal columns, the wide
+     photo across the first two, a tall 7:10 photo in each of the others, one height; 16px gaps; the site's 12px photo corner. No labels.
+   - Tablets (761 to 991px): one row you swipe from the page column past the screen's right edge, every photo 400 tall, the next one
+     showing at least 54px.
+   - Phones (760px down): only the third photo (the inside of a new run with its hangers), the column's full width, 4:5; no row.
+   Theme only: .label, h2, .sec-lede, the colour tokens and the panel corner. */
+
+.wsg-in { --wsg-gap: 16px; --wsg-space: 32px; --wsg-line: color-mix(in srgb, var(--heading) 30%, var(--page));
+  padding-inline: var(--edge); }
+
+/* the header: tag, H2, the description under it, the hairline */
+.wsg-head { padding-bottom: var(--wsg-space); border-bottom: 1px solid var(--wsg-line); }
+.wsg-head .sec-lede { margin-top: 14px; max-width: 60ch; text-wrap: pretty; }
+
+/* the row: four columns, the wide photo across two, the tall ones 7:10 and the wide one their height */
+.wsg-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--wsg-gap); margin-top: var(--wsg-space); }
+.wsg-ph { position: relative; overflow: hidden; border-radius: var(--r-panel); background: var(--line); }
+.wsg-ph--wide { grid-column: span 2; }
+.wsg-ph:not(.wsg-ph--wide) { aspect-ratio: 7 / 10; }
+.wsg-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.wsg-ph--wide img { object-position: 50% 30%; }
+
+/* tablets: one row you swipe, from the page column past the screen's right edge */
+@media (max-width: 991px) {
+  .wsg-in { --wsg-h: 400px; }
+  .wsg-row { --wsg-wide: min(var(--wsg-h) * 1.44, 100vw - var(--edge) - var(--wsg-gap) - 54px);
+    grid-template-columns: var(--wsg-wide) 280px 280px; margin-right: calc(-1 * var(--edge)); padding-right: var(--edge);
+    overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: none; }
+  .wsg-row::-webkit-scrollbar { display: none; }
+  .wsg-ph { height: var(--wsg-h); scroll-snap-align: start; }
+  .wsg-ph--wide { grid-column: auto; }
+  .wsg-ph:not(.wsg-ph--wide) { aspect-ratio: auto; }
+}
+
+/* phones: the third photo alone, the column's width, 4:5; the other two are not shown */
+@media (max-width: 760px) {
+  .wsg-in { --wsg-space: 24px; }
+  .wsg-row { display: block; margin-right: 0; padding-right: 0; overflow: visible; }
+  .wsg-ph { display: none; height: auto; }
+  .wsg-ph:last-child { display: block; aspect-ratio: 4 / 5; }
+}
+
+/* Hover (Vegas, 8 Oct 2026: "Add hover animation to all cards that dont have it"): the site's photo hover, as Our work's and the homepage
+   Service area's photos have it: the photo box lifts 4px onto a soft navy shadow and her photo eases in to 1.04 (mouse only, none under
+   reduced motion). */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .wsg-ph { transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+  .wsg-ph img { transition: transform .7s var(--ease); }
+  .wsg-ph:hover { z-index: 1; transform: translateY(-4px); box-shadow: 0 16px 24px -16px rgb(var(--shadow) / .5); }
+  .wsg-ph:hover img { transform: scale(1.04); }
+}

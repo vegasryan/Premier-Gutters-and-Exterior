@@ -1,0 +1,77 @@
+/* Contact's Where we work (#contact-where): the homepage's Service area design, copied as shipped from
+   mvp/sections/home-service-area/section.css by design/contact-where/l5/make.py, with Contact's additions at the foot. */
+
+/* The homepage's Service area (#home-service-area), written by design/home-service-area/make.py. Layout only: every colour, size, corner and
+   the eyebrow tag are theme.css's.
+
+   Vegas, 6 Oct 2026: "it needs to be extremely simplified compared to this but make a service area section for our homepage (view the scope)
+   and have it like this with the towns split by our on theme lines with an image taking up one side of the section ... only take that from
+   this ref dont make it dark like the ref or add any of the other elements use our sites style for those and only add the bare minimum".
+   His reference was his own mockup (Royal Gutter Estates, on Lovable): a navy section, eight towns in two columns, each town on a rule, and
+   a house photo at the right.
+
+   Taken from it: the towns in two columns, a rule under each and over the first row, the columns apart; a photo on the other side.
+   Ours: the light page ground (not its navy); the theme's eyebrow tag, H2 and lead line (the plan's words, with its "service area" link);
+   the town names in the capitals of the FAQ's questions (the theme's H3 type, 22px, 700, +.02em, 18px on phones); the site's header line
+   for the rules (1px, the ink at 30%: the FAQ rows', Recent work's and What we do's); her photo at the right with the panel corner, as tall
+   as the words. Left out, as he asked: the numbers, the plus signs, the count, the line over the towns, the note with its pin, the button,
+   the photo's caption and arrow, and the foot line. Nothing moved in take 1 (take 4's hover is below).
+
+   Take 2 (Vegas, same day): "needs a better pic" (make.py's PHOTOS: the shipped one is its DEFAULT, placed by the object-position make.py
+   writes below) and "no image for mobile for this section": from 900px down, where the section is one column, there is no photo. */
+
+.hsa-in { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); column-gap: clamp(40px, 5vw, 72px); margin-inline: var(--edge); }
+.hsa-words { min-width: 0; }
+.hsa-words > .label { display: block; width: fit-content; }   /* the theme's tag, out of its line box: its top is the photo's top */
+.hsa-words .sec-lede { text-wrap: pretty; }
+
+/* the towns: two columns, a rule under each town and over the first row (the rule belongs to the town, so the columns' rules stop at the gap) */
+.hsa-towns { --hsa-line: color-mix(in srgb, var(--heading) 30%, var(--page));
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; margin: clamp(32px, 3.2vw, 44px) 0 0; padding: 0; list-style: none; }
+.hsa-towns li { padding: 18px 0; border-bottom: 1px solid var(--hsa-line);
+  font: 700 var(--h3)/1.25 var(--f); letter-spacing: .02em; text-transform: uppercase; color: var(--heading); }
+.hsa-towns li:nth-child(-n + 2) { border-top: 1px solid var(--hsa-line); }
+
+/* the link to the service area page as the theme's arrow link (make.py LINKS 'arrow'; Vegas: "show me a different way we can link the service
+   area page"): at the left under the towns, as How it works puts its link under its cards, in a row of its own; on a touch screen a 44px hit
+   area that moves nothing */
+.hsa-all { grid-column: 1; justify-self: start; margin-top: clamp(28px, 3vw, 40px); }
+@media (pointer: coarse) { .hsa-all { position: relative; } .hsa-all::after { content: ''; position: absolute; inset: -12px -8px; } }
+
+/* her photo, the other side: as tall as the words, the panel corner, cropped to fit */
+.hsa-photo { position: relative; isolation: isolate; margin: 0; overflow: hidden; border-radius: var(--r-panel); background: var(--line); }
+.hsa-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 20% 0%; }
+
+/* take 5 (Vegas, 7 Oct 2026, first on Contact's Where we work: "show me the image on the rights bottom in line with the service area cta
+   instead of ended at the end of the towns list", then "do that change for any section using this layout like service area on homepage"):
+   the photo takes the arrow link's row too, so its foot is level with the link's; the towns and the link stay where they are. Its column is
+   set as well: a row alone would let the grid place it first, in the left column. With the link in the line (make.py LINKS 'inline') that
+   row is empty and the photo ends at the last rule as before. */
+@media (min-width: 901px) { .hsa-photo { grid-column: 2; grid-row: 1 / span 2; } }
+
+/* a mouse over the photo (Vegas, 6 Oct: "add a hover to image for desktop"): the site's photo hover, Recent work's number for number (right above
+   this section): the frame lifts 4px with a soft shadow and the photo zooms 4% inside it; nothing under reduced motion or on a touch screen */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hsa-photo { transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+  .hsa-photo img { transition: transform .7s var(--ease); }
+  .hsa-photo:hover { z-index: 1; transform: translateY(-4px); box-shadow: 0 16px 24px -16px rgb(var(--shadow) / .5); }
+  .hsa-photo:hover img { transform: scale(1.04); }
+}
+
+/* 900px and under: one column, the words and the towns only ("no image for mobile"; the picture is lazy, so it is never loaded there) */
+@media (max-width: 900px) {
+  .hsa-in { grid-template-columns: minmax(0, 1fr); }
+  .hsa-photo { display: none; }
+}
+@media (max-width: 600px) {
+  .hsa-towns { column-gap: 16px; }
+  .hsa-towns li { padding: 14px 0; font-size: 18px; }
+}
+@media (max-width: 360px) { .hsa-towns li { font-size: 16px; } }   /* SHALLOWATER keeps to its column at 320 */
+
+/* ---------- Contact's additions (design/contact-where/l5/make.py): only what this section's words need ---------- */
+
+/* Wolfforth, Shallowater and Levelland link to their parts of the service area page: the row's own ink, underlined when pointed at (the
+   site's hover, never a colour) */
+.hsa-towns a { color: inherit; text-decoration: none; }
+.hsa-towns a:hover, .hsa-towns a:focus-visible { text-decoration: underline; text-underline-offset: .18em; text-decoration-thickness: 2px; }

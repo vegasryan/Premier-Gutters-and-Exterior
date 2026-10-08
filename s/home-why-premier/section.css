@@ -76,6 +76,13 @@
    the preview showed that number with the one-step-deeper green (#43A434, 3.2:1) beside it, and he shipped her green. */
 
 .hr--depth { --hr-card: 380px; --hr-corner: var(--r-panel); }   /* 360 in take 2; 380 holds "Name, Google review" on one line for most names */
+/* one card size on every page that uses this design (Vegas, 7 Oct 2026: "hail jobs we've done needs to be the right size for the review
+   cards and photos its not like homes its inconsistent ... make sure other review sections dont have this problem"): a row was as tall as
+   its longest quote, so About's rows came out 248px, Hail damage's 308 and 222, and their photos took those heights. Now every card and
+   photo is the homepage's own height, measured at every width from 320 to 1920: 278px, and 267 where the rows merge on phones. A quote
+   has to fit it: design/about-people and design/copied-designs stop on one longer than the homepage's longest. */
+.hr--depth { --hr-card-h: 278px; }
+.hr--depth .hr-card, .hr--depth .hr-photo { height: var(--hr-card-h); }
 
 /* the white face (the default): flat, a hair cooler than white so its white shine line shows */
 .hr--depth .hr-card {
@@ -131,7 +138,7 @@
 .hr--depth .hr-all { margin-top: 0; }
 
 @media (max-width: 760px) {
-  .hr--depth { --hr-card: 300px; }
+  .hr--depth { --hr-card: 300px; --hr-card-h: 267px; }
   .hr--depth .hr-review { padding: calc(22px - .5px) calc(24px - .5px) calc(24px + 2px); }
   .hr--depth .hr-review .stars .i { width: 26px; height: 26px; }
   .hr--depth blockquote p { font-size: inherit; }

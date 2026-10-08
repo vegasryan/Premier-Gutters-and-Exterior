@@ -30,14 +30,21 @@
 .hsa-towns li:nth-child(-n + 2) { border-top: 1px solid var(--hsa-line); }
 
 /* the link to the service area page as the theme's arrow link (make.py LINKS 'arrow'; Vegas: "show me a different way we can link the service
-   area page"): at the left under the towns, as How it works puts its link under its cards, in a row of its own so the photo still ends at the
-   last rule; on a touch screen a 44px hit area that moves nothing */
+   area page"): at the left under the towns, as How it works puts its link under its cards, in a row of its own; on a touch screen a 44px hit
+   area that moves nothing */
 .hsa-all { grid-column: 1; justify-self: start; margin-top: clamp(28px, 3vw, 40px); }
 @media (pointer: coarse) { .hsa-all { position: relative; } .hsa-all::after { content: ''; position: absolute; inset: -12px -8px; } }
 
 /* her photo, the other side: as tall as the words, the panel corner, cropped to fit */
 .hsa-photo { position: relative; isolation: isolate; margin: 0; overflow: hidden; border-radius: var(--r-panel); background: var(--line); }
 .hsa-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 20% 0%; }
+
+/* take 5 (Vegas, 7 Oct 2026, first on Contact's Where we work: "show me the image on the rights bottom in line with the service area cta
+   instead of ended at the end of the towns list", then "do that change for any section using this layout like service area on homepage"):
+   the photo takes the arrow link's row too, so its foot is level with the link's; the towns and the link stay where they are. Its column is
+   set as well: a row alone would let the grid place it first, in the left column. With the link in the line (make.py LINKS 'inline') that
+   row is empty and the photo ends at the last rule as before. */
+@media (min-width: 901px) { .hsa-photo { grid-column: 2; grid-row: 1 / span 2; } }
 
 /* a mouse over the photo (Vegas, 6 Oct: "add a hover to image for desktop"): the site's photo hover, Recent work's number for number (right above
    this section): the frame lifts 4px with a soft shadow and the photo zooms 4% inside it; nothing under reduced motion or on a touch screen */

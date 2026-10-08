@@ -1,0 +1,128 @@
+/* How an installation works (.hwa), as Avenor's "About Avenor" category cards (Dribbble 27455678, "Avenor, Modern Real Estate Property
+   Website Landing Page Design"), on the photo-card layout of design/how-it-works-photocards. Theme tokens for every colour, size and corner.
+
+   Vegas, 5 Oct 2026: "i rebuilt the services section http://premier-v2-services-avenor.idea.localhost:8787/#home-services here using this
+   reference https://dribbble.com/shots/27455678-... use this reference (any section from it) to build this same layout". Then, take 2: "keep
+   that logo thing in the project folder but i dont want the images covered. add a line like avenor uses somewehre to the cards and rephrase
+   the once your happy part".
+
+   The layout kept from the photo cards (his, 5 Oct): the tag and H2 on the left, the line on the right, bottoms level, from 992px; four cards
+   across the page column with no scroll from 1200px and a swipe row below; titles in capitals over their lines at the foot, at one height on
+   every card; the estimate link under the row.
+   Copied from Avenor's cards (measured on the shot's 1600px page, its card column 1,310px wide, ours 1,304 at 1440, so 1 to 1):
+   - a top row 18px in: a small label at the left (Avenor's category name; ours "Step 1") and a small note at the right (Avenor's "214 available
+     listings"; ours when or where the step happens, from the step's own line);
+   - 18px padding all round, 18px between cards, the title over a two to three line description;
+   - the photo filling the card, as on Avenor's Houses card, all the time (take 2: "i dont want the images covered"; take 1 showed the ink face
+     and a ghost of her logo's roof until a card was pointed at, as Avenor's other three cards do; the mark is kept in mark/);
+   - the line (take 2): Avenor's featured residence cards run a hairline under the title, 1px of white at about 45%, across the card's inside,
+     about 12px under the words; here under each title, so the four lines sit level across the row.
+   Take 4 (Vegas, 5 Oct: "add a hover effect that lifts and have the card borders like the ones on here [the services preview's Recent work]"):
+   the cards take Recent work's photos' corner, the panels' 12px (--r-panel, no frame, edge or ring), and its hover, rule for rule
+   (mvp/sections/home-recent-work/section.css): pointed at, on devices that hover with motion allowed, a card lifts 4px onto the services cards'
+   soft shadow and its photo eases 4% closer.
+   Take 5: an even navy filter over each photo in place of the fades (see the filter's rule).
+   Take 6 (Vegas, 6 Oct, with a screenshot of the homepage's What we do: "section is missing the line like this has"): that section's
+   hairline across the column under the words, copied rule for rule (mvp/sections/home-services/section.css): 1px of the heading ink at 30%
+   on the page colour, 32px under the words and 32px over the cards (24 and 24 on phones).
+   Take 7 (Vegas, 7 Oct night, "some sections have the description going from half way and some have it starting later. make the ones half way
+   start later like the rest"): the line is What we do's, a 25em column at the far right, 48px from the heading, which is 922px into the page
+   column at 1440 (take 1 to 6 had it in the right half, from 728px).
+   Left out: Avenor's white "See More" button on each card (the steps are not pages; the estimate link stays under the row); its two-tone centred
+   statement over the cards (the layout's tag, H2 and line stay). */
+
+.sec.hwa { overflow: hidden; }   /* one stylesheet for every section in this design (gutter installation, about, windows, hail) */
+.hwa-in { --hwa-edge: var(--edge); --hwa-gap: 18px; --hwa-pad: 18px; --hwa-card: clamp(264px, (100cqw - 3 * var(--hwa-gap)) / 3.4, 340px);
+  --hwa-space: 32px; --hwa-line: color-mix(in srgb, var(--heading) 30%, var(--page));
+  display: grid; row-gap: var(--hwa-space); padding-left: var(--hwa-edge); container-type: inline-size; }
+/* the words, and the services section's hairline under them across the column (32px each side, 24 on phones) */
+.hwa-info { padding-right: var(--hwa-edge); padding-bottom: var(--hwa-space); border-bottom: 1px solid var(--hwa-line); }
+.hwa-info .label { margin-bottom: 12px; }
+.hwa-info .sec-lede { margin-top: 18px; }
+.hwa-all { justify-self: start; margin-top: calc(clamp(32px, 3.5vw, 48px) - var(--hwa-space)); }   /* the link keeps its distance under the cards */
+@media (min-width: 992px) {
+  .hwa-info { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 25em); column-gap: 48px; align-items: end; }   /* the homepage What we do's header, number for number (home-services .wd-head): the line a 25em column at the far right */
+  .hwa-head h2 { padding-right: 24px; }
+  .hwa-head h2:has(.hwa-l2) { white-space: nowrap; }
+  .hwa-l2 { display: block; }   /* his break (5 Oct) for the gutter installation heading: "How an installation" over "works"; the others wrap */
+  .hwa-info .sec-lede { margin-top: 0; }
+}
+
+/* the row: a swipe row below desktop (room around it for focus, taken back by the margins), four across from 1200px */
+.hwa-track { display: flex; gap: var(--hwa-gap); margin: -14px 0 -22px -8px; padding: 14px var(--hwa-edge) 22px 8px; list-style: none;
+  overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: none;
+  scroll-snap-type: x proximity; scroll-padding-inline: 8px; cursor: grab; -webkit-user-select: none; user-select: none; }
+.hwa-track::-webkit-scrollbar { display: none; }
+.hwa-track.is-drag { cursor: grabbing; scroll-snap-type: none; }
+@media (min-width: 1200px) {
+  .hwa-in { padding-right: var(--hwa-edge); }
+  .hwa-info { padding-right: 0; }
+  .hwa-track { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 0; overflow: visible; cursor: auto;
+    -webkit-user-select: auto; user-select: auto; }
+}
+
+/* a card: her photo filling it, the ink face behind it only while it loads */
+.hwa-card { position: relative; isolation: isolate; flex: 0 0 var(--hwa-card); display: flex; flex-direction: column; justify-content: space-between;
+  aspect-ratio: 8 / 11; padding: var(--hwa-pad); overflow: hidden; border-radius: var(--r-panel); background: var(--heading); color: var(--on-dark);
+  scroll-snap-align: start; }
+.hwa-card img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+/* the filter: one even navy over the whole photo (take 5, Vegas, 5 Oct: "for the photos have the darkness be consistent, less intense than how it
+   is right on the text but a consistent filter instead of fading"). Take 4 had fades: 84 to 92% navy under the words, 80% under the top row,
+   clear in between. 66%: the least an even filter can be with every word still clearing its bar on every photo is 63.7% (tools/flat.py, the
+   13px top row over the white soffit at the top of the Cleanup photo, at 1024px; the 15px lines need 60.6%, the titles 45%), plus about 2 points
+   for margin. */
+/* the tint: her logo's darkest blue (--logo-blue) at 15%, over photos matched to the What we do cards' reference (make.py, THE TONE), so these
+   cards are the What we do cards' shade (Vegas, 6 Oct: "ok ship those how it works changes"). It was the footer navy at 66% over the photos
+   as they were. At 15% the words on about half the cards read 3.3 to 4.4:1, under the 4.5:1 small words need; shipped as he picked, told. */
+.hwa-card::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: color-mix(in srgb, var(--logo-blue) 15%, transparent); }
+
+/* pointed at: Recent work's lift (4px onto the services cards' soft shadow) and its photo easing 4% closer */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hwa-card { transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+  .hwa-card img { transition: transform .7s var(--ease); }
+  .hwa-card:hover { z-index: 1; transform: translateY(-4px); box-shadow: 0 16px 24px -16px rgb(var(--shadow) / .5); }
+  .hwa-card:hover img { transform: scale(1.04); }
+}
+
+/* the top row: the step at the left, when or where at the right */
+.hwa-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font: 400 var(--small)/1.25 var(--f); }
+.hwa-top span:last-child { text-align: right; }
+
+/* the words: the title in capitals, Avenor's hairline under it, then the line; every title and every line the tallest one's height, so the
+   titles and the hairlines sit at one height on every card */
+.hwa-card h3 { min-height: var(--hwa-h3, 0px); padding-bottom: 12px; border-bottom: 1px solid rgb(255 255 255 / .45); color: var(--on-dark); font-size: var(--h3); font-weight: 700; line-height: 1.15; letter-spacing: .02em; text-transform: uppercase; }
+.hwa-words p { min-height: var(--hwa-p, 0px); margin-top: 12px; font-size: var(--cap); line-height: 1.45; color: var(--on-dark); text-wrap: pretty; }
+.hwa-measure .hwa-card h3, .hwa-measure .hwa-words p { min-height: 0; }
+.hwa-nw { white-space: nowrap; }   /* a hyphenated word kept whole ("Low-E") */
+
+@media (max-width: 760px) { .hwa-in { --hwa-space: 24px; } }
+@media (max-width: 479px) { .hwa-in { --hwa-pad: 16px; } }
+@media (forced-colors: active) { .hwa-card { border: 1px solid CanvasText; } }
+
+/* Look 3 with the hero's fade under the words (Vegas, 7 Oct 2026: "show me the whats included fade over the cards matching the hero fade at the bottom for the text").
+   The hero's shade (mvp/sections/gutter-cleaning-hero/section.css, `.sh-panel::before`; the same on the nine service heroes and the homepage's): the ink (#16213A, here
+   --heading, which is also the card's own face) at 94% at the foot, 78% a quarter of the way up (26%), 25% at the middle (52%) and clear from 64%, over the whole height of
+   the panel. Here the same stops over the whole height of each card, so the title, its hairline and the line sit on the navy the hero's words do. It lies over the photo and the
+   even tint and under the words (z -1, after the tint's ::before). `.hwa--clear` takes the even tint off, since the hero's photo has none; the live files also have a blue cast and a darker spread baked in (the design's tone(), matched to the What we do cards),
+   so a member set to 'clear' in make.py gets her photos as they are (hiw_natural), not those: the fade then sits on her own colours, as the hero's does.
+   Nothing here moves a box: the cards, the words and the levelling are the design's own. */
+.hwa--fade .hwa-card::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(to top,
+    color-mix(in srgb, var(--heading) 94%, transparent) 0%,
+    color-mix(in srgb, var(--heading) 78%, transparent) 26%,
+    color-mix(in srgb, var(--heading) 25%, transparent) 52%,
+    transparent 64%); }
+.hwa--fade.hwa--clear .hwa-card::before { display: none; }
+/* `.hwa--top` adds a short fade at the top for the note over the bright parts of her own photos (the hero has no words up there; these cards' own take 4 had 80% navy under the top row):
+   the hero's navy, 74% at the top edge, gone by 30%, over the hero's fade at the foot (the least that keeps the note above 4.5:1 on the brightest of her photos, with margin). */
+.hwa--top .hwa-card::after { background:
+  linear-gradient(to bottom,
+    color-mix(in srgb, var(--heading) 74%, transparent) 0%,
+    color-mix(in srgb, var(--heading) 66%, transparent) 9%,
+    color-mix(in srgb, var(--heading) 26%, transparent) 19%,
+    transparent 30%),
+  linear-gradient(to top,
+    color-mix(in srgb, var(--heading) 94%, transparent) 0%,
+    color-mix(in srgb, var(--heading) 78%, transparent) 26%,
+    color-mix(in srgb, var(--heading) 25%, transparent) 52%,
+    transparent 64%); }

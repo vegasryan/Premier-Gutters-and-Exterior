@@ -633,6 +633,8 @@ html.mnav-open .site-hdr::before { content: ""; position: fixed; inset: 0; backg
   transition: color .2s var(--ease), text-decoration-color .2s var(--ease); }
 .site-ftr .fw-legal a:hover { color: var(--on-dark); text-decoration-color: currentColor; }
 .site-ftr .fw-mail { overflow-wrap: anywhere; }
+.site-ftr .fw-tel { white-space: nowrap; }   /* the number before the email (Vegas, 7 Oct: "add phone number to line in footer before the email"), never
+   broken at its hyphens; on phones it stays (a tap to call) where the email is hidden */
 @media (max-width: 760px) { .site-ftr .fw-mail { display: none; } }   /* no email at the foot on phones (Vegas, 6 Oct: "remove the email from the
    mobile footer", "at the bottom"); the copyright line stands alone there. Tablets and desktop keep it beside the copyright */
 /* the wordmark: PREMIER as wide as the panel's inside (100cqw); 4.87 is its width in ems at 700 with +.02em, measured in Chrome */
@@ -718,8 +720,10 @@ html.mnav-open .site-hdr::before { content: ""; position: fixed; inset: 0; backg
 @media (max-width: 700px) {
   .fw-panel { padding-bottom: 32px; }   /* the words end 32px over the foot; the roof lies behind them */
   .fw-panel .fw-mark span { display: none; }
-  .fw-panel .fw-mark { position: absolute; z-index: -1; right: -8.5cqw; bottom: calc(-.06 * 85cqw * 560 / 1198); width: 85cqw; margin: 0;
+  .fw-panel .fw-mark { position: absolute; z-index: -1; right: -8.5cqw; bottom: calc(-.06 * 85cqw * 560 / 1198 + 24px); width: 85cqw; margin: 0;
     filter: url(#fw-etch); -webkit-mask: linear-gradient(#000 45%, rgb(0 0 0 / .3) 100%); mask: linear-gradient(#000 45%, rgb(0 0 0 / .3) 100%); }
+  /* + 24px: the roof lifted so the panel's foot no longer cuts it, the gutter shown whole, 16px clear at 390 (Vegas, 7 Oct: "for mobile show me
+     the premier logo at the bottom moved up a little", then "ship ... the mobile footer logo change"; preview design/footer-mark-phone) */
   .fw-panel .fw-mark::before { content: ""; display: block; aspect-ratio: 1198 / 560; background: #000;
     -webkit-mask: url(img/premier-roof-mark.webp) 0 0 / 100% 100% no-repeat; mask: url(img/premier-roof-mark.webp) 0 0 / 100% 100% no-repeat; }
 }
@@ -741,3 +745,9 @@ html.mnav-open .site-hdr::before { content: ""; position: fixed; inset: 0; backg
 }
 .estimate-card :is(.field input, .select select):focus-visible { outline: none; background: transparent; box-shadow: inset 0 -2px 0 var(--heading); }
 .estimate-card .field input:autofill { box-shadow: inset 0 0 0 60px var(--surface), inset 0 -1px 0 rgb(22 33 58 / .28); }
+
+/* ---------- scroll in and out (8 Oct 2026; mvp/reveal.js, copied from Mirador: design/scroll-motion/README.md) ----------
+   The script adds .sio-off only to a block that is off screen, and only when motion is allowed; nothing is hidden without it.
+   The block rests a few px low (--sio-y, set per block by the script) and clear; the script animates it in and out. */
+.sio-off { opacity: 0; translate: 0 var(--sio-y, 20px); }
+@media print { .sio-off { opacity: 1 !important; translate: none !important; } }

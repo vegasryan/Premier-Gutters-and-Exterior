@@ -1,0 +1,139 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Accessibility | Premier Gutters and Exterior</title><meta name="description" content="How this site is built to work for everyone, and how to tell us about a problem."><meta property="og:type" content="website"><meta property="og:url" content="https://premier-gutters-and-exterior.netlify.app/accessibility/"><meta property="og:site_name" content="Premier Gutters and Exterior"><meta property="og:title" content="Accessibility | Premier Gutters and Exterior"><meta property="og:description" content="How this site is built to work for everyone, and how to tell us about a problem."><meta property="og:image" content="https://premier-gutters-and-exterior.netlify.app/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="A dark seamless gutter wrapping a limestone roof corner under a grey shingle roof and a blue sky."><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/icon-32.png" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/theme.css"><link rel="stylesheet" href="/s/accessibility-statement/section.css"><script src="/header.js" defer></script><script src="/reveal.js" defer></script><script>
+addEventListener('DOMContentLoaded', () => {
+  const mq = matchMedia('(max-width: 700px)'), lists = document.querySelectorAll('.ft-acc');
+  const fold = () => lists.forEach((x) => { x.open = !mq.matches; x.querySelector('summary').tabIndex = mq.matches ? 0 : -1; });
+  lists.forEach((x) => x.querySelector('summary').addEventListener('click', (ev) => { if (!mq.matches) ev.preventDefault(); }));
+  fold(); mq.addEventListener('change', fold);
+});
+</script><style>
+/* draft sections: the words, set plainly in the theme */
+.draft-body { max-width: 760px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.draft-body > h1 + p, .draft-body > h2 + p { color: var(--muted); font-size: var(--lede); line-height: 1.5; }
+.sec--dark .draft-body > h2 + p { color: var(--on-dark-muted); }
+.draft-body h3 { margin-top: 8px; }
+.draft-body .items { margin: 0; padding-left: 22px; display: grid; gap: 4px; }
+.draft-acts { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
+.draft-quote { margin: 8px 0 0; padding-left: 18px; border-left: 3px solid var(--head); font-size: var(--lede); line-height: 1.5; }
+.sec--dark .draft-quote { border-color: var(--on-dark-muted); }
+.draft-quote + .caption { margin-top: -8px; }
+.sec--dark .caption { color: var(--on-dark-muted); }
+.draft-form { max-width: 560px; margin-top: 8px; }
+.anchor { display: block; position: relative; top: -12px; }
+</style></head><body><a class="skip" href="#main">Skip to content</a><header class="site-hdr">
+  <div class="hdr-bar">
+    <a class="brand" href="/"><img src="/img/premier-gutters-logo-360.webp" width="360" height="248" alt="Premier Gutters and Exterior, home"></a>
+    <nav class="nav" aria-label="Main">
+      <ul class="nav-list">
+        <li class="nav-home"><a class="nav-link" href="/">Home</a></li>
+        <li>
+          <details class="nav-svc">
+            <summary class="nav-link">Services<svg class="i caret" aria-hidden="true"><use href="/img/icons.svg#i-caret"/></svg></summary>
+            <div class="svc-menu">
+              <div class="svc-group">
+                <p class="label" id="svc-gutters">Gutters</p>
+                <ul aria-labelledby="svc-gutters">
+                  <li><a href="/gutter-installation/">Gutter installation</a></li>
+                  <li><a href="/gutter-repair/">Gutter repair</a></li>
+                  <li><a href="/gutter-cleaning/">Gutter cleaning</a></li>
+                  <li><a href="/gutter-guards/">Gutter guards</a></li>
+                </ul>
+              </div>
+              <div class="svc-group">
+                <p class="label" id="svc-exterior">Exterior</p>
+                <ul aria-labelledby="svc-exterior">
+                  <li><a href="/fascia-and-soffit/">Fascia and soffit</a></li>
+                  <li><a href="/siding/">Siding</a></li>
+                  <li><a href="/window-replacement/">Window replacement</a></li>
+                  <li><a href="/window-repair/">Window repair</a></li>
+                  <li><a href="/hail-damage/">Hail damage repair</a></li>
+                </ul>
+              </div>
+            </div>
+          </details>
+        </li>
+        <li><a class="nav-link" href="/about/">About</a></li>
+        <li><a class="nav-link" href="/#why-premier">Reviews</a></li>
+        <li><a class="nav-link" href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="hdr-cta">
+      <a class="btn btn--act" href="tel:+18068292622" aria-label="Call 806-829-2622"><svg class="i" aria-hidden="true"><use href="/img/icons.svg#i-phone-fill"/></svg>806-829-2622</a>
+      <details class="mnav">
+        <summary class="menu-btn" aria-label="Menu"><svg class="i i-menu" aria-hidden="true"><use href="/img/icons.svg#i-menu"/></svg><svg class="i i-x" aria-hidden="true"><use href="/img/icons.svg#i-x"/></svg></summary>
+        <nav class="mnav-sheet" aria-label="Menu">
+          <ul class="mnav-list">
+            <li><a class="mnav-link" href="/">Home</a></li>
+            <li>
+              <details class="mnav-svc">
+                <summary class="mnav-link">Services<svg class="i caret" aria-hidden="true"><use href="/img/icons.svg#i-caret"/></svg></summary>
+                <div class="mnav-sub">
+                  <div class="svc-group">
+                    <p class="label" id="mnav-gutters">Gutters</p>
+                    <ul aria-labelledby="mnav-gutters">
+                      <li><a href="/gutter-installation/">Gutter installation</a></li>
+                      <li><a href="/gutter-repair/">Gutter repair</a></li>
+                      <li><a href="/gutter-cleaning/">Gutter cleaning</a></li>
+                      <li><a href="/gutter-guards/">Gutter guards</a></li>
+                    </ul>
+                  </div>
+                  <div class="svc-group">
+                    <p class="label" id="mnav-exterior">Exterior</p>
+                    <ul aria-labelledby="mnav-exterior">
+                      <li><a href="/fascia-and-soffit/">Fascia and soffit</a></li>
+                      <li><a href="/siding/">Siding</a></li>
+                      <li><a href="/window-replacement/">Window replacement</a></li>
+                      <li><a href="/window-repair/">Window repair</a></li>
+                      <li><a href="/hail-damage/">Hail damage repair</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </details>
+            </li>
+            <li><a class="mnav-link" href="/about/">About</a></li>
+            <li><a class="mnav-link" href="/#why-premier">Reviews</a></li>
+            <li><a class="mnav-link" href="/contact/">Contact</a></li>
+          </ul>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+<main id="main"><section id="accessibility-statement" class="sec lg lg--rows" aria-labelledby="accessibility-statement-title">
+  <div class="lg-in">
+    <div class="lg-head">
+      <h1 id="accessibility-statement-title">Accessibility</h1>
+      <p class="sec-lede">We want this site to work for everyone, whether you use a mouse, a keyboard, a screen reader or zoom.</p>
+      <p class="lg-date caption">Last updated <time datetime="2026-09-30">September 30, 2026</time></p>
+    </div>
+    <div class="lg-body">
+      <div class="lg-text">
+        <div class="lg-part">
+          <h2 id="accessibility-the-standard-we-aim-for">The standard we aim for</h2>
+          <p>This site aims for level AA of the Web Content Accessibility Guidelines (WCAG) 2.2, the World Wide Web Consortium’s guide to making websites usable by people with disabilities.</p>
+        </div>
+        <div class="lg-part">
+          <h2 id="accessibility-what-the-site-does">What the site does</h2>
+          <p>On every page you’ll find:</p>
+          <ul>
+            <li>a Skip to content link, the first thing your keyboard reaches</li>
+            <li>an outline that shows where you are as you tab through the page</li>
+            <li>body text with a contrast of at least 4.5 to 1 against its background, the level AA asks for</li>
+            <li>text descriptions on the photos that carry information, for screen readers</li>
+            <li>a label on every form field</li>
+            <li>zoom that works: nothing on the site stops you enlarging the page</li>
+            <li>no moving animations when your device is set to reduce motion</li>
+          </ul>
+        </div>
+        <div class="lg-part">
+          <h2 id="accessibility-tell-us-about-a-problem">Tell us about a problem</h2>
+          <p>If something on this site doesn’t work for you, call or email us. Tell us which page it was and what went wrong.</p>
+          <ul>
+            <li>By phone: <a href="tel:+18068292622">806-829-2622</a>, Mon to Fri, 9am to 5pm</li>
+            <li>By email: <a href="mailto:info@premierguttersandexterior.com">info@premierguttersandexterior.com</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main><footer class="site-ftr fw" id="site-footer"><div class="fw-panel"><div class="fw-top"><div class="fw-call"><p class="fw-brand"><span class="fw-brand-name">Premier Gutters and Exterior</span></p><p class="fw-line">Seamless gutters, gutter guards and exterior repair for homes in Lubbock, Wolfforth and nearby towns.</p><p class="fw-social"><a href="https://www.instagram.com/premierguttersandexterior" rel="noopener" aria-label="Instagram"><svg class="i" aria-hidden="true"><use href="/img/icons.svg#i-ig-logo"/></svg></a><a href="https://www.facebook.com/profile.php?id=61580124877471" rel="noopener" aria-label="Facebook"><svg class="i" aria-hidden="true"><use href="/img/icons.svg#i-fb-logo"/></svg></a></p></div><div class="ft-cols fw-cols"><nav class="ft-col" aria-label="Gutter services"><details class="ft-acc" open><summary class="ft-h">Gutters<svg class="ft-caret" aria-hidden="true"><use href="/img/icons.svg#i-caret"/></svg></summary><ul><li><a href="/gutter-installation/">Gutter installation</a></li><li><a href="/gutter-repair/">Gutter repair</a></li><li><a href="/gutter-cleaning/">Gutter cleaning</a></li><li><a href="/gutter-guards/">Gutter guards</a></li></ul></details></nav><nav class="ft-col" aria-label="Exterior services"><details class="ft-acc" open><summary class="ft-h">Exterior<svg class="ft-caret" aria-hidden="true"><use href="/img/icons.svg#i-caret"/></svg></summary><ul><li><a href="/fascia-and-soffit/">Fascia and soffit</a></li><li><a href="/siding/">Siding</a></li><li><a href="/window-replacement/">Window replacement</a></li><li><a href="/window-repair/">Window repair</a></li><li><a href="/hail-damage/">Hail damage repair</a></li></ul></details></nav><nav class="ft-col" aria-label="Company"><details class="ft-acc" open><summary class="ft-h">Company<svg class="ft-caret" aria-hidden="true"><use href="/img/icons.svg#i-caret"/></svg></summary><ul><li><a href="/service-area/">Service area</a></li><li><a href="/#why-premier">Reviews</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></details></nav><div class="ft-col ft-visit"><p class="ft-h">Office and hours</p><address class="ft-addr"><a href="https://www.google.com/maps/search/?api=1&amp;query=8228%20Valencia%20Ave%2C%20Lubbock%2C%20TX%2079424" rel="noopener">8228 Valencia Ave<br>Lubbock, TX 79424</a></address><p class="ft-hours">Mon to Fri, 9am to 5pm<br>Sat and Sun closed</p></div></div></div><div class="fw-legal"><p class="fw-legal-l"><span>© 2026 Premier Gutters and Exterior</span><a class="fw-tel" href="tel:+18068292622">806-829-2622</a><a class="fw-mail" href="mailto:info@premierguttersandexterior.com">info@<wbr>premierguttersandexterior.com</a></p><p class="fw-legal-r"><a href="/privacy-policy/">Privacy policy</a><a href="/accessibility/">Accessibility</a><span>Site by <a href="https://upbeamsystems.com/" target="_blank" rel="noopener">Upbeam Systems</a></span></p></div><a class="fw-mark" href="/" aria-label="Premier Gutters and Exterior, home"><span aria-hidden="true">Premier</span></a></div><svg class="fw-defs" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><filter id="fw-etch" x="-.02" y="-.12" width="1.06" height="1.24" primitiveUnits="objectBoundingBox" color-interpolation-filters="sRGB"><feFlood flood-color="#000" flood-opacity=".18"/><feComposite in2="SourceAlpha" operator="in" result="face"/><feGaussianBlur in="SourceAlpha" stdDeviation=".00155 .0238"/><feOffset dy=".0238" result="low"/><feComposite in="SourceAlpha" in2="low" operator="out" result="rim"/><feFlood flood-color="#000" flood-opacity=".4"/><feComposite in2="rim" operator="in" result="shade"/><feMerge><feMergeNode in="face"/><feMergeNode in="shade"/></feMerge></filter></svg></footer></body></html>

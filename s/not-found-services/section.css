@@ -1,0 +1,110 @@
+/* #not-found-services: the homepage What we do cards' design (#home-services' section.css, copied whole below by design/copied-designs/make.py)
+   with this section's words, links and the homepage cards' photos for its pages. */
+
+/* #home-services, "What we do", rebuilt as Avenor's "Inside The House" (Vegas, 5 Oct: "using this reference [Dribbble 27469731,
+   Avenor] ... rebuild this section ... copy as much of the reference as possible. add a little description so it can match the
+   reference and where it says details have it say read more but when clicked it still redirects").
+
+   Measured from the shot (its content 2,534px wide, here 1,304 at 1440, so x .515) and built in the theme's colours and type:
+   - the tag, then the heading on the left and the line on the right, their bottoms level;
+   - one hairline across the column, 32px under the heading and 32px over the cards (the shot: 60 and 59, x .515 = 31 and 30);
+   - tall cards (11:14; the shot's 612 x 780), 16px apart (15), the site's 12px panel corner (the shot's 4px was tried; Vegas: "keep our corners"). Not the shot's four filling
+     the column: the row runs past the screen's right edge with the next card cut by it, so it reads as a row you scroll, as the
+     shipped row did (Vegas, 5 Oct: "remove the arrows from the bottom and have it back to the look where the card is peeking out
+     from right so the user knows they can scroll");
+   - on each card, along the bottom over a navy shade: the title, a line under it, a hairline (white at 30%), and a Read more
+     row with the site's arrow at the far end (the shot's "Details" row, whose caret points down; Vegas: "have the downward arrow
+     in the bottom right of the cards use the right pointing arrow instead"); 16px in from the sides (the shot's 32 x .515);
+   - no buttons under the row (the shot's two square arrows were built, then dropped: "remove the arrows from the bottom").
+   Theme only: .label, h2, h3, .sec-lede, the type sizes, the colour tokens and the site's icon sprite. */
+
+#not-found-services { overflow: hidden; }
+.wd-in { --wd-gap: 16px; --wd-space: 32px; --wd-line: color-mix(in srgb, var(--heading) 30%, var(--page));
+  padding-inline: var(--edge); }
+
+/* the words: the tag and the heading at the left, the line at the right, their bottoms level, and the hairline under them */
+.wd-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 25em); align-items: end; column-gap: 48px;
+  padding-bottom: var(--wd-space); border-bottom: 1px solid var(--wd-line); }
+.wd-title h2 { max-width: 14em; }
+.wd-head .sec-lede { margin: 0; text-wrap: pretty; }
+
+/* the row: from the page edge to the screen's right edge, and a card sized from the row's own width so that 2.4, 3.4 or 4.4
+   fit (the steps below): the last one in view is always cut by the screen's edge with 40% of it showing, and no card is under
+   296px (the shipped row's floor, 264, put "Fascia and soffit repair" on two lines, and at 291 the lines under the titles ran to
+   three). Narrower rows: one card, up to 320px, and the next showing about 44px. Room around the cards for a lifted card, its
+   shadow and the focus ring, taken back by the margins, so the first card lines up with the hairline's start. */
+.wd-feed { min-width: 0; margin-right: calc(-1 * var(--edge)); container: wd-feed / inline-size; }
+.wd-track { display: flex; gap: var(--wd-gap); margin: calc(var(--wd-space) - 14px) 0 -22px -8px; padding: 14px var(--edge) 22px 8px;
+  list-style: none; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: none;
+  scroll-snap-type: x proximity; scroll-padding-inline: 8px; cursor: grab; -webkit-user-select: none; user-select: none; }
+.wd-track::-webkit-scrollbar { display: none; }
+.wd-track.is-drag { cursor: grabbing; scroll-snap-type: none; }
+
+/* a card: the photo under one even navy overlay, and its words along the bottom */
+.wd-card { position: relative; isolation: isolate; flex: 0 0 min(320px, 100cqw - var(--wd-gap) - 44px);
+  display: grid; align-content: end; aspect-ratio: 11 / 14; overflow: hidden; border-radius: var(--r-panel); background: var(--line);
+  scroll-snap-align: start; }   /* the site's panel corner, 12px, as the live row (Vegas, 5 Oct: "keep our corners"; the shot's ~4px was tried) */
+.wd-card img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
+/* the overlay: her logo's darkest blue (--logo-blue) at 15%, even over the whole photo (Vegas, 6 Oct, from the strength slider on
+   boards/services-tint.html: "ship 15%"; 31% before it, the gutter installation card's own, of which he said "the first card looks great
+   ... verify in chrome that they all look the same shade and then send me the changed section"). At 15% the white words on the weakest
+   card's foot are 3.5:1, under the 4.5:1 small words need (30% is the lowest that keeps it); shipped as he picked, flagged to him. So that every card comes out that shade, the eight other photos are her photos matched to
+   the gutter installation photo (the -even files): its lightness from dark to light, place for place over what the card shows, and its
+   overall colour cast, each keeping its own colours otherwise. Measured at 31%: every card's average #2D446D (#29436D to #2E446C), the
+   same lightness spread and the same blue; at 15% they average #374E6D and move together. Before: the footer navy (--dark-2) at 66% over the photos as
+   they were, from the How an installation works cards (5 Oct, "have the services cards have this blue overlay"). */
+/* SINCE 7 Oct 2026, night: the hero's fade (Vegas: "ship and make sure all esctions that use that card design/layout habe that hero bottom only
+   fade or bottom + top for those with the elemetns at the top as well"), in place of the even tint above: the service heroes' shade
+   (.sh-panel::before), the ink at 94% at the foot, 78% a quarter of the way up, 25% at the middle and clear from 64%, over the card's whole
+   height, as design/how-it-works-avenor/hwa-fade.css draws it on the How it works cards; these cards have words at the foot only, so the
+   foot's fade alone (no top fade), on her photos as they are (the -even colour-matched files are kept in img/, unused). */
+.wd-card::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(to top,
+    color-mix(in srgb, var(--heading) 94%, transparent) 0%,
+    color-mix(in srgb, var(--heading) 78%, transparent) 26%,
+    color-mix(in srgb, var(--heading) 25%, transparent) 52%,
+    transparent 64%); }
+/* narrow phones (400px down): a card is under 300px wide, so a title wraps to more lines and starts higher on the card, where the hero's
+   stops are light; the same fade carried a little higher keeps the titles over 3:1 on the brightest photo (2.4:1 at 360 before) */
+@media (max-width: 400px) {
+  .wd-card::before { background: linear-gradient(to top,
+    color-mix(in srgb, var(--heading) 94%, transparent) 0%,
+    color-mix(in srgb, var(--heading) 82%, transparent) 34%,
+    color-mix(in srgb, var(--heading) 34%, transparent) 62%,
+    transparent 76%); }
+}
+.wd-words { padding: 0 16px 16px; }
+.wd-card h3 { color: var(--on-dark); text-transform: uppercase; letter-spacing: .02em; }   /* capitals like the headings, at the h3's own
+   size (Vegas, 5 Oct: "have the service titles in caps like the header but not a larger size"); the words sit on the card's foot, so a
+   title that wraps grows upward and the titles' last lines, the lines under them and the Read more rows stay level */
+.wd-card h3 a { color: inherit; text-decoration: none; }
+.wd-card h3 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }   /* the whole card is the link; its text is the page's phrase */
+.wd-words > p { margin-top: 6px; font-size: var(--cap); line-height: 1.45; color: var(--on-dark); }   /* white, as DESIGN1's cards: under the
+   even overlay the paler --on-dark-muted measured 3.36:1 on the brightest photo */
+.wd-more { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px;
+  border-top: 1px solid rgb(255 255 255 / .3); font: 400 var(--cap)/1.2 var(--f); color: var(--on-dark); }
+.wd-more .i { width: 18px; height: 18px; color: var(--on-dark); transition: transform .18s var(--ease); }
+.wd-card a:focus-visible { outline: none; }
+.wd-card:has(a:focus-visible) { outline: 3px solid var(--focus); outline-offset: 3px; }
+@media (hover: hover) {
+  .wd-card { transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+  .wd-card:hover { transform: translateY(-4px); box-shadow: 0 16px 24px -16px rgb(var(--shadow) / .5); }
+  .wd-card:hover .wd-more { color: var(--on-dark); }
+  .wd-card:hover .wd-more .i { transform: translateX(3px); }   /* the site's arrows nudge right on hover */
+}
+
+@container wd-feed (min-width: 743px) { .wd-card { flex-basis: calc((100cqw - 2 * var(--wd-gap)) / 2.4); } }
+@container wd-feed (min-width: 1055px) { .wd-card { flex-basis: calc((100cqw - 3 * var(--wd-gap)) / 3.4); } }
+@container wd-feed (min-width: 1367px) { .wd-card { flex-basis: calc((100cqw - 4 * var(--wd-gap)) / 4.4); } }
+
+/* under 992px the line goes under the heading */
+@media (max-width: 991px) {
+  .wd-head { grid-template-columns: minmax(0, 1fr); row-gap: 16px; }
+  .wd-head .sec-lede { max-width: 60ch; }
+}
+@media (max-width: 760px) {
+  .wd-in { --wd-space: 24px; }
+}
+
+
+/* ---------- this section ---------- */

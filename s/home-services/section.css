@@ -50,8 +50,26 @@
    overall colour cast, each keeping its own colours otherwise. Measured at 31%: every card's average #2D446D (#29436D to #2E446C), the
    same lightness spread and the same blue; at 15% they average #374E6D and move together. Before: the footer navy (--dark-2) at 66% over the photos as
    they were, from the How an installation works cards (5 Oct, "have the services cards have this blue overlay"). */
+/* SINCE 7 Oct 2026, night: the hero's fade (Vegas: "ship and make sure all esctions that use that card design/layout habe that hero bottom only
+   fade or bottom + top for those with the elemetns at the top as well"), in place of the even tint above: the service heroes' shade
+   (.sh-panel::before), the ink at 94% at the foot, 78% a quarter of the way up, 25% at the middle and clear from 64%, over the card's whole
+   height, as design/how-it-works-avenor/hwa-fade.css draws it on the How it works cards; these cards have words at the foot only, so the
+   foot's fade alone (no top fade), on her photos as they are (the -even colour-matched files are kept in img/, unused). */
 .wd-card::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: color-mix(in srgb, var(--logo-blue) 15%, transparent); }
+  background: linear-gradient(to top,
+    color-mix(in srgb, var(--heading) 94%, transparent) 0%,
+    color-mix(in srgb, var(--heading) 78%, transparent) 26%,
+    color-mix(in srgb, var(--heading) 25%, transparent) 52%,
+    transparent 64%); }
+/* narrow phones (400px down): a card is under 300px wide, so a title wraps to more lines and starts higher on the card, where the hero's
+   stops are light; the same fade carried a little higher keeps the titles over 3:1 on the brightest photo (2.4:1 at 360 before) */
+@media (max-width: 400px) {
+  .wd-card::before { background: linear-gradient(to top,
+    color-mix(in srgb, var(--heading) 94%, transparent) 0%,
+    color-mix(in srgb, var(--heading) 82%, transparent) 34%,
+    color-mix(in srgb, var(--heading) 34%, transparent) 62%,
+    transparent 76%); }
+}
 .wd-words { padding: 0 16px 16px; }
 .wd-card h3 { color: var(--on-dark); text-transform: uppercase; letter-spacing: .02em; }   /* capitals like the headings, at the h3's own
    size (Vegas, 5 Oct: "have the service titles in caps like the header but not a larger size"); the words sit on the card's foot, so a
