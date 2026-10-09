@@ -1,0 +1,1 @@
+addEventListener("DOMContentLoaded",()=>{const e=matchMedia("(max-width: 700px)"),a=document.querySelectorAll(".ft-acc"),c=()=>a.forEach(t=>{t.open=!e.matches,t.querySelector("summary").tabIndex=e.matches?0:-1});a.forEach(t=>t.querySelector("summary").addEventListener("click",n=>{e.matches||n.preventDefault()})),c(),e.addEventListener("change",c)});
