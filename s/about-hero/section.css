@@ -1,118 +1,68 @@
-/* The nine service pages' hero (#<page>-hero): layout only. Every colour, size and button comes from theme.css (with
-   the shared --edge, --r-panel and --nav-clear). The same on all nine: a page differs only by its photo files and the
-   phone word's place, in its section.html.
-
-   The first site's service hero (Vegas, 4 Oct 2026: "we are keeping the same images i just want the updated typography
-   and colors for the buttons"; "have the hero image framed like in premier-gutters-mvp ... with those rounded
-   corners"): one rounded photo panel under the floating nav, 12px in from the page's sides (8px on phones) like the
-   header bar and the homepage hero's panel; PREMIER across the sky with the roof in front of it; the Google chip, the
-   H1 and the line low left; Get a free estimate on the right, level with the line's first line (the first site had a
-   second button, Explore services, over it; Vegas, 7 Oct 2026: "i dont want to use the secondary cta at all"). From v2: the
-   type, the theme's button, the theme's photo shade, the shared panel corner and
-   the words on --edge (56px inside the panel at 1440, where the first site had them).
-
-   The stage: the photo, the word and the roof copy (the photo cut by its old mask) share one box, 3:2 on desktop
-   (top-anchored; the panel trims its foot) and 2:3 on phones, so the roof stays on the word at every width. The word
-   is artwork in the stage's units, as on the first site, not one of the eight text sizes. */
-
-.sh { padding: var(--nav-top, 16px) 12px 0; }   /* under the bar by the bar's own gap from the page top, as on the homepage (Vegas, 4 Oct: "less space from the nav and the hero image top edge on home and SLIGHTLY more on the service pages, they should have the same gap"); was 12px */
-.sh { --dark-2: #16213A; }   /* the hero's navy (the panel and every shade over the photo) in the ink, the footer's colour, as the
-   homepage hero's (Vegas, 5 Oct: "ship ink hero", then "do that for the services page heros scrim part too"); a literal, since the
-   heroes reset --heading to their charcoal. The theme's --dark-2, the footer navy #1A2A5E, before */
-.sh-panel { position: relative; isolation: isolate; overflow: hidden; overflow: clip; container-type: inline-size;   /* clip: clipped like hidden, but not a scroll container, so focus or a jump link never slides the stage (MVP, 4 Oct) */
-  max-width: 1680px; margin-inline: auto;
-  height: max(560px, min(calc(100svh - var(--nav-clear, 92px) - var(--nav-top, 16px) - 12px), calc((min(100vw, 1704px) - 24px) * 2 / 3)));   /* the first screen under the nav; never taller than the photo */
-  border-radius: var(--r-panel, 12px); background: var(--dark-2); color: var(--on-dark); }
+.sh { padding: var(--nav-top, 16px) 12px 0; }
+.sh { --dark-2: #16213A; }
+.sh-panel { position: relative; isolation: isolate; overflow: hidden; overflow: clip; container-type: inline-size;
+max-width: 1680px; margin-inline: auto;
+height: max(560px, min(calc(100svh - var(--nav-clear, 92px) - var(--nav-top, 16px) - 12px), calc((min(100vw, 1704px) - 24px) * 2 / 3)));
+border-radius: var(--r-panel, 12px); background: var(--dark-2); color: var(--on-dark); }
 .sh-stage { position: absolute; z-index: 0; inset: 0 0 auto; aspect-ratio: 3 / 2; }
 .sh-stage picture { display: contents; }
 .sh-stage img, .sh-word { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; }
 .sh-photo { object-fit: cover; }
 .sh-word { overflow: visible; pointer-events: none; }
 .sh-word text { font-family: var(--f); font-weight: 700; letter-spacing: .02em; fill: var(--on-dark); }
-.sh-word--wide text { font-size: 291.4px; }               /* stage units: ink 59.3 to 1440.7 of 1500, cap top 30.5 */
+.sh-word--wide text { font-size: 291.4px; }
 .sh-word--tall { display: none; }
-.sh-word--tall text { font-size: 157.9px; }               /* stage units: ink 25.7 to 774.3 of 800 */
-
-/* the shade under the white words: the first site's, in the theme's photo shade */
+.sh-word--tall text { font-size: 157.9px; }
 .sh-panel::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(to top,
-    color-mix(in srgb, var(--dark-2) 94%, transparent) 0%,
-    color-mix(in srgb, var(--dark-2) 78%, transparent) 26%,
-    color-mix(in srgb, var(--dark-2) 25%, transparent) 52%,
-    transparent 64%); }
-
-/* the words: the chip, the H1 and the line from --edge; the button ending on it */
+background: linear-gradient(to top,
+color-mix(in srgb, var(--dark-2) 94%, transparent) 0%,
+color-mix(in srgb, var(--dark-2) 78%, transparent) 26%,
+color-mix(in srgb, var(--dark-2) 25%, transparent) 52%,
+transparent 64%); }
 .sh-copy { position: absolute; z-index: 2; bottom: 52px;
-  left: calc(var(--edge) - max(12px, (100vw - 1680px) / 2)); right: calc(var(--edge) - max(12px, (100vw - 1680px) / 2));
-  display: grid; grid-template-columns: minmax(0, 1fr) max-content; column-gap: 56px; align-items: end; }
+left: calc(var(--edge) - max(12px, (100vw - 1680px) / 2)); right: calc(var(--edge) - max(12px, (100vw - 1680px) / 2));
+display: grid; grid-template-columns: minmax(0, 1fr) max-content; column-gap: 56px; align-items: end; }
 .sh-head { display: contents; }
-.sh-chip { grid-column: 1; grid-row: 1; justify-self: start; margin-bottom: 20px; }   /* placed here; its look is theme.css's .g-chip (Vegas, 4 Oct: "ship 3") */
+.sh-chip { grid-column: 1; grid-row: 1; justify-self: start; margin-bottom: 20px; }
 .sh-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .sh h1 { grid-column: 1; grid-row: 2; max-width: 11em; color: var(--on-dark); }
 .sh .lede { grid-column: 1; grid-row: 3; align-self: start; margin-top: 18px; max-width: 34em; color: var(--on-dark); text-wrap: pretty; }
-/* the one button (Vegas, 7 Oct 2026: "i dont want to use the secondary cta at all"): Get a free estimate, level with the line's
-   first line. Its margin is the one the two-button stack had, without the pull-up for the white Explore services button and the 12px gap
-   above it. 255.8125px is the width that button stretched the stack to (measured in Chrome; 16em, 256px, is 0.19px more): alone the green button would
-   shrink to its words, 6px narrower, and the H1 or the line would wrap differently at a few tablet widths; with this width every box matches the
-   two-button hero at every window width, 320 to 1920px. */
 .sh-cta { grid-column: 2; grid-row: 3; align-self: start; display: grid;
-  margin-top: calc(18px + (var(--lede) * 1.5 - var(--btn-h)) / 2); }   /* the theme's one button height */
+margin-top: calc(18px + (var(--lede) * 1.5 - var(--btn-h)) / 2); }
 .sh-cta .btn { min-width: 255.8125px; }
-
-/* phones: the first site's phone poster. One rounded panel, 8px in: the 2:3 photo on top with the word and the roof,
-   the chip, the H1 and the line at its foot over the shade, then the button on the panel's navy */
 @media (max-width: 760px) {
-  .sh { padding: var(--nav-top, 8px) 8px 0; }
-  .sh-panel { height: auto; }
-  .sh-stage { aspect-ratio: 2 / 3; }
-  .sh-word--wide { display: none; }
-  .sh-word--tall { display: block; }
-  /* the shade runs 2px past the photo's foot, solid from the foot down: where the foot falls inside a pixel (most phones),
-     the photo's last row showed through as a faint light line under the words (Vegas, 5 Oct: "what is this line showing up
-     on this servicer pahe mobile hero under the descirption"); now that row is covered and the shade's own edge is on navy */
-  .sh-stage::after { content: ""; position: absolute; inset: 0 0 -2px; pointer-events: none;
-    background: linear-gradient(to bottom, transparent 28%,
-      color-mix(in srgb, var(--dark-2) 24%, transparent) 38%,
-      color-mix(in srgb, var(--dark-2) 62%, transparent) 50%,
-      color-mix(in srgb, var(--dark-2) 90%, transparent) 64%,
-      var(--dark-2) calc(100% - 2px)); }
-  .sh-panel::before { display: none; }
-  .sh-copy { position: relative; inset: auto; display: block; padding: 0 calc(var(--edge) - 8px) 22px; }
-  .sh-head { display: flex; flex-direction: column; justify-content: flex-end; min-height: 150cqw; }   /* the words end at the photo's foot */
-  .sh-chip { width: max-content; margin-bottom: 16px; }
-  .sh h1 { max-width: none; }
-  .sh .lede { margin-top: 14px; max-width: none; }
-  .sh-cta { margin-top: 24px; }
-  .sh-cta .btn { width: 100%; min-width: 0; }
+.sh { padding: var(--nav-top, 8px) 8px 0; }
+.sh-panel { height: auto; }
+.sh-stage { aspect-ratio: 2 / 3; }
+.sh-word--wide { display: none; }
+.sh-word--tall { display: block; }
+.sh-stage::after { content: ""; position: absolute; inset: 0 0 -2px; pointer-events: none;
+background: linear-gradient(to bottom, transparent 28%,
+color-mix(in srgb, var(--dark-2) 24%, transparent) 38%,
+color-mix(in srgb, var(--dark-2) 62%, transparent) 50%,
+color-mix(in srgb, var(--dark-2) 90%, transparent) 64%,
+var(--dark-2) calc(100% - 2px)); }
+.sh-panel::before { display: none; }
+.sh-copy { position: relative; inset: auto; display: block; padding: 0 calc(var(--edge) - 8px) 22px; }
+.sh-head { display: flex; flex-direction: column; justify-content: flex-end; min-height: 150cqw; }
+.sh-chip { width: max-content; margin-bottom: 16px; }
+.sh h1 { max-width: none; }
+.sh .lede { margin-top: 14px; max-width: none; }
+.sh-cta { margin-top: 24px; }
+.sh-cta .btn { width: 100%; min-width: 0; }
 }
-
-/* The grain (5 Oct 2026; Vegas: "add the other heros too so i can see how they all look", then "ship 12% to all
-   heros"; preview design/hero-grain/). The review cards' grain (home-why-premier, --cd-grain-img: white fractal noise in
-   a 180px tile), at 12% here where the cards have 7%, as one layer over the whole panel: the photo, the PREMIER word,
-   the roof copy and the shade on desktop; on phones the same, plus the panel's navy under the photo, where the buttons
-   sit. It sits under the words (.sh-copy, z 2), so the chip, the H1, the line and the buttons stay clean, as the cards'
-   words do. */
 .sh { --sh-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url%28%23n%29'/%3E%3C/svg%3E"); }
 .sh-panel::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: var(--sh-grain); }
-
-/* Window (8 Oct 2026): About's line is the long one, so the words climb over the stucco gable and its white trim; they carry House's
-   fade, on the H1 so it starts at the words at every width, only as strong as they measure as needing (tools/contrast.mjs, the
-   brightest 5% under each line, ten sizes 1920 to 320): 42% desktop, 10% phones, where the words now start under PREMIER (below).
-   Without it the H1 measured 1.00 to 2.98:1 at nine of the ten sizes; with it the H1 is 3.40:1 or more (3:1 needed; 3.67 on phones,
-   none there left 3.14) and the line 7.61:1 or more (4.5:1). No grain of its own: the panel's shows through it. */
 .sh--window h1 { position: relative; }
 .sh--window h1::before { content: ""; position: absolute; z-index: -1; pointer-events: none;
-  top: calc(-20px - 40px - 48px); bottom: -1000px;
-  left: calc(-1 * (var(--edge) - max(12px, (100vw - 1680px) / 2)));
-  width: calc(var(--edge) - max(12px, (100vw - 1680px) / 2) + 1100px);
-  background: linear-gradient(to right, color-mix(in srgb, var(--dark-2) 42%, transparent) 0,
-    color-mix(in srgb, var(--dark-2) 42%, transparent) calc(var(--edge) - max(12px, (100vw - 1680px) / 2) + 720px), transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 48px); mask-image: linear-gradient(to bottom, transparent, #000 48px); }
+top: calc(-20px - 40px - 48px); bottom: -1000px;
+left: calc(-1 * (var(--edge) - max(12px, (100vw - 1680px) / 2)));
+width: calc(var(--edge) - max(12px, (100vw - 1680px) / 2) + 1100px);
+background: linear-gradient(to right, color-mix(in srgb, var(--dark-2) 42%, transparent) 0,
+color-mix(in srgb, var(--dark-2) 42%, transparent) calc(var(--edge) - max(12px, (100vw - 1680px) / 2) + 720px), transparent 100%);
+-webkit-mask-image: linear-gradient(to bottom, transparent, #000 48px); mask-image: linear-gradient(to bottom, transparent, #000 48px); }
 @media (max-width: 760px) {
-  .sh--window h1::before { top: calc(-16px - 40px - 48px); left: calc(8px - var(--edge)); right: calc(8px - var(--edge)); width: auto;
-    background: color-mix(in srgb, var(--dark-2) 10%, transparent); }
-  /* the words never climb over PREMIER: they start 28px under its baseline (210.7 of the 2:3 stage's 1200 units) and, where About's long
-     line makes them taller than the photo under the word (under about 380px wide), run on past the photo's foot onto the panel's navy;
-     wider, they still end at the photo's foot as the family's do */
-  .sh--window .sh-head { padding-top: calc(210.7 / 1200 * 150cqw + 28px); }
+.sh--window h1::before { top: calc(-16px - 40px - 48px); left: calc(8px - var(--edge)); right: calc(8px - var(--edge)); width: auto;
+background: color-mix(in srgb, var(--dark-2) 10%, transparent); }
+.sh--window .sh-head { padding-top: calc(210.7 / 1200 * 150cqw + 28px); }
 }

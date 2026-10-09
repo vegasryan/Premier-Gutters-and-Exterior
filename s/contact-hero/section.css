@@ -1,43 +1,23 @@
-/* Contact page hero: the homepage hero's design (mvp/sections/home-hero, approved by Vegas 4 Oct 2026) with this page's
-   own words (Vegas, 4 Oct: "it should use the same design as the homepage hero but with its own elements"). Her stone
-   house in the navy panel, its roof breaking out above the panel and over the last letter of the top line, the words on
-   the left over the shade, and the homepage's estimate card riding the panel's foot. Layout only, theme tokens only.
-
-   These rules are home-hero's section.css as it stood on 4 Oct (14:35), with #home-hero written #contact-hero and the
-   second line's rules left out (this H1 is one line). What this page adds is at the end: the call, the email and the
-   office hours under the line, and the form's error messages. A change to the homepage hero's design belongs in both.
-
-   Sizes on desktop are in --u, one unit of a 2000-wide panel (the script sets it from the panel; this is the fallback),
-   so the composition holds from 1180px up. Layers, bottom to top: the panel with the photo and its shade; the words;
-   the cut-out roof (the peak above the panel and the roof over the last letter); the form. */
-#contact-hero.hh { --u: calc((min(100vw, 1704px) - 24px) / 2000); --shade: 22 33 58;  /* the ink, #16213A, the footer's colour (Vegas, 5 Oct: "ship ink hero"); the footer navy, 26 42 94 (#1A2A5E), before */
-  position: relative; isolation: isolate; padding: var(--nav-top, 16px) 12px 0; }   /* the bar's own gap from the page top, as on the homepage and the service pages */
+#contact-hero.hh { --u: calc((min(100vw, 1704px) - 24px) / 2000); --shade: 22 33 58;
+position: relative; isolation: isolate; padding: var(--nav-top, 16px) 12px 0; }
 .hh-panel { position: relative; display: flex; flex-direction: column; max-width: 1680px; min-height: calc(var(--u) * 946); margin: 0 auto;
-  padding: calc(var(--u) * 40) calc(var(--u) * 61) calc(var(--u) * 50) calc(var(--edge) - max(12px, (100vw - 1680px) / 2));  /* the words on --edge, with the header's logo and the other sections */
-  border-radius: var(--r-panel); background: rgb(var(--shade)); color: var(--on-dark); }  /* the shared panel corner, with the header and footer */
-
-/* the photo, clipped to the panel, and its shade: solid on the left, clear by 58% across; a low shade along the foot */
+padding: calc(var(--u) * 40) calc(var(--u) * 61) calc(var(--u) * 50) calc(var(--edge) - max(12px, (100vw - 1680px) / 2));
+border-radius: var(--r-panel); background: rgb(var(--shade)); color: var(--on-dark); }
 .hh-media { position: absolute; inset: 0; z-index: 0; overflow: hidden; border-radius: inherit; }
 .hh-photo { position: absolute; left: 0; top: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 60% 40%; }
 .hh.is-laid .hh-photo { object-fit: fill; }
 .hh-shade { position: absolute; inset: 0;
-  background:
-    linear-gradient(to top, rgb(var(--shade) / .62) 0, rgb(var(--shade) / 0) calc(var(--u) * 330)),
-    linear-gradient(to right, rgb(var(--shade)) 0, rgb(var(--shade)) 14%, rgb(var(--shade) / .86) 30%,
-      rgb(var(--shade) / .5) 43%, rgb(var(--shade) / .12) 52%, rgb(var(--shade) / 0) 58%); }
-
-/* the words */
+background:
+linear-gradient(to top, rgb(var(--shade) / .62) 0, rgb(var(--shade) / 0) calc(var(--u) * 330)),
+linear-gradient(to right, rgb(var(--shade)) 0, rgb(var(--shade)) 14%, rgb(var(--shade) / .86) 30%,
+rgb(var(--shade) / .5) 43%, rgb(var(--shade) / .12) 52%, rgb(var(--shade) / 0) 58%); }
 .hh-words { position: relative; z-index: 1; }
 .hh-h1 { color: var(--on-dark); line-height: 1; }
 .hh-l1 { display: block; white-space: nowrap; }
 .hh-base { display: inline-block; width: 0; height: 0; vertical-align: baseline; }
 .hh-lede { max-width: 46ch; margin-top: calc(var(--u) * 22); font-size: var(--lede); line-height: 1.5; color: rgb(255 255 255 / .92); }
-
-/* the cut-out roof, in front of the words; the script places and clips it */
 .hh-cut { display: none; position: absolute; z-index: 2; max-width: none; pointer-events: none; }
 .hh.is-laid .hh-cut { display: block; }
-
-/* the form (the first site's hero form, in the theme) */
 .hh-form { position: relative; z-index: 3; width: min(100%, calc(var(--u) * 880)); margin-top: calc(var(--u) * 34); }
 .hh-row3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .hh-row2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -47,216 +27,137 @@
 .hh-rating:hover { text-decoration: underline; }
 .hh :focus-visible { outline-color: var(--focus-dark); }
 .hh-form :focus-visible { outline-color: var(--focus); }
-
-/* under 1180px: the photo as a band at the top behind the words, then the form on the page */
 @media (max-width: 1179px) {
-  #contact-hero.hh { padding: 0; }
-  .hh-panel { min-height: 0; padding: 28px var(--pad) 0; border-radius: 0; background: transparent; }
-  .hh-media { inset: 0 0 auto 0; height: 520px; border-radius: 0; }
-  .hh-shade { background: linear-gradient(to bottom, rgb(var(--shade) / .9) 0, rgb(var(--shade) / .72) 55%, rgb(var(--shade) / .35) 100%); }
-  .hh-l1 { white-space: normal; }
-  .hh-lede { margin-top: 18px; }
-  .hh-form { order: 3; width: 100%; max-width: 640px; margin: 36px 0 0; }
+#contact-hero.hh { padding: 0; }
+.hh-panel { min-height: 0; padding: 28px var(--pad) 0; border-radius: 0; background: transparent; }
+.hh-media { inset: 0 0 auto 0; height: 520px; border-radius: 0; }
+.hh-shade { background: linear-gradient(to bottom, rgb(var(--shade) / .9) 0, rgb(var(--shade) / .72) 55%, rgb(var(--shade) / .35) 100%); }
+.hh-l1 { white-space: normal; }
+.hh-lede { margin-top: 18px; }
+.hh-form { order: 3; width: 100%; max-width: 640px; margin: 36px 0 0; }
 }
 @media (max-width: 760px) {
-  .hh-row3, .hh-row2 { grid-template-columns: minmax(0, 1fr); }
-  .hh-media { height: 460px; }
+.hh-row3, .hh-row2 { grid-template-columns: minmax(0, 1fr); }
+.hh-media { height: 460px; }
 }
-
-/* The first site's estimate card (Vegas, 4 Oct: "i need the form to be like the one in premier-gutters-mvp ... with the
-   glass border to it and the sizing"), in this theme's type and colours, as on the homepage hero: a 6px frosted ring
-   outside a white card (the panel shows through it, blurred; the ring sits outside, so the card keeps its place), 14px
-   corners, 28/32 padding, a 28px title, 16px labels, 48px flat boxes with 12px corners, 14 and 16px gaps, the theme's
-   one green button, and the Google chip under it. */
 .hh-form.estimate-card { width: calc(min(100%, calc(var(--u) * 880)) + 12px); margin-top: auto; margin-left: -6px; margin-right: -6px;
-  padding: 28px 32px 26px; background: var(--surface) padding-box; border: 6px solid color-mix(in srgb, var(--band) 24%, transparent);
-  border-radius: 14px; box-shadow: 0 30px 50px -30px rgb(var(--shadow) / .55);
-  -webkit-backdrop-filter: blur(10px) saturate(1.1); backdrop-filter: blur(10px) saturate(1.1); }
+padding: 28px 32px 26px; background: var(--surface) padding-box; border: 6px solid color-mix(in srgb, var(--band) 24%, transparent);
+border-radius: 14px; box-shadow: 0 30px 50px -30px rgb(var(--shadow) / .55);
+-webkit-backdrop-filter: blur(10px) saturate(1.1); backdrop-filter: blur(10px) saturate(1.1); }
 .hh-form .form-title { margin-bottom: 18px; font-size: 28px; font-weight: 700; line-height: 1.2; letter-spacing: -.012em; }
 .hh-form .field-row { gap: 0 16px; }
 .hh-form .field { gap: 5px; margin-bottom: 14px; }
 .hh-form .field label { font: 500 16px/22px var(--f); color: var(--heading); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .hh-form .field input, .hh-form .select select { height: 48px; min-height: 48px; padding: 0 16px 0 18px; font: 500 18px/22px var(--f); color: var(--ink);
-  background-color: var(--page); border: 0; border-radius: 12px; box-shadow: none; transition: background-color .15s ease, box-shadow .15s ease; }
+background-color: var(--page); border: 0; border-radius: 12px; box-shadow: none; transition: background-color .15s ease, box-shadow .15s ease; }
 .hh-form .select select { padding-right: 42px; }
 @media (hover: hover) {
-  .hh-form .field input:hover, .hh-form .select select:hover { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--focus) 35%, transparent); }
+.hh-form .field input:hover, .hh-form .select select:hover { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--focus) 35%, transparent); }
 }
 .hh-form .field input:focus-visible, .hh-form .select select:focus-visible { outline: none; background-color: var(--surface);
-  box-shadow: inset 0 0 0 2px var(--focus), 0 0 0 4px color-mix(in srgb, var(--focus) 16%, transparent); }
+box-shadow: inset 0 0 0 2px var(--focus), 0 0 0 4px color-mix(in srgb, var(--focus) 16%, transparent); }
 .hh-form .field input:autofill { box-shadow: inset 0 0 0 60px var(--page); -webkit-text-fill-color: var(--ink); }
-.hh-form .btn--block { margin-top: 8px; }   /* the theme's one primary, no size of its own (Vegas, 4 Oct: "no exceptions for primary") */
-
+.hh-form .btn--block { margin-top: 8px; }
 @media (max-width: 1179px) {
-  /* on the page under the photo band: the ring tinted blue so it shows on the light page */
-  .hh-form.estimate-card { width: calc(100% + 12px); max-width: 652px; margin: 30px -6px 0; border-color: color-mix(in srgb, var(--focus) 18%, transparent); }
+.hh-form.estimate-card { width: calc(100% + 12px); max-width: 652px; margin: 30px -6px 0; border-color: color-mix(in srgb, var(--focus) 18%, transparent); }
 }
 @media (max-width: 760px) {
-  .hh-form.estimate-card { width: calc(100% + 8px); margin: 26px -4px 0; padding: 24px 20px 22px; border-width: 4px; }
-  .hh-form .form-title { font-size: 24px; }
+.hh-form.estimate-card { width: calc(100% + 8px); margin: 26px -4px 0; padding: 24px 20px 22px; border-width: 4px; }
+.hh-form .form-title { font-size: 24px; }
 }
-
-/* The words and the card can make the panel taller than the photo (1180 to about 1400 wide). The script sets --hh-gap to
-   the panel left under the photo; the foot shade is solid over it and fades into the photo above. With no gap it is the
-   same shade as before (.62 at the foot, clear by 330 units).
-   The side shade's stops never come nearer the left edge than they sit at 1440 wide (max(%, px)): the words keep their
-   size while the panel narrows, so on a percentage alone their line ends ran out over the clear sky below 1440 (white
-   lede 3.6:1 at 1180, measured). From 1440 up it is the homepage's shade exactly. */
 #contact-hero.hh { --hh-gap: 0px; }
 @media (min-width: 1180px) {
-  .hh-shade { background:
-    linear-gradient(to top, rgb(var(--shade)) 0, rgb(var(--shade)) var(--hh-gap), rgb(var(--shade) / .62) calc(var(--hh-gap) + min(48px, var(--hh-gap) * 100)),
-      rgb(var(--shade) / 0) calc(var(--hh-gap) + var(--u) * 330)),
-    linear-gradient(to right, rgb(var(--shade)) 0, rgb(var(--shade)) max(14%, 198px), rgb(var(--shade) / .86) max(30%, 425px),
-      rgb(var(--shade) / .5) max(43%, 609px), rgb(var(--shade) / .12) max(52%, 736px), rgb(var(--shade) / 0) max(58%, 821px)); }
+.hh-shade { background:
+linear-gradient(to top, rgb(var(--shade)) 0, rgb(var(--shade)) var(--hh-gap), rgb(var(--shade) / .62) calc(var(--hh-gap) + min(48px, var(--hh-gap) * 100)),
+rgb(var(--shade) / 0) calc(var(--hh-gap) + var(--u) * 330)),
+linear-gradient(to right, rgb(var(--shade)) 0, rgb(var(--shade)) max(14%, 198px), rgb(var(--shade) / .86) max(30%, 425px),
+rgb(var(--shade) / .5) max(43%, 609px), rgb(var(--shade) / .12) max(52%, 736px), rgb(var(--shade) / 0) max(58%, 821px)); }
 }
-
-/* The form rides the panel's foot (an auto margin above it, over the words' minimum gap), and the panel is at least 946
-   units tall with a 50-unit foot, as on the homepage. */
 @media (min-width: 1180px) {
-  .hh-words { margin-bottom: calc(var(--u) * 34 - 6px); }
+.hh-words { margin-bottom: calc(var(--u) * 34 - 6px); }
 }
-
-/* Under 1180px the photo band runs up under the floating header, so the bar floats over the photo rather than sitting on
-   a strip of page above it (the words stay where they were). */
 @media (max-width: 1179px) {
-  #contact-hero.hh { margin-top: calc(-1 * var(--nav-clear)); }
-  .hh-panel { padding-top: calc(var(--nav-clear) + 28px); }
-  .hh-media { height: var(--hh-band, calc(520px + var(--nav-clear))); }   /* the script sets --hh-band: 72px into the form card */
+#contact-hero.hh { margin-top: calc(-1 * var(--nav-clear)); }
+.hh-panel { padding-top: calc(var(--nav-clear) + 28px); }
+.hh-media { height: var(--hh-band, calc(520px + var(--nav-clear))); }
 }
 @media (max-width: 760px) {
-  .hh-media { height: var(--hh-band, calc(460px + var(--nav-clear))); }
+.hh-media { height: var(--hh-band, calc(460px + var(--nav-clear))); }
 }
-
-/* ---------- this page's own ---------- */
-
-/* The call, the email and the office hours (the content file's words for this hero): white text under the reviews
-   chip, "Call 806-829-2622 or email info@..." as one sentence and the hours under it, the number and the address links
-   in bold (Vegas, 4 Oct: "for the contact hero have the phone number under the bio not as a button but as a part of the
-   text like how the email is", then "put call or email in one line dont break it because its a new thing just have it
-   break normally" and "show me the google review chip then the contact info changing the order"; it was the theme's
-   call button, with the email and the hours beside it, above the chip). White words on her photo stay on the shade
-   (the site's rule: measure under the real text, on the photo): the words start on --edge, and the row is no wider than
-   49% of the panel from its left edge. Measured 4 Oct at 18 widths from 320 to 1920 (the words hidden, the lightest 5%
-   of each line's background): the call and email 5.3:1 or better, the hours 5.2:1 or better, both lowest on tablets.
-   The address moves to the next line whole (an inline block) before it breaks. */
 .hh-reach { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: calc(var(--u) * 34); }
 @media (min-width: 1180px) {
-  .hh-reach { max-width: calc(var(--u) * 980 - var(--edge) + max(12px, (100vw - 1680px) / 2)); }   /* 980 units from the panel's left edge, less where the words start */
+.hh-reach { max-width: calc(var(--u) * 980 - var(--edge) + max(12px, (100vw - 1680px) / 2)); }
 }
 .hh-alt { display: grid; gap: 2px; font-size: var(--ui); line-height: 1.45; color: var(--on-dark); }
 .hh-alt a { display: inline-block; font-weight: 700; color: var(--on-dark); text-decoration-thickness: 1.5px; }
 .hh-alt a:hover { text-decoration-thickness: 2.5px; }
 @media (max-width: 1179px) {
-  .hh-reach { margin-top: 24px; }
-  /* the photo band: these words run lower into it than the homepage's, so its shade holds at .66 down to the card's
-     top (the band ends 72px into the card) instead of thinning to .35: measured under the real text on the band's
-     palest stone */
-  .hh-shade { background: linear-gradient(to bottom, rgb(var(--shade) / .9) 0, rgb(var(--shade) / .72) 55%,
-    rgb(var(--shade) / .66) calc(100% - 72px), rgb(var(--shade) / .35) 100%); }
+.hh-reach { margin-top: 24px; }
+.hh-shade { background: linear-gradient(to bottom, rgb(var(--shade) / .9) 0, rgb(var(--shade) / .72) 55%,
+rgb(var(--shade) / .66) calc(100% - 72px), rgb(var(--shade) / .35) 100%); }
 }
 @media (max-width: 760px) {
-  .hh-reach { gap: 14px; margin-top: 22px; }
+.hh-reach { gap: 14px; margin-top: 22px; }
 }
-/* The lede without "look at the roof line", so it fits windows too (Vegas, 4 Oct: "have the description be relevant
-   for windows too, maybe just dont say roof line"). Shorter, it would end on "charge." alone at its 46ch measure (every
-   width from 760 up, and 390): pretty wrapping brings "no" down with it. Where nothing is alone, it wraps as before. */
 .hh-lede { text-wrap: pretty; }
-
-/* The form's errors (the content file's words): hidden until a box is left wrong, or a send finds it wrong; as the
-   estimate cards' (design/estimate-card/estimate.css). */
-.hh-form .field { align-content: start; }   /* boxes level in a row when one shows an error */
+.hh-form .field { align-content: start; }
 .hh-form .field-err { display: none; }
 .hh-form .field:has(:user-invalid) .field-err, .hh-form.was-submitted .field:has(:invalid) .field-err { display: block; }
 .hh-form .field :is(input, select):user-invalid, .hh-form.was-submitted .field :is(input, select):invalid {
-  background-color: var(--surface); box-shadow: inset 0 0 0 2px var(--err); }
+background-color: var(--surface); box-shadow: inset 0 0 0 2px var(--err); }
 .hh-form .field :is(input, select):user-invalid:focus-visible, .hh-form.was-submitted .field :is(input, select):invalid:focus-visible {
-  box-shadow: inset 0 0 0 2px var(--err), 0 0 0 4px color-mix(in srgb, var(--err) 16%, transparent); }
-
-/* Phones (760px and under): the homepage hero's phone poster (DESIGN3 for Vegas, 4 Oct, shipped to the homepage at 14:48
-   on his "ship to mvp"; its notes are in home-hero's section.css), with this page's words. A navy panel 8px in from the
-   screen with the panel corner: the desktop's house across its top, its main peak rising out of the panel (6 Oct, Vegas:
-   "SHIP A"; it was the first site's photo with PREMIER over it), then the line, the lede, the reviews chip,
-   and the call with the email and the hours closing the navy part; the form follows as its own card, without its chip. The stone-house band
-   is hidden on phones; tablets and desktop keep it. The rules below are the homepage's, with #home-hero written
-   #contact-hero and the call row lifted over the house layer with the words. */
-/* The reviews chip sits under the lede on every screen, not under the form's button, and the form keeps its height,
-   the chip's 48px spread inside it (Vegas, 4 Oct: "show me the hero with the google review chip under the description instead of under the form submit button and adjust the form accordingly to make up for that lost space. have the form titled get a free estimate", then "ship this" (the form keeps its height)). On phones the poster block below restyles the chip the same way. */
-.hh-rating--poster { position: relative; z-index: 2; margin: 24px 0 0; }   /* placed here; its look is theme.css's .g-chip (Vegas, 4 Oct: "ship 3") */
+box-shadow: inset 0 0 0 2px var(--err), 0 0 0 4px color-mix(in srgb, var(--err) 16%, transparent); }
+.hh-rating--poster { position: relative; z-index: 2; margin: 24px 0 0; }
 @media (min-width: 761px) {
-  .hh-form.estimate-card { padding-top: 34px; padding-bottom: 34px; }
-  .hh-form .form-title { margin-bottom: 26px; }
-  .hh-form .field { margin-bottom: 22px; }
-  .hh-form .btn--block { margin-top: 18px; }
+.hh-form.estimate-card { padding-top: 34px; padding-bottom: 34px; }
+.hh-form .form-title { margin-bottom: 26px; }
+.hh-form .field { margin-bottom: 22px; }
+.hh-form .btn--block { margin-top: 18px; }
 }
 @media (max-width: 760px) {
-  #contact-hero.hh { margin-top: 0; padding: var(--nav-top, 8px) 0 0; }   /* MVP: the bar's own gap, as on the service heroes (Vegas, 4 Oct: "they should have the same gap"); DESIGN3's mock had 4px */
-  .hh-panel { container-type: inline-size; padding: 0 8px; background: transparent; }
-  .hh-media { display: none; }
-  /* the photo across the panel's top (Vegas, 6 Oct: "SHIP A"): the desktop's house, its main peak at 55% across, clear over the
-     house and solid ink just above the headline; the panel sits 6cqw down, so the peak rises into the gap under the bar */
-  .hh-words { --open: 68cqw;
-    position: relative; isolation: isolate; overflow: hidden; margin-top: 6cqw; border-radius: var(--r-panel);
-    padding: var(--open) calc(var(--edge) - 8px) 28px;
-    background:
-      linear-gradient(to bottom, rgb(var(--shade) / 0) 44cqw, rgb(var(--shade) / .35) 54cqw, rgb(var(--shade) / .7) 62cqw,
-        rgb(var(--shade) / .92) 68cqw, rgb(var(--shade)) 71cqw),
-      url(/s/contact-hero/img/white-stone-home-gutters-blue-sky-phone-1200.webp) 0 0 / 100% auto no-repeat,
-      rgb(var(--shade)); }
-  /* the peak rising out, as the desktop's does: the strip of the photo just above the panel (7% of its width: 6% above, 1% into it,
-     the tip 5.5% up), the sky cut away (from the desktop's cut-out) */
-  .hh-panel::before { content: ""; position: absolute; z-index: 3; top: 0; left: 8px; right: 8px; aspect-ratio: 100 / 7; pointer-events: none;
-    background: url(/s/contact-hero/img/white-stone-home-roof-peak-phone-1200.webp) 0 0 / 100% 100% no-repeat; filter: var(--hh-grain-f); }
-  .hh-h1, .hh-lede, .hh-reach, .hh-rating--poster { position: relative; z-index: 2; }
-  /* the reviews chip under the lede, as the form's chip looks (a white pill), left on the words' line */
-  .hh-rating--poster { margin: 24px 0 0; }   /* its look is theme.css's .g-chip */
-  .hh-words :focus-visible { outline-color: var(--focus-dark); }   /* the theme's ring on navy */
-  .hh-form.estimate-card, .hh-form { width: 100%; max-width: none; margin: 20px 0 0; }
+#contact-hero.hh { margin-top: 0; padding: var(--nav-top, 8px) 0 0; }
+.hh-panel { container-type: inline-size; padding: 0 8px; background: transparent; }
+.hh-media { display: none; }
+.hh-words { --open: 68cqw;
+position: relative; isolation: isolate; overflow: hidden; margin-top: 6cqw; border-radius: var(--r-panel);
+padding: var(--open) calc(var(--edge) - 8px) 28px;
+background:
+linear-gradient(to bottom, rgb(var(--shade) / 0) 44cqw, rgb(var(--shade) / .35) 54cqw, rgb(var(--shade) / .7) 62cqw,
+rgb(var(--shade) / .92) 68cqw, rgb(var(--shade)) 71cqw),
+url(/s/contact-hero/img/white-stone-home-gutters-blue-sky-phone-1200.webp) 0 0 / 100% auto no-repeat,
+rgb(var(--shade)); }
+.hh-panel::before { content: ""; position: absolute; z-index: 3; top: 0; left: 8px; right: 8px; aspect-ratio: 100 / 7; pointer-events: none;
+background: url(/s/contact-hero/img/white-stone-home-roof-peak-phone-1200.webp) 0 0 / 100% 100% no-repeat; filter: var(--hh-grain-f); }
+.hh-h1, .hh-lede, .hh-reach, .hh-rating--poster { position: relative; z-index: 2; }
+.hh-rating--poster { margin: 24px 0 0; }
+.hh-words :focus-visible { outline-color: var(--focus-dark); }
+.hh-form.estimate-card, .hh-form { width: 100%; max-width: none; margin: 20px 0 0; }
 }
-
-/* The grain (5 Oct 2026; Vegas: "there is soem kind of grainy texture on this card ... is it possible to add this
-   grainy look to the big background image in the hero of that page", then "ship 12% to all heros"; preview
-   design/hero-grain/). The review cards' grain (home-why-premier, --cd-grain-img: white fractal noise in a 180px tile),
-   at 12% here where the cards have 7%, laid over the photo and its shade, so the navy panel and the house read as the
-   same material as the navy cards. The words, the chip and the form stay clean, as the cards' words do. Three places:
-   - desktop and tablet: a layer over the photo and the shade (.hh-media::after);
-   - the cut-out roof (the peak above the panel and the roof over the S): the same noise as the SVG filter #hh-grain,
-     inside the section, so the copy of the house is as grainy as the photo it continues;
-   - phones: the top layer of the panel's background; the peak rising out of the panel takes the SVG filter, as the
-     desktop's cut-out does. */
-.hh { --hh-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url%28%23n%29'/%3E%3C/svg%3E"); --hh-grain-f: url(#hh-grain); }   /* the homepage hero and its copy on Contact */
+.hh { --hh-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url%28%23n%29'/%3E%3C/svg%3E"); --hh-grain-f: url(#hh-grain); }
 .hh-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
 .hh-media::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: var(--hh-grain); }
 .hh-cut { filter: var(--hh-grain-f); }
 @media (max-width: 760px) {
-  .hh-words {
-    background:
-      var(--hh-grain),
-      linear-gradient(to bottom, rgb(var(--shade) / 0) 44cqw, rgb(var(--shade) / .35) 54cqw, rgb(var(--shade) / .7) 62cqw,
-        rgb(var(--shade) / .92) 68cqw, rgb(var(--shade)) 71cqw),
-      url(/s/contact-hero/img/white-stone-home-gutters-blue-sky-phone-1200.webp) 0 0 / 100% auto no-repeat,
-      rgb(var(--shade)); }
+.hh-words {
+background:
+var(--hh-grain),
+linear-gradient(to bottom, rgb(var(--shade) / 0) 44cqw, rgb(var(--shade) / .35) 54cqw, rgb(var(--shade) / .7) 62cqw,
+rgb(var(--shade) / .92) 68cqw, rgb(var(--shade)) 71cqw),
+url(/s/contact-hero/img/white-stone-home-gutters-blue-sky-phone-1200.webp) 0 0 / 100% auto no-repeat,
+rgb(var(--shade)); }
 }
-
-/* ---------- 6 Oct 2026: the form in the closing panel's look ----------
-   Shipped from the homepage preview premier-v2-services-avenor (design/home-services-avenor/exp/hero-form.css; Vegas: "give the hero this
-   form too", then "ok ship to mvp all pages have the contact forms match the spec"; the homepage hero's and the contact hero's alike).
-   The card keeps its place, width, ring, corner, spacing and rows; it takes the closing form's white at 86% over its blur and no shadow,
-   the names over 1px lines in place of the boxes (the values stay 18px), and a focused line thicker in ink, never blue ("no blue line
-   when form field is selected"); the button stays full width; the need's select is blank until opened (section.html). */
 .hh-form.estimate-card { background: rgb(255 255 255 / .86) padding-box; box-shadow: none; }
 .hh-form .field { gap: 4px; }
 .hh-form :is(.field input, .select select) { height: 40px; min-height: 40px; padding: 0; border-radius: 0; background: transparent;
-  box-shadow: inset 0 -1px 0 rgb(22 33 58 / .28); }   /* the line: the ink at 28% */
+box-shadow: inset 0 -1px 0 rgb(22 33 58 / .28); }
 .hh-form .select select { padding-right: 26px; }
 .hh-form .select .i { right: 2px; color: var(--heading); }
 @media (hover: hover) {
-  .hh-form :is(.field input, .select select):hover { box-shadow: inset 0 -1px 0 rgb(22 33 58 / .5); }
+.hh-form :is(.field input, .select select):hover { box-shadow: inset 0 -1px 0 rgb(22 33 58 / .5); }
 }
 .hh-form :is(.field input, .select select):focus-visible { outline: none; background: transparent; box-shadow: inset 0 -2px 0 var(--heading); }
 .hh-form .field input:autofill { box-shadow: inset 0 0 0 60px var(--surface), inset 0 -1px 0 rgb(22 33 58 / .28); }
-/* a field left wrong: its line red and thicker, as a focused one is ink (the box's red ring was for the boxes) */
 .hh-form .field :is(input, select):user-invalid, .hh-form.was-submitted .field :is(input, select):invalid {
-  background-color: transparent; box-shadow: inset 0 -2px 0 var(--err); }
+background-color: transparent; box-shadow: inset 0 -2px 0 var(--err); }
 .hh-form .field :is(input, select):user-invalid:focus-visible, .hh-form.was-submitted .field :is(input, select):invalid:focus-visible {
-  box-shadow: inset 0 -2px 0 var(--err); }
+box-shadow: inset 0 -2px 0 var(--err); }

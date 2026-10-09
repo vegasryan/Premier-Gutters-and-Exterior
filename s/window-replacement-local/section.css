@@ -1,137 +1,73 @@
-/* The office sections (#about-office, About: "Our office in Lubbock"; #contact-office, Contact: "Our office"): one family, one design, written by
-   design/about-office-glass/make.py. Layout only: every colour, size, corner, the eyebrow tag and the icon are theme.css's.
-
-   Shipped 6 Oct 2026 (Vegas: "ok ship the dribbble to all pages it should be on"). The design is the Dribbble "Contact form" shot (dribbble.com/shots/25095638, Nikola
-   Jakimovik) turned round so the words are at the left ("add this as an option. should be inverted so the content is on the left though"): one long dark box as wide as the
-   footer, her own street map filling it, and the words at the left on the ink, which fades smoothly into the map ("for dribble it should fade smoothly"). In the words: the
-   theme's eyebrow tag ("add an eyebrow to dribbble", "different eyebrow wording": Find us), the heading, her bio with the site's line under it (the How it works cards' hairline;
-   "no line between header and description. have it under description"), then the address, the email and the number in one type ("have office, phone, email all the same
-   typography"; "swap phone number and email"), and the hours on one plain line under the number ("Mon to Fri, 9am to 5pm should be one line not bolded"; "dont say closed line
-   its implied"). No button ("no green button or button at all in this section"). On a phone the words stop at the address and the map takes the room ("for mobile remove
-   everything under address to make room for the map"), and the business's name comes off the pin ("remove the name of the business from above the pin on mobile only"); since
-   8 Oct 2026 "Our office" stands over the pin there in its place ("for mobile above the pin in the office map sections, on all pages it appears, add "our office" above the
-   pin, give it the same animation same timing as the pin on hover/click"): the name's type, inside the piece that lifts, so it moves with the pin as one.
-
-   The map: OpenStreetMap data drawn by design/about-office/tools/render_hair.py (palette 'dark', label_mode 'beside': every street name a hair off its road, no road cut), one
-   3200 x 1000 picture at a fixed scale, never scaled; the pin and the names are HTML over it. The pin's hover: her name and the pin lift 10px as one piece with a small shadow on the
-   road, and her name underlines; a mouse only, the underline only under reduced motion. The street names show only where the map shows them whole (the container rules at the foot,
-   written by make.py). */
-
-/* the box on the page column (--edge), where the section above it sits (Vegas, 7 Oct 2026: "show me it with same padding as the section above", then
-   "ship the section above look"; mvp/boards/office-edge.html): its edges line up with the How a job with us works cards above it on About and gutter
-   installation, 68px in at 1440, 170 at 1920, 41 at 1024, 20 on phones. Until then it had the footer's edges from before 6 Oct (32px in from 1240px,
-   at most 1652px wide, 18px below), kept as --ob-was for the words panel's width (below). The section adds no space of its own above or below */
 .ob { --box-edge: var(--edge); --ob-was: max(18px, (100vw - 1652px) / 2); --ob-x: max(0px, calc(var(--edge) - var(--box-edge)));
-  --ob-py: clamp(28px, 2.6vw, 44px); padding: 0 var(--box-edge); }
+--ob-py: clamp(28px, 2.6vw, 44px); padding: 0 var(--box-edge); }
 @media (min-width: 1240px) { .ob { --ob-was: max(32px, (100vw - 1652px) / 2); } }
-/* right under a hero (Contact): the page's gap (--sec) above the box, as every section under a hero has it (a hero keeps no gap under itself); elsewhere the section above
-   keeps the gap. The MVP puts its spec box between them, hence the second selector. */
 [id$="-hero"] + .ob, [id$="-hero"] + .sec-spec + .ob { padding-top: var(--sec); }
 .obb-box { position: relative; isolation: isolate; display: flex; min-height: clamp(440px, 32vw, 540px); overflow: hidden; border-radius: var(--r-panel); background: var(--heading); }
-
-/* the map fills the box; the office sits halfway across the map that is left past the words' fade (make.py needs_b()) */
 .obb-map { --obb-fade: calc(max(340px, 30%) * 1.6); position: absolute; inset: 0; overflow: hidden; container: obbmap / size; }
 .ob-stage { position: absolute; width: 3200px; height: 1000px; left: calc(var(--obb-fade) + (100% - var(--obb-fade)) / 2 - 1536px); top: calc(50% - 520px); pointer-events: none; }
 .ob-roads { display: block; width: 3200px; height: 1000px; max-width: none; }
-
-/* the words at the left, on the ink, which lies over the map at 90% and fades into it across the next 60% of the panel's width. The words are 40px inside the
-   box (its right padding too) since the box moved onto the page column (7 Oct); the panel keeps the words' column as wide as it was: 30% of the box as it
-   was before (at least 340px), less that box's inside padding, plus the 40px. --ob-gain is what the box gave up on each side, so no line rewraps and no box
-   changed height (measured at 1920 to 390 on About, Contact, gutter installation and siding) */
 .obb-panel { --ob-gain: max(0px, calc(var(--edge) - var(--ob-was))); position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center;
-  width: calc(max(340px, (100% + 2 * var(--ob-gain)) * .3) - max(20px, var(--ob-gain)) + 40px);
-  padding: var(--ob-py) 40px; }
+width: calc(max(340px, (100% + 2 * var(--ob-gain)) * .3) - max(20px, var(--ob-gain)) + 40px);
+padding: var(--ob-py) 40px; }
 .obb-panel::before { content: ''; position: absolute; inset: 0 -60% 0 0; z-index: -1; pointer-events: none;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--heading) 90%, transparent) 0 62.5%, color-mix(in srgb, var(--heading) 84%, transparent) 68%,
-    color-mix(in srgb, var(--heading) 72%, transparent) 73.75%, color-mix(in srgb, var(--heading) 56%, transparent) 79.4%, color-mix(in srgb, var(--heading) 38%, transparent) 85%,
-    color-mix(in srgb, var(--heading) 21%, transparent) 90.6%, color-mix(in srgb, var(--heading) 7%, transparent) 96.25%, transparent 100%); }
-.obb-panel .label { align-self: flex-start; }   /* the theme's eyebrow tag (white on the dark: .sec--dark on the box) hugs its word in the flex column */
+background: linear-gradient(90deg, color-mix(in srgb, var(--heading) 90%, transparent) 0 62.5%, color-mix(in srgb, var(--heading) 84%, transparent) 68%,
+color-mix(in srgb, var(--heading) 72%, transparent) 73.75%, color-mix(in srgb, var(--heading) 56%, transparent) 79.4%, color-mix(in srgb, var(--heading) 38%, transparent) 85%,
+color-mix(in srgb, var(--heading) 21%, transparent) 90.6%, color-mix(in srgb, var(--heading) 7%, transparent) 96.25%, transparent 100%); }
+.obb-panel .label { align-self: flex-start; }
 .obb-panel h2 { color: var(--on-dark); text-wrap: balance; }
-.obb-line { margin-top: 12px; padding-bottom: 22px; border-bottom: 1px solid rgb(255 255 255 / .45); font-size: var(--body); line-height: 1.5; color: var(--on-dark-muted); text-wrap: pretty; }   /* the bio, and the site's line under it */
-.obb-panel h2.obb-ruled { padding-bottom: 22px; border-bottom: 1px solid rgb(255 255 255 / .45); }   /* a member with no bio (Contact): the same line under the heading */
-/* an even words column (Vegas, 6 Oct, on gutter installation's Find us: "can we have the horizontal width be more consistent on the left side content so we can
-   shorten that dividing line a little too", then "ship all that"; mvp/boards/office-column.html): from 900px, everything under the heading stops at 360px, so the
-   bio, the blocks and the lines under them sit close to the heading's width (the panel is 30% of the box, which ran them to 418px at 1710 against a 345px
-   heading). Contact's line is under its heading, so that heading takes it too (254px wide, it never re-wraps). Below about 1500px the column is already
-   narrower, so nothing changes there; the panel, its fade and the map don't move */
+.obb-line { margin-top: 12px; padding-bottom: 22px; border-bottom: 1px solid rgb(255 255 255 / .45); font-size: var(--body); line-height: 1.5; color: var(--on-dark-muted); text-wrap: pretty; }
+.obb-panel h2.obb-ruled { padding-bottom: 22px; border-bottom: 1px solid rgb(255 255 255 / .45); }
 @media (min-width: 900px) { .obb-panel > :is(:not(.label, h2), h2.obb-ruled) { max-width: 360px; } }
 .ob-nw { white-space: nowrap; }
 .obb-blk { display: grid; justify-items: start; gap: 6px; margin-top: 22px; }
-.obb-fact { font: 600 var(--ui)/1.5 var(--f); color: var(--on-dark); text-decoration: none; text-wrap: balance; }   /* the address, the email and the number in one type */
+.obb-fact { font: 600 var(--ui)/1.5 var(--f); color: var(--on-dark); text-decoration: none; text-wrap: balance; }
 .obb-row { font: 400 var(--ui)/1.5 var(--f); color: var(--on-dark-muted); }
-.obb-time { margin-top: 4px; }   /* the hours, one plain line under the number */
-.obb-mail { overflow-wrap: normal; }   /* breaks only after its @ (make.py puts a wbr there) */
+.obb-time { margin-top: 4px; }
+.obb-mail { overflow-wrap: normal; }
 .obb-panel a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .obb-panel :focus-visible { outline-color: var(--on-dark); }
-@media (pointer: coarse) { .obb-panel a { position: relative; } .obb-panel a::after { content: ''; position: absolute; inset: -10px -4px; } }   /* a 44px hit area on a touch screen; the layout does not move */
-
-/* the street names: beside their roads in the on-dark muted blue (one font for every street; a freeway's name heavy white). Real text, aria-hidden: they only decorate. */
+@media (pointer: coarse) { .obb-panel a { position: relative; } .obb-panel a::after { content: ''; position: absolute; inset: -10px -4px; } }
 .ob-st { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%) rotate(var(--r)); white-space: nowrap;
-  font: 600 var(--small)/1 var(--f); letter-spacing: .02em; color: var(--on-dark-muted); }
+font: 600 var(--small)/1 var(--f); letter-spacing: .02em; color: var(--on-dark-muted); }
 .ob-st--major { font-weight: 800; color: var(--on-dark); }
-
-/* the office: the theme's pin standing on the point (its tip sits 13% above the icon box's foot), her name over it. The link is the hover area and stays put; its one child,
-   .ob-pin-lift, holds the name and the pin as one piece, and that piece is what lifts. --pt is where the office point is, down the link: the shadow is set on it. The pin is a mouse
-   link to the directions, out of the tab order (the address in the words is the keyboard's). */
 .ob-pin { --pt: calc(100% - 6px); position: absolute; left: 1536px; top: 520px; transform: translate(-50%, calc(-100% + 6px));
-  color: var(--on-dark); text-decoration: none; pointer-events: auto; }
+color: var(--on-dark); text-decoration: none; pointer-events: auto; }
 .ob-pin-lift { display: grid; justify-items: center; gap: 2px; }
 .ob-pin .i { width: 44px; height: 44px; }
 .ob-pin-name { font: 700 var(--cap)/1.2 var(--f); color: var(--on-dark); white-space: nowrap;
-  text-shadow: 0 0 2px var(--heading), 0 0 2px var(--heading), 0 0 5px var(--heading), 0 0 5px var(--heading); }   /* a soft halo in the ground colour that follows the letters: no box, no cut */
-.ob-pin-name--short { display: none; }   /* "Our office": phones only (below), in the name's place and type, in the same lifting piece */
+text-shadow: 0 0 2px var(--heading), 0 0 2px var(--heading), 0 0 5px var(--heading), 0 0 5px var(--heading); }
+.ob-pin-name--short { display: none; }
 @media (hover: hover) {
-  .ob-pin:hover .ob-pin-name { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.ob-pin:hover .ob-pin-name { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .ob-pin-lift { transition: translate .4s var(--ease); }
-  .ob-pin::after { content: ''; position: absolute; left: 50%; top: var(--pt); z-index: -1; width: 22px; height: 8px; margin: -4px 0 0 -11px; border-radius: 50%;
-    background: radial-gradient(closest-side, rgb(0 0 0 / .6), rgb(0 0 0 / .24) 62%, transparent);   /* black on the ink, as the theme's buttons shadow on navy grounds */
-    opacity: 0; transform: scale(.4); transition: opacity .4s var(--ease), transform .4s var(--ease); }
-  .ob-pin:hover .ob-pin-lift { translate: 0 -10px; }
-  .ob-pin:hover::after { opacity: 1; transform: scale(1); }
+.ob-pin-lift { transition: translate .4s var(--ease); }
+.ob-pin::after { content: ''; position: absolute; left: 50%; top: var(--pt); z-index: -1; width: 22px; height: 8px; margin: -4px 0 0 -11px; border-radius: 50%;
+background: radial-gradient(closest-side, rgb(0 0 0 / .6), rgb(0 0 0 / .24) 62%, transparent);
+opacity: 0; transform: scale(.4); transition: opacity .4s var(--ease), transform .4s var(--ease); }
+.ob-pin:hover .ob-pin-lift { translate: 0 -10px; }
+.ob-pin:hover::after { opacity: 1; transform: scale(1); }
 }
-
-/* under 900px the box stacks: the words, then the map as a band under them, fading in from the ink */
 @media (max-width: 899px) {
-  .obb-box { flex-direction: column; min-height: 0; }
-  .obb-map { position: relative; inset: auto; order: 2; height: clamp(260px, 62vw, 420px);
-    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 28%); mask-image: linear-gradient(180deg, transparent 0, #000 28%); }
-  .ob-stage { left: calc(50% - 1536px); top: calc(52% - 520px); }
-  .obb-panel { width: auto; padding: var(--ob-py) max(20px, var(--ob-x)) 12px; }
-  .obb-panel::before { content: none; }
+.obb-box { flex-direction: column; min-height: 0; }
+.obb-map { position: relative; inset: auto; order: 2; height: clamp(260px, 62vw, 420px);
+-webkit-mask-image: linear-gradient(180deg, transparent 0, #000 28%); mask-image: linear-gradient(180deg, transparent 0, #000 28%); }
+.ob-stage { left: calc(50% - 1536px); top: calc(52% - 520px); }
+.obb-panel { width: auto; padding: var(--ob-py) max(20px, var(--ob-x)) 12px; }
+.obb-panel::before { content: none; }
 }
-/* phones: the words stop at the address, the map takes the room, and the pin carries "Our office" in place of the business's name (8 Oct 2026) */
 @media (max-width: 760px) {
-  .obb-blk > :not(:first-child) { display: none; }
-  .obb-map { height: clamp(330px, 90vw, 460px); }
-  .ob-pin-name--full { display: none; }
-  .ob-pin-name--short { display: block; }
+.obb-blk > :not(:first-child) { display: none; }
+.obb-map { height: clamp(330px, 90vw, 460px); }
+.ob-pin-name--full { display: none; }
+.ob-pin-name--short { display: block; }
 }
-
-/* ---------- the white card (.ob--white), every member since 7 Oct 2026 ----------
-   Vegas, on Contact's office with a screenshot of gutter installation's Gutter sizes and styles card: "show me the contact pages our office section with a
-   white rounded edge rectangle like this section does ... have the map light with the content on the left still", then the pin "not see through so i cant
-   see the road behind it and ... the same color as the premier gutters and exterior text", then "add phone number and hours to the info under the office ...
-   both on same line dont say sat or sun", "no email", and "ship that with the solid pin" (preview: design/contact-office-white, its ocw.css), shipped on
-   Contact; then, the same evening, "ship that white our office for all our office sections replacing the dark ones": About's member (make.py: white=True on
-   both) and the three local sections (design/office-local, which copies this stylesheet and Contact's map block, white since then; its local.css has the
-   white blocks). The dark rules above stay as the base: drop white=True and the members are dark again.
-   - the box is the products card's face (design/products-tabs .pt-stage): white, the 12px corner, no shadow; the map is the same render in navy hairlines
-     mixed into the white (make.py's 'white' palette, about-office-map-white.svg; water at .06, as .12 read as a smudge under the words);
-   - the words in the light-ground colours: the eyebrow the theme's ink tag (no .sec--dark on the box), the heading and the facts in the ink, the hours
-     --muted, the line under the heading the products card's title hairline; the panel under them white at 90% fading into the map (the stops above);
-   - no email; the number (the address's type) and the hours (--muted) on one line under the address at every width, phones included (where the family
-     shows the address only); from 900px the panel holds at least the 302px that line needs (the column is 277 to 289px from 900 to about 1330); only a
-     panel with that line widens (the local sections have none, so their words keep the family's column);
-   - the pin in the name's ink and solid: the theme's outline pin over its own outer edge filled in the ink and its own eye in white (make.py), so no road
-     shows through it; the street names --muted, a freeway's the text ink. */
 .ob--white { --obw-line: color-mix(in srgb, var(--heading) 30%, var(--page)); }
 .ob--white .obb-box { background: var(--surface); }
 .ob--white .obb-panel::before {
-  background: linear-gradient(90deg, color-mix(in srgb, var(--surface) 90%, transparent) 0 62.5%, color-mix(in srgb, var(--surface) 84%, transparent) 68%,
-    color-mix(in srgb, var(--surface) 72%, transparent) 73.75%, color-mix(in srgb, var(--surface) 56%, transparent) 79.4%, color-mix(in srgb, var(--surface) 38%, transparent) 85%,
-    color-mix(in srgb, var(--surface) 21%, transparent) 90.6%, color-mix(in srgb, var(--surface) 7%, transparent) 96.25%, transparent 100%); }
+background: linear-gradient(90deg, color-mix(in srgb, var(--surface) 90%, transparent) 0 62.5%, color-mix(in srgb, var(--surface) 84%, transparent) 68%,
+color-mix(in srgb, var(--surface) 72%, transparent) 73.75%, color-mix(in srgb, var(--surface) 56%, transparent) 79.4%, color-mix(in srgb, var(--surface) 38%, transparent) 85%,
+color-mix(in srgb, var(--surface) 21%, transparent) 90.6%, color-mix(in srgb, var(--surface) 7%, transparent) 96.25%, transparent 100%); }
 .ob--white .obb-panel h2 { color: var(--heading); }
 .ob--white .obb-line { color: var(--muted); border-bottom-color: var(--obw-line); }
 .ob--white .obb-panel h2.obb-ruled { border-bottom-color: var(--obw-line); }
@@ -140,11 +76,11 @@
 .ob--white .obb-panel :focus-visible { outline-color: var(--focus); }
 .ob--white .obb-blk { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 6px; }
 .ob--white .obb-blk > :first-child { flex-basis: 100%; }
-.ob--white .obb-blk > :not(:first-child) { display: block; white-space: nowrap; }   /* each keeps its words together: on a narrow phone the hours drop under the number whole */
+.ob--white .obb-blk > :not(:first-child) { display: block; white-space: nowrap; }
 .ob--white .obb-time { margin-top: 0; }
 @media (min-width: 900px) {
-  .ob--white .obb-panel:has(> .obb-blk) { width: max(calc(max(340px, (100% + 2 * var(--ob-gain)) * .3) - max(20px, var(--ob-gain)) + 40px), 382px); }
-  .ob--white .obb-panel > .obb-blk { min-width: 302px; }
+.ob--white .obb-panel:has(> .obb-blk) { width: max(calc(max(340px, (100% + 2 * var(--ob-gain)) * .3) - max(20px, var(--ob-gain)) + 40px), 382px); }
+.ob--white .obb-panel > .obb-blk { min-width: 302px; }
 }
 .ob--white .ob-st { color: var(--muted); }
 .ob--white .ob-st--major { color: var(--ink); }
@@ -153,87 +89,55 @@
 .ob--white .ob-pin-fill { display: inline; fill: var(--heading); }
 .ob--white .ob-pin-dot { display: inline; fill: var(--surface); }
 .ob--white .ob-pin-name { color: var(--heading);
-  text-shadow: 0 0 2px var(--surface), 0 0 2px var(--surface), 0 0 5px var(--surface), 0 0 5px var(--surface); }   /* the halo in the ground colour */
+text-shadow: 0 0 2px var(--surface), 0 0 2px var(--surface), 0 0 5px var(--surface), 0 0 5px var(--surface); }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .ob--white .ob-pin::after { background: radial-gradient(closest-side, rgb(var(--shadow) / .42), rgb(var(--shadow) / .16) 62%, transparent); }   /* the lift's shadow, ink-tinted on white */
+.ob--white .ob-pin::after { background: radial-gradient(closest-side, rgb(var(--shadow) / .42), rgb(var(--shadow) / .16) 62%, transparent); }
 }
-
-/* Hover (Vegas, 8 Oct 2026: "Add hover animation to all cards that dont have it"): the site's card hover on the office box, the lift and
-   soft navy shadow the What we do and How it works cards have (mouse only, none under reduced motion); the pin keeps its own lift inside it.
-   No zoom: the street names and the pin are placed on the map's picture. */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .obb-box { transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
-  .obb-box:hover { transform: translateY(-4px); box-shadow: 0 16px 24px -16px rgb(var(--shadow) / .5); }
+.obb-box { transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+.obb-box:hover { transform: translateY(-4px); box-shadow: 0 16px 24px -16px rgb(var(--shadow) / .5); }
 }
-
-/* the street names' gates, written by make.py from where each name sits: a name shows only where the map shows it whole */
 @media (min-width: 900px) {
-  @container obbmap (width < 616px) { .obbw616 { display: none; } }
-  @container obbmap (width < 716px) { .obbw716 { display: none; } }
-  @container obbmap (width < 732px) { .obbw732 { display: none; } }
-  @container obbmap (width < 820px) { .obbw820 { display: none; } }
-  @container obbmap (width < 932px) { .obbw932 { display: none; } }
-  @container obbmap (width < 1008px) { .obbw1008 { display: none; } }
-  @container obbmap (width < 1660px) { .obbw1660 { display: none; } }
-  @container obbmap (height < 124px) { .obbh124 { display: none; } }
-  @container obbmap (height < 176px) { .obbh176 { display: none; } }
-  @container obbmap (height < 224px) { .obbh224 { display: none; } }
-  @container obbmap (height < 236px) { .obbh236 { display: none; } }
-  @container obbmap (height < 328px) { .obbh328 { display: none; } }
-  @container obbmap (height < 424px) { .obbh424 { display: none; } }
-  @container obbmap (height < 600px) { .obbh600 { display: none; } }
+@container obbmap (width < 616px) { .obbw616 { display: none; } }
+@container obbmap (width < 716px) { .obbw716 { display: none; } }
+@container obbmap (width < 732px) { .obbw732 { display: none; } }
+@container obbmap (width < 820px) { .obbw820 { display: none; } }
+@container obbmap (width < 932px) { .obbw932 { display: none; } }
+@container obbmap (width < 1008px) { .obbw1008 { display: none; } }
+@container obbmap (width < 1660px) { .obbw1660 { display: none; } }
+@container obbmap (height < 124px) { .obbh124 { display: none; } }
+@container obbmap (height < 176px) { .obbh176 { display: none; } }
+@container obbmap (height < 224px) { .obbh224 { display: none; } }
+@container obbmap (height < 236px) { .obbh236 { display: none; } }
+@container obbmap (height < 328px) { .obbh328 { display: none; } }
+@container obbmap (height < 424px) { .obbh424 { display: none; } }
+@container obbmap (height < 600px) { .obbh600 { display: none; } }
 }
 @media (max-width: 899px) {
-  @container obbmap (width < 112px) { .obsw112 { display: none; } }
-  @container obbmap (width < 188px) { .obsw188 { display: none; } }
-  @container obbmap (width < 240px) { .obsw240 { display: none; } }
-  @container obbmap (width < 276px) { .obsw276 { display: none; } }
-  @container obbmap (width < 388px) { .obsw388 { display: none; } }
-  @container obbmap (width < 464px) { .obsw464 { display: none; } }
-  @container obbmap (width < 864px) { .obsw864 { display: none; } }
-  @container obbmap (height < 184px) { .obsh184 { display: none; } }
-  @container obbmap (height < 224px) { .obsh224 { display: none; } }
-  @container obbmap (height < 236px) { .obsh236 { display: none; } }
-  @container obbmap (height < 244px) { .obsh244 { display: none; } }
-  @container obbmap (height < 648px) { .obsh648 { display: none; } }
-  @container obbmap (height < 844px) { .obsh844 { display: none; } }
-  @container obbmap (height < 1212px) { .obsh1212 { display: none; } }
+@container obbmap (width < 112px) { .obsw112 { display: none; } }
+@container obbmap (width < 188px) { .obsw188 { display: none; } }
+@container obbmap (width < 240px) { .obsw240 { display: none; } }
+@container obbmap (width < 276px) { .obsw276 { display: none; } }
+@container obbmap (width < 388px) { .obsw388 { display: none; } }
+@container obbmap (width < 464px) { .obsw464 { display: none; } }
+@container obbmap (width < 864px) { .obsw864 { display: none; } }
+@container obbmap (height < 184px) { .obsh184 { display: none; } }
+@container obbmap (height < 224px) { .obsh224 { display: none; } }
+@container obbmap (height < 236px) { .obsh236 { display: none; } }
+@container obbmap (height < 244px) { .obsh244 { display: none; } }
+@container obbmap (height < 648px) { .obsh648 { display: none; } }
+@container obbmap (height < 844px) { .obsh844 { display: none; } }
+@container obbmap (height < 1212px) { .obsh1212 { display: none; } }
 }
-
-/* The local-company sections in the office family's design (Vegas, 6 Oct 2026, on gutter installation's "Local gutter installers you can
-   reach": "for this section and all related sections use the our office section freom the contact paghe. dont put the reviews in this
-   section"). Added after the office family's own section.css (the Contact office section's, as shipped), which draws everything else: the
-   long dark box as wide as the footer, her street map, the panel at the left fading into it, the eyebrow, the heading, the bio with the
-   site's line under it, the fact type and the plain row type. Layout only, theme tokens only.
-
-   What these sections have that the office sections don't: two short blocks under the bio, each a line in the fact type (its h3), a
-   sentence in the plain row type, and its links in the fact type (the estimate, the call, the two service pages); the hours close the
-   second block as they close the office list. No button, as in the family. The blocks stay on phones (the family hides its list under the
-   address there to give the map room; these words are the section's content, so they stay and the map band follows them). */
-
 .obl-blk { display: grid; justify-items: start; gap: 4px; margin-top: 22px; }
-/* the site's line between the two blocks (Vegas, 6 Oct: "show me a line between the get a free estimate and when you call"): the family's own
-   line under the bio, 1px white at 45%, with its 22px either side */
 .obl-blk + .obl-blk { margin-top: 22px; padding-top: 22px; border-top: 1px solid rgb(255 255 255 / .45); }
 .obl-blk h3 { font: 600 var(--ui)/1.5 var(--f); letter-spacing: 0; color: var(--on-dark); }
 .obl-blk p { font: 400 var(--ui)/1.5 var(--f); color: var(--on-dark-muted); text-wrap: pretty; }
 .obl-links { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 2px; }
 .obl-blk .obb-time { margin-top: 0; }
-/* the white card (Vegas, 7 Oct 2026: "ship that white our office for all our office sections replacing the dark ones"): the section carries the
-   family's .ob--white, and the blocks take its light-ground colours: the title in the ink, the sentence --muted, the line between the blocks the
-   family's white-card hairline (--obw-line, the products card's title line) */
 .ob--white .obl-blk h3 { color: var(--heading); }
 .ob--white .obl-blk p { color: var(--muted); }
 .ob--white .obl-blk + .obl-blk { border-top-color: var(--obw-line); }
-
-/* The Short look only (the section carries .obl-short), added after local.css. Vegas, 6 Oct 2026: "also have that dividing line be the same
-   color as the main road line on the map or more of a white shade than a grey": the line under the bio is white at 85% here, in place of the
-   family's white at 45% (which reads grey on the ink). The map's main road (#57627A, the 'major' stroke in render_hair.py's dark palette) draws
-   darker than that line, so its colour is the preview's second choice (Line: Road), not the default. */
 .obl-short .obb-line { border-bottom-color: rgb(255 255 255 / .85); }
-/* the link at the foot of the block a little further from the sentence (Vegas, 6 Oct: "add a little more space between the last descriptuon and
-   the cta at the bottom"): 16px in place of the block's 4px gap; siding's two service links the same */
 .obl-short .obl-blk > .arrow-link, .obl-short .obl-blk > .obl-links { margin-top: 12px; }
-/* on the white card (7 Oct: "ship that white our office for all our office sections replacing the dark ones") the white line would vanish: the line
-   under the bio is the family's white-card hairline, as on About */
 .ob--white.obl-short .obb-line { border-bottom-color: var(--obw-line); }

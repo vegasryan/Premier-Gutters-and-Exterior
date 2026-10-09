@@ -1,109 +1,57 @@
-/* The questions family, option "Dribbble" (Vegas, 6 Oct 2026: "build the faq section in our sites style with this references layout
-   https://dribbble.com/shots/26943592-FAQ-Section"). Layout only: every colour, size, corner and icon is theme.css's.
-
-   Taken from the shot, measured on its 1440 frame:
-   - No photo: the heading row, then the questions across the whole page column.
-   - The heading row: the description at the left (our H2 goes there), the title at the right (the word FAQs, no arrow: take 2), their
-     feet level. Then 49px to the first rule.
-   - The rows: the question at the left (in capitals until 7 Oct, below) and the plus at the right that turns to a cross; the open answer set into the
-     right-hand column, starting 58.7% across (728 of the shot's 1240) and ending at the icon.
-   Ours: Libre Franklin at our sizes, the content's words (and his FAQs), our colours on the page ground (no white panel), the site's
-   header line between the rows (take 2), the open question's two rules turning navy (Vegas, take 3 of the current build), and the phone
-   layout (the shot has none).
-   Every answer is in the page's HTML (closed details elements), so Google reads them. No script. */
-
 .nw { white-space: nowrap; }
-
 .fqw-in { margin-inline: var(--edge); }
-
-/* the heading row (take 2, Vegas: "have the description be the h2 and have the top right part just say faqs no arrow"): at the left, in
-   the shot's description slot, the H2 (the tag over it, where the content has one), at most 13em wide so a long heading takes two lines as
-   the shot's description does; at the right the word FAQs, the shot's title, at our largest size (the H1's, about the shot's title on a
-   1440 page); their last baselines level */
 .fqw-head { display: flex; align-items: flex-end; align-items: last baseline; justify-content: space-between; gap: 16px 48px;
-  margin-bottom: clamp(32px, 3.4vw, 49px); }
+margin-bottom: clamp(32px, 3.4vw, 49px); }
 .fqw-lead { min-width: 0; max-width: 13em; font-size: var(--h2); }
 .fqw-lead > .label { font-size: var(--small); }
 .fqw-mark { flex: none; margin: 0; font: 700 var(--h1)/1 var(--f); letter-spacing: .02em; text-transform: uppercase; color: var(--heading); }
-
-/* the rows: the site's line under its section headers between them (take 2: "have the lines between the faqs like the line under the
-   headers of the site": 1px, the ink at 30%, as What we do's and Recent work's). Each rule belongs to one element (a row's top border; the
-   list owns the last), so a colour change never doubles a line. The open question's two rules still turn navy, as in Current. */
 .fqw-list { --fqw-line: color-mix(in srgb, var(--heading) 30%, var(--page));
-  border-bottom: 1px solid var(--fqw-line); transition: border-color .2s var(--ease); }
+border-bottom: 1px solid var(--fqw-line); transition: border-color .2s var(--ease); }
 .fqw-q { border-top: 1px solid var(--fqw-line); transition: border-color .2s var(--ease); }
 .fqw-q[open], .fqw-q[open] + .fqw-q { border-top-color: var(--link); }
 .fqw-list:has(> .fqw-q:last-child[open]) { border-bottom-color: var(--link); }
 .fqw-q summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 92px; padding: 24px 0;
-  border-radius: 4px; cursor: pointer; list-style: none; }
+border-radius: 4px; cursor: pointer; list-style: none; }
 .fqw-q summary::-webkit-details-marker { display: none; }
-/* the questions in sentence case: the theme's small heading as it is (h3: 700, sentence case, its own spacing). They were in capitals, as the
-   shot's (take 2: "questions should be all caps like the reference"), until Vegas, 7 Oct 2026: "show me the faq section without the questions
-   in all caps", then "ship that for all faq sections" (preview design/faq-case; the capitals rule is in before-sentence-case/) */
 .fqw-q h3 { margin: 0; }
 .fqw-q .i { flex: none; width: 24px; height: 24px; color: var(--head); transition: transform .2s var(--ease); }
 .fqw-q .i use { transform-box: fill-box; transform-origin: 50% 50%; }
 .fqw-q[open] .i { transform: rotate(45deg); }
-/* the answer in the right-hand column: from 58.7% across to the icon's left edge */
 .fqw-ans { margin-left: 58.7%; padding: 0 24px 34px 0; }
 .fqw-ans p { max-width: 56ch; }
 .fqw-ans p + p { margin-top: 12px; }
-
-/* tablets: the answer under its question, the full width less the icon */
 @media (max-width: 900px) {
-  .fqw-ans { margin-left: 0; padding-right: 44px; }
-  .fqw-ans p { max-width: 64ch; }
+.fqw-ans { margin-left: 0; padding-right: 44px; }
+.fqw-ans p { max-width: 64ch; }
 }
-/* phones: the word FAQs first, as the shot's title, then the tag and the H2; shorter rows */
 @media (max-width: 760px) {
-  .fqw-head { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .fqw-mark { order: -1; }
-  .fqw-lead { max-width: none; }
-  .fqw-q summary { min-height: 72px; padding: 18px 0; gap: 20px; }
-  .fqw-q h3 { font-size: 18px; }   /* set for the capitals (18px kept most on one line at 390) and kept for sentence case, as previewed */
-  .fqw-q .i { width: 22px; height: 22px; }
-  .fqw-ans { padding: 0 36px 26px 0; }
+.fqw-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+.fqw-mark { order: -1; }
+.fqw-lead { max-width: none; }
+.fqw-q summary { min-height: 72px; padding: 18px 0; gap: 20px; }
+.fqw-q h3 { font-size: 18px; }
+.fqw-q .i { width: 22px; height: 22px; }
+.fqw-ans { padding: 0 36px 26px 0; }
 }
 @media (prefers-reduced-motion: reduce) { .fqw-list, .fqw-q, .fqw-q .i { transition: none; } }
-
-/* The questions family, option "Dribbble + photo" (Vegas, 6 Oct 2026: "show me this with no faqs in top right and squished to fit an image
-   box on the left like in the current design [his screenshot of the current gutter-installation FAQ] just the image alone though no words
-   inside"). Added after faq-dribbble.css (the handoff's section.css is the two files in that order). Layout only, theme tokens only.
-
-   Take 2 (Vegas: "smaller image vertically so its only as tall as the questions, then the header goes on the left on top of image with an
-   eyebrow"):
-   - The heading row on the left, over the image box: the eyebrow (the content's tag, "Questions" where the content has none: his word) and
-     the H2, then the Dribbble's gap to the box.
-   - The image box is the current design's: her IMG_3763 cut so the box's top edge cuts the chimney, the panel corner (--r-panel, 12px), no
-     words and no shade, on the left (5fr against the questions' 6fr, 32 to 64px between), as tall as the questions with the first answer
-     open (the inline script), its top level with the first rule and its foot with the last, so it holds still while other answers open.
-   - The rows in the right-hand column beside the box, as in the Dribbble option without its FAQs word. The open answer sits under its
-     question there (the shot's right-hand answer column would be about 255px wide in this column).
-   - At 900px and under: the eyebrow and the H2, then the image box (4:3, 16:10 from 601px), then the rows, as the homepage's current design. */
-
 .fqp .fqw-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); column-gap: clamp(32px, 4.4vw, 64px); align-items: start; }
 .fqp .fqw-head { grid-column: 1; grid-row: 1; }
 .fqp .fqw-list { grid-column: 2; grid-row: 2; }
 .fqp-photo { grid-column: 1; grid-row: 2; position: relative; align-self: stretch; height: var(--faq-fit, auto); min-height: 360px; margin: 0;
-  overflow: hidden; border-radius: var(--r-panel); background: var(--line); }
+overflow: hidden; border-radius: var(--r-panel); background: var(--line); }
 .fqp-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
 .fqp .fqw-ans { margin-left: 0; padding-right: 44px; }
 .fqp .fqw-ans p { max-width: 64ch; }
-
 @media (max-width: 900px) {
-  .fqp .fqw-in { grid-template-columns: minmax(0, 1fr); }
-  .fqp .fqw-head { grid-column: 1; grid-row: 1; }
-  .fqp-photo { grid-column: 1; grid-row: 2; height: auto; min-height: 0; aspect-ratio: 4 / 3; margin-bottom: 28px; }
-  .fqp .fqw-list { grid-column: 1; grid-row: 3; }
+.fqp .fqw-in { grid-template-columns: minmax(0, 1fr); }
+.fqp .fqw-head { grid-column: 1; grid-row: 1; }
+.fqp-photo { grid-column: 1; grid-row: 2; height: auto; min-height: 0; aspect-ratio: 4 / 3; margin-bottom: 28px; }
+.fqp .fqw-list { grid-column: 1; grid-row: 3; }
 }
 @media (min-width: 601px) and (max-width: 900px) { .fqp-photo { aspect-ratio: 16 / 10; } }
-
-/* Hover (Vegas, 8 Oct 2026: "Add hover animation to all cards that dont have it"): the site's photo hover, as the homepage Service area's
-   and Our work's photos have it: the box lifts 4px onto a soft navy shadow and her photo eases in to 1.04 (mouse only, none under reduced
-   motion). */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .fqp-photo { transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
-  .fqp-photo img { transition: transform .7s var(--ease); }
-  .fqp-photo:hover { transform: translateY(-4px); box-shadow: 0 16px 24px -16px rgb(var(--shadow) / .5); }
-  .fqp-photo:hover img { transform: scale(1.04); }
+.fqp-photo { transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+.fqp-photo img { transition: transform .7s var(--ease); }
+.fqp-photo:hover { transform: translateY(-4px); box-shadow: 0 16px 24px -16px rgb(var(--shadow) / .5); }
+.fqp-photo:hover img { transform: scale(1.04); }
 }

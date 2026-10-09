@@ -1,45 +1,14 @@
-/* The closing call on every page that has one (<page>-estimate: the homepage, the nine service pages, Services, Service area and
-   About), as the top of one panel with the footer: District One's contact and footer (Dribbble 27608841, "Footer & Contact Form - Web
-   UI"; Vegas, 5 Oct 2026: "build the bottom contact section to blend into the footer like this with our glass border form from the
-   hero ... still use the style of the avenor reference just copy the blend and layout of the other dribbble reference for contact",
-   then "ship these changes to this page. and then have the form and footer on all the other pages too").
-
-   One source, design/closing-contact/ (this file, make.py, img/): make.py writes each page's slot from its words in content/pages.json
-   and copies this file in as its section.css; change it here and run `python3 design/closing-contact/make.py --ship`, never a slot.
-
-   Measured from the shot (its panel 2,412 wide on a 3,200 page; here per cent of the panel, so it holds at any width):
-   - one panel, the photo across its top under a cast; the contact part 48% of the panel's width tall;
-   - the words at the left, from 6% down (an eyebrow, a two-line heading, a short line), about a third of the width;
-   - the form at the right, 44% of the panel wide, its top level with the words;
-   - the photo clear for its top half, then solid by a hairline (white at 13%, the panel's full width) where the footer starts, in
-     the same panel; no gap, no seam (the footer's .fw--joined, theme.css).
-   Ours: her IMG_3416 (a limestone and stucco home at dusk, the house number painted out: refs/hail/r2/photo/3416-nonumber.png; no
-   camera data, so never captioned as her job; on no other page) under the ink (--heading #16213A, the footer's colour; Vegas: "give the
-   footer the ink color these use and have the blend adjusted to match that"); the panel on the footer's own edges (--ft-edge) with the
-   12px panel corner at the top; the words on the page's --edge from 1241px (36px inside the panel, as the footer's), 48px below, 22px
-   on phones; the theme's tag, H2 and line (its last sentence any "We also do" links, since 8 Oct); the call and the hours (the closing
-   call must hold both); and
-   the hero's own glass form, the theme's .estimate-card (white, the 6px ring in the band's colour at 24% with the photo blurred
-   through it, flat 48px fields, the green button), the hero's fields in its rows of three and two, titled "Tell us about your
-   project:". No quotes (the shot has none; each section's two are kept in its proof). Stacked under 1180px, as the hero's form. */
-
-.sec.ec { --ec-edge: max(12px, (100vw - 1680px) / 2); --ec-ink: 22 33 58; padding-bottom: 0; background: transparent; }   /* --ec-ink:
-   the theme's ink (--heading, #16213A) as rgb, the footer's colour, for the cast and the fade (Vegas: "have the blend adjusted to
-   match that"); it was the footer navy, #1A2A5E */
-@media (max-width: 760px) { .sec.ec { --ec-edge: 8px; } }   /* the footer's --ft-edge: the heroes' edges since 6 Oct (Vegas, 6 Oct: "show me the footer with the same padding spacing as the hero", then "ship it"; boards/footer-edge.html);
-   it was 32px in from 1240px and 18px below, at most 1652px wide */
-
+.sec.ec { --ec-edge: max(12px, (100vw - 1680px) / 2); --ec-ink: 22 33 58; padding-bottom: 0; background: transparent; }
+@media (max-width: 760px) { .sec.ec { --ec-edge: 8px; } }
 .ec-panel { position: relative; isolation: isolate; container-type: inline-size; margin-inline: var(--ec-edge); overflow: hidden;
-  border-radius: var(--r-panel) var(--r-panel) 0 0; background: var(--heading); }
+border-radius: var(--r-panel) var(--r-panel) 0 0; background: var(--heading); }
 .ec-photo { position: absolute; inset: 0 0 auto; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
-/* the cast and the blend: navy over the whole photo, a little deeper behind the words at the left, and solid navy at the foot */
 .ec-panel::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background:
-    linear-gradient(to bottom, rgb(var(--ec-ink) / 0) 0, rgb(var(--ec-ink) / 0) 52%, rgb(var(--ec-ink) / .7) 78%, var(--heading) 100%),
-    linear-gradient(to right, rgb(var(--ec-ink) / .62) 0, rgb(var(--ec-ink) / .5) 40%, rgb(var(--ec-ink) / .38) 70%, rgb(var(--ec-ink) / .38) 100%); }
-
-.ec-in { display: grid; grid-template-columns: minmax(0, 1fr) 44cqi; column-gap: clamp(40px, 6vw, 112px); align-items: start;   /* the form 44% of the panel, as the shot's */
-  padding: clamp(56px, 6vw, 84px) calc(var(--edge) - var(--ec-edge)) clamp(64px, 6.5vw, 96px); }   /* the words on --edge at every width, as the footer's */
+background:
+linear-gradient(to bottom, rgb(var(--ec-ink) / 0) 0, rgb(var(--ec-ink) / 0) 52%, rgb(var(--ec-ink) / .7) 78%, var(--heading) 100%),
+linear-gradient(to right, rgb(var(--ec-ink) / .62) 0, rgb(var(--ec-ink) / .5) 40%, rgb(var(--ec-ink) / .38) 70%, rgb(var(--ec-ink) / .38) 100%); }
+.ec-in { display: grid; grid-template-columns: minmax(0, 1fr) 44cqi; column-gap: clamp(40px, 6vw, 112px); align-items: start;
+padding: clamp(56px, 6vw, 84px) calc(var(--edge) - var(--ec-edge)) clamp(64px, 6.5vw, 96px); }
 .ec-words { max-width: 30em; }
 .ec-words .sec-lede { margin-top: 18px; color: rgb(255 255 255 / .9); }
 .ec-call { margin: 28px 0 0; font: 500 var(--body)/1.4 var(--f); color: var(--on-dark); }
@@ -47,74 +16,50 @@
 .ec-call a:hover { text-decoration-thickness: 2.5px; }
 .ec-hours { margin: 6px 0 0; font: 400 var(--cap)/1.4 var(--f); color: rgb(255 255 255 / .82); }
 .ec-form { margin-inline: 0; }
-.ec-form :focus-visible { outline-color: var(--focus); }   /* as the hero's form: the dark section's green ring would sit on the white card */
-/* links inside the description (the "We also do" sentence; Vegas, 8 Oct 2026: "have it in the description ... in the descriptions text style so it
-   just blends in"): the description's own colour, a 1px underline 4px down, as the thanks page's lede link in this panel (design/copied-designs) */
+.ec-form :focus-visible { outline-color: var(--focus); }
 .ec-words .sec-lede a { color: inherit; text-decoration: underline 1px; text-underline-offset: 4px; }
 .ec-words .sec-lede a:hover { text-decoration-thickness: 2px; }
 .ec-row3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .ec-row2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
 @media (max-width: 1179px) {
-  .ec-in { grid-template-columns: minmax(0, 1fr); row-gap: 36px; padding-block: 48px 56px; }
-  .ec-form { max-width: 640px; }
-  /* stacked, the photo sits behind the words and the form's top; the navy takes over under them */
-  .ec-panel::before { background:
-    linear-gradient(to bottom, rgb(var(--ec-ink) / .55) 0, rgb(var(--ec-ink) / .6) 30%, rgb(var(--ec-ink) / .9) 48%, var(--heading) 62%); }
-  .ec-photo { height: 62%; }
+.ec-in { grid-template-columns: minmax(0, 1fr); row-gap: 36px; padding-block: 48px 56px; }
+.ec-form { max-width: 640px; }
+.ec-panel::before { background:
+linear-gradient(to bottom, rgb(var(--ec-ink) / .55) 0, rgb(var(--ec-ink) / .6) 30%, rgb(var(--ec-ink) / .9) 48%, var(--heading) 62%); }
+.ec-photo { height: 62%; }
 }
 @media (max-width: 760px) {
-  .ec-row3, .ec-row2 { grid-template-columns: minmax(0, 1fr); }
-  .ec-photo { height: 46%; object-position: 46% 40%; }
-  .ec-panel::before { background:
-    linear-gradient(to bottom, rgb(var(--ec-ink) / .55) 0, rgb(var(--ec-ink) / .62) 24%, rgb(var(--ec-ink) / .92) 38%, var(--heading) 46%); }
+.ec-row3, .ec-row2 { grid-template-columns: minmax(0, 1fr); }
+.ec-photo { height: 46%; object-position: 46% 40%; }
+.ec-panel::before { background:
+linear-gradient(to bottom, rgb(var(--ec-ink) / .55) 0, rgb(var(--ec-ink) / .62) 24%, rgb(var(--ec-ink) / .92) 38%, var(--heading) 46%); }
 }
 @media (max-width: 700px) {
-  .ec-in { padding-block: 36px 40px; }
+.ec-in { padding-block: 36px 40px; }
 }
-
-/* ---------- 6 Oct 2026: layout 5 with its own form in the hero card's glass border ----------
-   Shipped from the homepage preview premier-v2-services-avenor (design/home-services-avenor/, exp/closing-layouts.css and its README;
-   Vegas: "ok ship to mvp all pages have the contact forms match the spec"). Over the 5 Oct panel above, the same panel, photo, cast
-   and fade into the footer:
-   - the arrangement of United Roofing's contact (Dribbble 27662357, his find, "5"): the words at the left, the form at the right, 40% of
-     the panel; the tag (Contact) back over the heading, its top level with the form's top, as the shot's CONTACT is;
-   - under the line, the number and the email alone, each its own line, no underline (Vegas: "just have below the description the phone
-     number and email standalone", "remove the underlines under the phone and email"); "Prefer to call?" and the hours off the panel;
-     shrinking together on phones so the email keeps one line;
-   - the form: United Roofing's (fields two to a row, each its name over a 1px line) in the hero card's glass border (the theme's 6px
-     ring in the band at 24%, 14px corner) and the hero form's type (the title in the theme's capitals, the names 500 16px, what people
-     type 18px), the white at 86% over a 10px blur, no shadow, the green button full width, a focused line in ink, never blue; the
-     need's select blank until opened;
-   - the cast behind the words a little deeper beside the form (.76 and .66), so the line keeps its contrast over the brighter stucco;
-   - the photo her IMG_7369, the porte-cochere (white stucco and limestone, dark gutters, a blue sky), the preview's, in IMG_3416's place
-     on every page, as is (Vegas: "just ship with the photo with holiday lights taht shoudlnt be a rule"; make.py PHOTO). */
 .ec-in { grid-template-columns: minmax(0, 1fr) 40cqi; column-gap: clamp(48px, 7vw, 120px); }
-.ec-words .label { display: block; width: fit-content; }   /* a block: its top the words' top, the form's top */
+.ec-words .label { display: block; width: fit-content; }
 @media (min-width: 1180px) {
-  .ec-panel::before { background:
-    linear-gradient(to bottom, rgb(var(--ec-ink) / 0) 0, rgb(var(--ec-ink) / 0) 52%, rgb(var(--ec-ink) / .7) 78%, var(--heading) 100%),
-    linear-gradient(to right, rgb(var(--ec-ink) / .76) 0, rgb(var(--ec-ink) / .66) 40%, rgb(var(--ec-ink) / .4) 70%, rgb(var(--ec-ink) / .38) 100%); }
+.ec-panel::before { background:
+linear-gradient(to bottom, rgb(var(--ec-ink) / 0) 0, rgb(var(--ec-ink) / 0) 52%, rgb(var(--ec-ink) / .7) 78%, var(--heading) 100%),
+linear-gradient(to right, rgb(var(--ec-ink) / .76) 0, rgb(var(--ec-ink) / .66) 40%, rgb(var(--ec-ink) / .4) 70%, rgb(var(--ec-ink) / .38) 100%); }
 }
 .ec-words { container-type: inline-size; }
-.ec-reach { font-size: min(var(--body), 100cqi / 18.4); }   /* the email was 18.1em at 800; at 400 it is narrower */
-/* the number and the email in the regular weight, underlined (Vegas, 6 Oct: "show me these not bold but normal font underlined", then "ship all that";
-   mvp/boards/contact-reach.html): 400, a 1px underline 5px under the words, thickening to 2px when pointed at. They were 800 with no underline, fading
-   to .8 when pointed at */
+.ec-reach { font-size: min(var(--body), 100cqi / 18.4); }
 .ec-reach a { display: block; width: fit-content; overflow-wrap: anywhere; font-weight: 400; text-decoration: underline 1px; text-underline-offset: 5px; }
 .ec-reach a:hover { text-decoration-thickness: 2px; }
 .ec-reach a + a { margin-top: 10px; }
 .ec .ec-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; margin: 0; padding: 34px 34px 30px;
-  border: 6px solid color-mix(in srgb, var(--band) 24%, transparent); border-radius: 14px; background: rgb(255 255 255 / .86) padding-box;
-  box-shadow: none; color: var(--ink); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+border: 6px solid color-mix(in srgb, var(--band) 24%, transparent); border-radius: 14px; background: rgb(255 255 255 / .86) padding-box;
+box-shadow: none; color: var(--ink); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .ec .ec-form .form-title { grid-column: 1 / -1; margin-bottom: 22px; font: 700 28px/1.2 var(--f); letter-spacing: .02em; text-transform: uppercase;
-  color: var(--heading); }
+color: var(--heading); }
 .ec .ec-form .field-row { display: contents; }
 .ec .ec-form :is(.ec-row2 .field:last-child, .btn) { grid-column: 1 / -1; }
 .ec .ec-form .field { gap: 4px; margin-bottom: 16px; }
 .ec .ec-form .field label { font: 500 var(--ui)/22px var(--f); color: var(--heading); }
 .ec .ec-form :is(.field input, .select select) { height: 40px; min-height: 40px; padding: 0; border-radius: 0; background: transparent;
-  color: var(--ink); font: 500 var(--body)/22px var(--f); box-shadow: inset 0 -1px 0 rgb(var(--ec-ink) / .28); }
+color: var(--ink); font: 500 var(--body)/22px var(--f); box-shadow: inset 0 -1px 0 rgb(var(--ec-ink) / .28); }
 .ec .ec-form .select select { padding-right: 26px; }
 .ec .ec-form .select .i { right: 2px; color: var(--heading); }
 .ec .ec-form :is(.field input, .select select):focus-visible { outline: none; background: transparent; box-shadow: inset 0 -2px 0 var(--heading); }
@@ -122,6 +67,6 @@
 .ec .ec-form .btn--block { justify-self: stretch; width: 100%; margin-top: 8px; }
 @media (max-width: 1179px) { .ec-in { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 760px) {
-  .ec .ec-form { grid-template-columns: minmax(0, 1fr); padding: 24px 18px 22px; border-width: 4px; }
-  .ec .ec-form .form-title { font-size: 24px; }
+.ec .ec-form { grid-template-columns: minmax(0, 1fr); padding: 24px 18px 22px; border-width: 4px; }
+.ec .ec-form .form-title { font-size: 24px; }
 }

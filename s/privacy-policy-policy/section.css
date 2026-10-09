@@ -1,61 +1,30 @@
-/* The legal pages, #privacy-policy-policy (/privacy-policy/) and #accessibility-statement (/accessibility/): laid out as a normal
-   professional policy page, no design of their own (Vegas, 7 Oct 2026: "no need for design just lay it out like a normal professional
-   privacy and accesibility page does"). Theme only: h1, h2, .sec-lede, .caption, the type sizes, the colour tokens.
-
-   - the page's title block on the page column: the H1, the intro (.sec-lede), "Last updated" under it (as policy pages put it, wherever
-     the words have it), the hairline the site's headers carry;
-   - one reading column, about 68 characters wide: the numbered H2s at the card titles' size (22px capitals), paragraphs and bullet
-     lists at the body size, the phone and email linked;
-   - a long policy (five parts or more: the privacy policy) lists its parts at the right from 1100px, held in view as you read, each a
-     link to its part; the accessibility page is short and has none;
-   - a closing line at the end of the words (the privacy policy's "By using this site ...") set apart under a rule, in the muted grey.
-   That is look "Plain" (take 1). Vegas then: "make it look a little better". Two looks on it, from the site's own pieces (the preview's
-   Look switch; the section ships with one class):
-   Take 3 (Vegas: "sheet is good for privacy add the line under our header ... accessability do rows without the animation wehre the
-   side follows ... then ship both"): the privacy policy ships as Sheet with the header's hairline, the accessibility page as Rows with
-   nothing sticky. SHIPPED.
-   - .lg--rows: the site's section header (heading at the left, its line at the right, bottoms level) made the page's
-     layout: the H1 at the left, the intro and the date at the right; then each part a row on a hairline, its H2 at the left and its
-     words at the right (nothing sticky); the parts list goes (the headings at the left are the list). Stacked under 992px.
-   - .lg--sheet: the words on a white sheet at the site's panel corner, a hairline between the parts; the parts list at the LEFT from
-     1100px, the part you are reading marked in navy (the script). */
-
 .lg-in { --lg-line: color-mix(in srgb, var(--heading) 30%, var(--page)); padding-inline: var(--edge); }
-
-/* the title block */
 .lg-head { padding-bottom: 32px; border-bottom: 1px solid var(--lg-line); }
-.lg-head h1 { font-size: min(var(--h1), 10.5vw); }   /* "ACCESSIBILITY" is one word: on the narrowest phones (under ~380px) the H1 eases
-   down rather than breaking it mid-word; the theme's size everywhere else */
+.lg-head h1 { font-size: min(var(--h1), 10.5vw); }
 .lg-date { margin-top: 14px; }
-
-/* the reading column, and the parts list beside it on wide screens */
 .lg-body { display: grid; grid-template-columns: minmax(0, 68ch); column-gap: 64px; margin-top: 48px; }
 .lg-text h2 { font-size: var(--h3); line-height: 1.25; scroll-margin-top: calc(var(--bar-h, 0px) + var(--nav-clear) + 24px); }
-.lg-n { color: var(--muted); }   /* the part's number, as the words give it ("1."), in the muted grey */
+.lg-n { color: var(--muted); }
 .lg-part + .lg-part { margin-top: 48px; }
 .lg-text p, .lg-text ul { margin: 14px 0 0; }
 .lg-text ul { padding-left: 1.3em; }
 .lg-text li + li { margin-top: 6px; }
 .lg-text li::marker { color: var(--muted); }
 .lg-note { margin-top: 48px !important; padding-top: 24px; border-top: 1px solid var(--line); font-size: var(--cap); color: var(--muted); }
-
 .lg-toc { display: none; }
 @media (min-width: 1100px) {
-  .lg--toc .lg-body { grid-template-columns: minmax(0, 68ch) minmax(0, 18rem); justify-content: space-between; }
-  .lg-toc { display: block; order: 2; align-self: start; position: sticky; top: calc(var(--bar-h, 0px) + var(--nav-clear) + 24px); }
-  .lg-toc ol { margin: 0; padding: 0 0 0 20px; list-style: none; border-left: 1px solid var(--lg-line); }
-  .lg-toc li + li { margin-top: 12px; }
-  .lg-toc a { font: 500 var(--cap)/1.35 var(--f); color: var(--ink); text-decoration: none; }
-  .lg-toc a:hover { color: var(--link); text-decoration: underline; }
+.lg--toc .lg-body { grid-template-columns: minmax(0, 68ch) minmax(0, 18rem); justify-content: space-between; }
+.lg-toc { display: block; order: 2; align-self: start; position: sticky; top: calc(var(--bar-h, 0px) + var(--nav-clear) + 24px); }
+.lg-toc ol { margin: 0; padding: 0 0 0 20px; list-style: none; border-left: 1px solid var(--lg-line); }
+.lg-toc li + li { margin-top: 12px; }
+.lg-toc a { font: 500 var(--cap)/1.35 var(--f); color: var(--ink); text-decoration: none; }
+.lg-toc a:hover { color: var(--link); text-decoration: underline; }
 }
-
 @media (max-width: 760px) {
-  .lg-head { padding-bottom: 24px; }
-  .lg-body { margin-top: 32px; }
-  .lg-part + .lg-part { margin-top: 40px; }
+.lg-head { padding-bottom: 24px; }
+.lg-body { margin-top: 32px; }
+.lg-part + .lg-part { margin-top: 40px; }
 }
-
-/* ---------- Rows (.lg--rows) ---------- */
 .lg--rows .lg-toc { display: none !important; }
 .lg--rows .lg-head { border-bottom: 0; }
 .lg--rows .lg-body { display: block; margin-top: 0; }
@@ -64,40 +33,36 @@
 .lg--rows .lg-part:last-child { border-bottom: 1px solid var(--line); }
 .lg--rows .lg-note { margin-top: 32px !important; padding-top: 0; border-top: 0; }
 @media (min-width: 992px) {
-  .lg--rows .lg-head, .lg--rows .lg-part { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 64px; }
-  .lg--rows .lg-head { align-items: end; }
-  .lg--rows .lg-head h1 { grid-column: 1; grid-row: 1 / span 2; }
-  .lg--rows .lg-head .sec-lede { grid-column: 2; grid-row: 1; margin: 0; }
-  .lg--rows .lg-date { grid-column: 2; grid-row: 2; }
-  .lg--rows .lg-part { align-items: start; }
-  .lg--rows .lg-part > h2 { grid-column: 1; }   /* not sticky (Vegas, take 3: "without the animation wehre the side follows ... just keep it
-     simple") */
-  .lg--rows .lg-part > :not(h2) { grid-column: 2; }
-  .lg--rows .lg-part > h2 + * { margin-top: 0; }
-  .lg--rows .lg-text { max-width: none; }
-  .lg--rows .lg-note { margin-left: calc(50% + 32px); }
+.lg--rows .lg-head, .lg--rows .lg-part { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 64px; }
+.lg--rows .lg-head { align-items: end; }
+.lg--rows .lg-head h1 { grid-column: 1; grid-row: 1 / span 2; }
+.lg--rows .lg-head .sec-lede { grid-column: 2; grid-row: 1; margin: 0; }
+.lg--rows .lg-date { grid-column: 2; grid-row: 2; }
+.lg--rows .lg-part { align-items: start; }
+.lg--rows .lg-part > h2 { grid-column: 1; }
+.lg--rows .lg-part > :not(h2) { grid-column: 2; }
+.lg--rows .lg-part > h2 + * { margin-top: 0; }
+.lg--rows .lg-text { max-width: none; }
+.lg--rows .lg-note { margin-left: calc(50% + 32px); }
 }
 @media (max-width: 991px) {
-  .lg--rows .lg-part > h2 + * { margin-top: 12px; }
-  .lg--rows .lg-part { padding: 32px 0; }
+.lg--rows .lg-part > h2 + * { margin-top: 12px; }
+.lg--rows .lg-part { padding: 32px 0; }
 }
-
-/* ---------- Sheet (.lg--sheet) ---------- */
-.lg--sheet .lg-body { margin-top: 32px; }   /* the header's hairline kept, 32px over and under it as the site's section headers
-   (Vegas, take 3: "add the line under our header/bio whever it normally goes in oursections") */
+.lg--sheet .lg-body { margin-top: 32px; }
 .lg--sheet { --lg-pad: clamp(24px, 4.4vw, 64px); }
 .lg--sheet .lg-text { max-width: calc(68ch + 2 * var(--lg-pad)); padding: var(--lg-pad); background: var(--surface); border-radius: var(--r-panel); }
 .lg--sheet .lg-part + .lg-part { margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--line); }
 .lg--sheet .lg-body { grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 1100px) {
-  .lg--sheet.lg--toc .lg-body { grid-template-columns: minmax(0, 15rem) minmax(0, calc(68ch + 2 * var(--lg-pad))); justify-content: start; column-gap: 48px; }
-  .lg--sheet .lg-toc { order: 0; }
-  .lg--sheet .lg-toc ol { padding: 0; border-left: 0; }
-  .lg--sheet .lg-toc li + li { margin-top: 4px; }
-  .lg--sheet .lg-toc a { display: block; padding: 8px 0 8px 14px; border-left: 3px solid transparent; }
-  .lg--sheet .lg-toc a[aria-current] { color: var(--link); font-weight: 700; border-left-color: var(--link); }
+.lg--sheet.lg--toc .lg-body { grid-template-columns: minmax(0, 15rem) minmax(0, calc(68ch + 2 * var(--lg-pad))); justify-content: start; column-gap: 48px; }
+.lg--sheet .lg-toc { order: 0; }
+.lg--sheet .lg-toc ol { padding: 0; border-left: 0; }
+.lg--sheet .lg-toc li + li { margin-top: 4px; }
+.lg--sheet .lg-toc a { display: block; padding: 8px 0 8px 14px; border-left: 3px solid transparent; }
+.lg--sheet .lg-toc a[aria-current] { color: var(--link); font-weight: 700; border-left-color: var(--link); }
 }
 @media (max-width: 760px) {
-  .lg--sheet .lg-body { margin: 24px calc(-1 * var(--edge) + 8px) 0; }   /* the sheet nearly edge to edge on phones, 8px in like the heroes' panel */
-  .lg--sheet .lg-part + .lg-part { margin-top: 32px; padding-top: 32px; }
+.lg--sheet .lg-body { margin: 24px calc(-1 * var(--edge) + 8px) 0; }
+.lg--sheet .lg-part + .lg-part { margin-top: 32px; padding-top: 32px; }
 }

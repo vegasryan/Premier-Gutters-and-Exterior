@@ -1,71 +1,49 @@
-/* #siding-repair-or-replace, Siding repair or replacement: two photo cards (Vegas, 8 Oct 2026: "show me the words repair and rpelacce
-   in the eyebrow style in the top left of the cards, then the description inside with the hero fade at the bottom", then "keep the
-   content but have the bottom like this" (the What hail does cards) and "then ship it"). Written by design/siding-rr-r3/make.py --ship
-   from the board's options.css (its shared header rules and option D); change it there and ship again, never here. */
-
-/* ---------- shared: the page column and the site's section header (What we do's: the tag and H2 at the left, the line a 25em column
-   at the right 48px away, their bottoms level, a hairline 32px under them; under 992px the line goes under the H2) ---------- */
 .rr3 { --rr3-line: color-mix(in srgb, var(--heading) 30%, var(--band)); }
 .rr3-in { padding-inline: var(--edge); }
 .rr3-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 25em); align-items: end; column-gap: 48px;
-  padding-bottom: 32px; border-bottom: 1px solid var(--rr3-line); }
+padding-bottom: 32px; border-bottom: 1px solid var(--rr3-line); }
 .rr3-head h2 { max-width: 14em; }
 .rr3-head .sec-lede { margin: 0; text-wrap: pretty; }
 .rr3 h3 { text-wrap: balance; }
 .rr3 p { text-wrap: pretty; }
 @media (max-width: 991px) { .rr3-head { grid-template-columns: minmax(0, 1fr); row-gap: 14px; } }
-
-/* ---------- D: Cards (his own take, 8 Oct: "show me the words repair and rpelacce in the eyebrow style in the top left of the cards, then
-   the description inside with the hero fade at the bottom so the photo can act like a scrim") ----------
-   Her two photos as two cards on the page column, the 12px corner, shown as they are. REPAIR and REPLACE at each card's top left are the
-   section's own eyebrow, the tag (theme.css's .label: the ink chip with white capitals), only placed. The heading, one short line and on
-   Repair the storm link sit inside at the foot over the service heroes' fade (the ink at 94% at the foot to clear), scaled to the words
-   as the photo cards' rule asks (hero-fade-scaled-to-words): it starts --rrc-ramp over the heading and is 49% ink at the heading's top,
-   whatever the card's shape. The two cards share their rows (subgrid), so the headings, the lines and the link rows sit level. Phones:
-   one row you swipe, the next card peeking, snapping to each card. Every part names its cell (grid-area): the fade holds column 1 of
-   rows 2 to 4, and a word left to auto-placement would be pushed into a second column beside it.
-   The bottom (8 Oct: "keep the content but have the bottom like this", the What hail does cards on premier-v2-hav-eyebrow): their line
-   (--cap, 1.45, 6px under the heading) and their Read more row (a white hairline at 30%, the words at the left at --cap, the arrow at the
-   far end, nudging 3px on hover); the row's cover makes the whole card its link, the focus ring on the card. */
 .rrc-cards { --rrc-px: 32px; --rrc-pb: 30px; --rrc-ramp: 120px;
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: minmax(clamp(240px, 26vw, 440px), 1fr) repeat(3, auto);
-  column-gap: 20px; margin-top: 48px; }
+display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: minmax(clamp(240px, 26vw, 440px), 1fr) repeat(3, auto);
+column-gap: 20px; margin-top: 48px; }
 .rrc-card { position: relative; isolation: isolate; grid-row: 1 / span 4; display: grid; grid-template-rows: subgrid;
-  grid-template-columns: minmax(0, 1fr); overflow: hidden; border-radius: var(--r-panel); background: var(--line);
-  padding: 24px var(--rrc-px) var(--rrc-pb); color: var(--on-dark); }
+grid-template-columns: minmax(0, 1fr); overflow: hidden; border-radius: var(--r-panel); background: var(--line);
+padding: 24px var(--rrc-px) var(--rrc-pb); color: var(--on-dark); }
 .rrc-photo { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
 .rrc-card::after { content: ""; grid-row: 2 / 5; grid-column: 1; z-index: -1; pointer-events: none;
-  margin: calc(-1 * var(--rrc-ramp)) calc(-1 * var(--rrc-px)) calc(-1 * var(--rrc-pb));
-  background: linear-gradient(to bottom, transparent 0, color-mix(in srgb, var(--heading) 25%, transparent) calc(var(--rrc-ramp) * .5),
-    color-mix(in srgb, var(--heading) 49%, transparent) var(--rrc-ramp), color-mix(in srgb, var(--heading) 78%, transparent) 62%,
-    color-mix(in srgb, var(--heading) 94%, transparent) 100%); }
+margin: calc(-1 * var(--rrc-ramp)) calc(-1 * var(--rrc-px)) calc(-1 * var(--rrc-pb));
+background: linear-gradient(to bottom, transparent 0, color-mix(in srgb, var(--heading) 25%, transparent) calc(var(--rrc-ramp) * .5),
+color-mix(in srgb, var(--heading) 49%, transparent) var(--rrc-ramp), color-mix(in srgb, var(--heading) 78%, transparent) 62%,
+color-mix(in srgb, var(--heading) 94%, transparent) 100%); }
 .rrc-card > .label { grid-area: 1 / 1; align-self: start; justify-self: start; margin: 0; }
-/* on the photo the eyebrow is the theme's form for dark ground, a white face with ink words, as the What hail does cards' (Vegas, 8 Oct:
-   "since its in the photo it needs to be white"); the id outweighs the theme's header-tag rule (main section:not([id$=-hero]) .label) */
 #siding-repair-or-replace .rrc-card > .label { background: #FFFFFF; color: var(--heading); }
 .rrc-card h3 { grid-area: 2 / 1; align-self: end; color: var(--on-dark); text-transform: uppercase; letter-spacing: .02em; text-wrap: balance; }
 .rrc-line { grid-area: 3 / 1; margin-top: 6px; max-width: 34em; color: var(--on-dark); font-size: var(--cap); line-height: 1.45; }
 .rrc-more { grid-area: 4 / 1; display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px;
-  border-top: 1px solid rgb(255 255 255 / .3); font: 400 var(--cap)/1.2 var(--f); color: var(--on-dark); text-decoration: none; }
+border-top: 1px solid rgb(255 255 255 / .3); font: 400 var(--cap)/1.2 var(--f); color: var(--on-dark); text-decoration: none; }
 .rrc-more .i { width: 18px; height: 18px; color: currentColor; }
-.rrc-more::after { content: ""; position: absolute; inset: 0; z-index: 1; }   /* the whole card is the link */
+.rrc-more::after { content: ""; position: absolute; inset: 0; z-index: 1; }
 .rrc-card a:focus-visible { outline: none; }
 .rrc-card:has(a:focus-visible) { outline: 3px solid var(--focus); outline-offset: 3px; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .rrc-card { transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
-  .rrc-photo { transition: transform .7s var(--ease); }
-  .rrc-card:hover { transform: translateY(-4px); box-shadow: 0 16px 24px -16px rgb(var(--shadow) / .5); }
-  .rrc-card:hover .rrc-photo { transform: scale(1.04); }
-  .rrc-more .i { transition: transform .18s var(--ease); }
-  .rrc-card:hover .rrc-more .i { transform: translateX(3px); }
+.rrc-card { transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+.rrc-photo { transition: transform .7s var(--ease); }
+.rrc-card:hover { transform: translateY(-4px); box-shadow: 0 16px 24px -16px rgb(var(--shadow) / .5); }
+.rrc-card:hover .rrc-photo { transform: scale(1.04); }
+.rrc-more .i { transition: transform .18s var(--ease); }
+.rrc-card:hover .rrc-more .i { transform: translateX(3px); }
 }
 @media (max-width: 991px) { .rrc-cards { --rrc-px: 24px; --rrc-pb: 24px; } }
 @media (max-width: 760px) {
-  .rrc-cards { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(320px, 100% - 44px);
-    grid-template-rows: minmax(220px, 1fr) repeat(3, auto); column-gap: 16px; overflow-x: auto; overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--edge)); padding-inline: var(--edge);
-    scroll-padding-inline: var(--edge); --rrc-px: 20px; --rrc-pb: 20px; --rrc-ramp: 100px; }
-  .rrc-cards::-webkit-scrollbar { display: none; }
-  .rrc-card { scroll-snap-align: start; padding-top: 18px; }
-  .rrc-card:has(a:focus-visible) { outline-offset: -3px; }   /* inside the card: the row's scroller would clip a ring outside it */
+.rrc-cards { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(320px, 100% - 44px);
+grid-template-rows: minmax(220px, 1fr) repeat(3, auto); column-gap: 16px; overflow-x: auto; overscroll-behavior-x: contain;
+scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--edge)); padding-inline: var(--edge);
+scroll-padding-inline: var(--edge); --rrc-px: 20px; --rrc-pb: 20px; --rrc-ramp: 100px; }
+.rrc-cards::-webkit-scrollbar { display: none; }
+.rrc-card { scroll-snap-align: start; padding-top: 18px; }
+.rrc-card:has(a:focus-visible) { outline-offset: -3px; }
 }

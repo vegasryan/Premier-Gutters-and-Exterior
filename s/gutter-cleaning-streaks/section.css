@@ -1,148 +1,72 @@
-/* #hail-damage-what-hail-does, "What hail does", in a design of its own (Vegas, 7 Oct 2026: "we need to build another design for this
-   section sicne its repeating the design from "after a storm" on the same page. build it with inspo from this section [Avenor's About
-   Avenor, Dribbble 27455678] i dont want the cards to be covered like theirs though dont include that ... and the header should be ours
-   but centered still").
-
-   From Avenor's About section, measured off his screenshot (its cards 484 x 331, 14 apart, 14 in from the card's edges):
-   - the header ours, as the page's other headers and the homepage's What we do (Vegas, 7 Oct, take 2: "put the header off to the left
-     like our normal style and add the line under the header"): the tag and the H2 at the left, the line (.sec-lede) at the right,
-     their bottoms level, one hairline across the column 32px under them and 32px over the cards (take 1 had it all centred); take 3
-     ("show me the description starting from the center of the section so there is more room and add we also do window repair to
-     description"): the header in the cards' two columns, so the line starts on the second card's left edge and has the right half's
-     width; it ends with the window repair line (no line under the cards any more). Then, 7 Oct night ("some sections have the
-     description going from half way and some have it starting later. make the ones half way start later like the rest"): the line is
-     What we do's again, number for number: a 25em column at the far right, 48px from the heading (the homepage's .wd-head), which is
-     922px into the column at 1440; take 3's half-way start is the preview's Description switch (.hav--center);
-   - four wide cards, two by two, the shot's 484:331, 16px apart (the site's card gap), the site's 12px panel corner;
-   - on each card along the bottom: the name, the line, and What we do's Read more row (take 2: "the read more arrow like in the what
-     we do home section"): a white hairline at 30%, Read more at the left and the site's arrow at the far right (take 1 had the line
-     at the left and READ MORE at the right, for the shot's See More button);
-   - her photo on every card, clear from the top: no grey faces, no tint over the whole photo (Vegas: "i dont want the cards to be
-     covered like theirs"); only the hero's fade at the foot (7 Oct, night: "make sure all sections that use that card design/layout
-     have that hero bottom only fade or bottom + top for those with the elements at the top as well"; these cards' words are all at the
-     foot, so the bottom-only one, in place of the navy shade under the words); no corner labels (the shot's category and count: the After a storm cards carry a top line, and the seamless photos'
-     labels were taken off). Words switch on the preview: Under the photo, where nothing at all sits on the photo.
-   Phones get one row you swipe, the next card showing. Theme only: .label, h2, h3, .sec-lede, the type sizes, the colour tokens and
-   the icon sprite. 20px inside the card is the shot's 14 of 484 at our
-   card's 644 (no theme token for it). */
-
 .hav-in { --hav-gap: 16px; --hav-space: 32px; --hav-line: color-mix(in srgb, var(--heading) 30%, var(--page));
-  padding-inline: var(--edge); }
-.sec--band .hav-in { --hav-line: color-mix(in srgb, var(--heading) 30%, var(--band)); }   /* a member on a band */
-
-/* the header: the tag and the heading at the left, the line at the right, their bottoms level, and the hairline under them; from 992px
-   What we do's, number for number (mvp/sections/home-services, .wd-head): the line a 25em column at the far right, 48px from the heading */
+padding-inline: var(--edge); }
+.sec--band .hav-in { --hav-line: color-mix(in srgb, var(--heading) 30%, var(--band)); }
 .hav-head { display: grid; grid-template-columns: minmax(0, 1fr); align-items: end; column-gap: 48px;
-  padding-bottom: var(--hav-space); border-bottom: 1px solid var(--hav-line); }
+padding-bottom: var(--hav-space); border-bottom: 1px solid var(--hav-line); }
 .hav-title h2 { max-width: 14em; }
 .hav-head .sec-lede { max-width: none; margin: 0; text-wrap: pretty; }
 @media (min-width: 992px) {
-  .hav-head { grid-template-columns: minmax(0, 1fr) minmax(0, 25em); }
-  /* take 3 (preview's Description switch): the header in the cards' two columns, the line from the second card's left edge */
-  .hav--center .hav-head { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--hav-gap); }
+.hav-head { grid-template-columns: minmax(0, 1fr) minmax(0, 25em); }
+.hav--center .hav-head { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--hav-gap); }
 }
-
-/* the cards, two by two across the column */
 .hav-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--hav-gap); margin: var(--hav-space) 0 0; padding: 0;
-  list-style: none; container: hav-grid / inline-size; }
-
-/* a card: the shot's shape (its height from the grid's width, so a row's two cards stay one height), grown taller only if its words
-   need it (narrow cards); the top 38% of its width always clear photo */
-.hav-card { --hav-clear: calc((100cqw - var(--hav-gap)) / 2 * .38);   /* the clear top: 38% of the card's width, which the fade is measured from */
-  position: relative; isolation: isolate; display: grid; align-content: end;
-  min-height: calc((100cqw - var(--hav-gap)) / 2 * 331 / 484); padding-top: var(--hav-clear); border-radius: var(--r-panel); color: var(--on-dark); }
+list-style: none; container: hav-grid / inline-size; }
+.hav-card { --hav-clear: calc((100cqw - var(--hav-gap)) / 2 * .38);
+position: relative; isolation: isolate; display: grid; align-content: end;
+min-height: calc((100cqw - var(--hav-gap)) / 2 * 331 / 484); padding-top: var(--hav-clear); border-radius: var(--r-panel); color: var(--on-dark); }
 .hav-ph { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: inherit; background: var(--line); }
 .hav-ph img { width: 100%; height: 100%; object-fit: cover; transition: scale .5s var(--ease); }
 .hav-words { padding: 0 20px 20px; }
-/* the hero's fade (the service heroes' .sh-panel::before, the How it works cards' hwa-fade.css): the ink (--heading, #16213A; the heroes reset it
-   for their own use, so there it is --dark-2) at 94% at the foot, 78% at 26%, 25% at 52% and clear from 64%, over her photo as it is (the files
-   carry no tint). It replaces the navy shade (--dark-2, 80% to 62%) that sat under the words only.
-   The hero's words fill the lower part of a tall panel, so its stops are fractions of the panel. These cards are short and their words fill
-   more of them the narrower they get (about 45% of the card at 1440, 65% at 1024 and 768), and over the whole card the fade was clear by the
-   words' top: titles 1.3 to 2:1 at 768 and on phones. So the same stops are 2.5 times the words zone, the card below its clear top (the
-   100% - --hav-clear): 49% ink at the top of the words, whatever the card's shape, and at 1440 and 1920 within about 12% of the hero's own.
-   Drawn as the card's ::after, under the words (z -1, after the photo's own z -1), the card's own corners; the words box has no background and
-   is never positioned, so the link's cover (below) spans the whole card, photo included */
 .hav-card::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
-  background: linear-gradient(to top,
-    color-mix(in srgb, var(--heading) 94%, transparent) 0,
-    color-mix(in srgb, var(--heading) 78%, transparent) calc((100% - var(--hav-clear)) * .65),
-    color-mix(in srgb, var(--heading) 25%, transparent) calc((100% - var(--hav-clear)) * 1.3),
-    transparent calc((100% - var(--hav-clear)) * 1.6)); }
-.hav-card :is(h2, h3) { font-size: var(--h3); line-height: 1.25; color: inherit; text-transform: uppercase; letter-spacing: .02em; }   /* capitals
-   at the h3's size, as the site's cards; a member whose words give the card's title as an H2 (a part that was a section of its own) keeps it */
+background: linear-gradient(to top,
+color-mix(in srgb, var(--heading) 94%, transparent) 0,
+color-mix(in srgb, var(--heading) 78%, transparent) calc((100% - var(--hav-clear)) * .65),
+color-mix(in srgb, var(--heading) 25%, transparent) calc((100% - var(--hav-clear)) * 1.3),
+transparent calc((100% - var(--hav-clear)) * 1.6)); }
+.hav-card :is(h2, h3) { font-size: var(--h3); line-height: 1.25; color: inherit; text-transform: uppercase; letter-spacing: .02em; }
 .hav-card :is(h2, h3) a, a.hav-more { color: inherit; text-decoration: none; }
-/* the whole card is the link: on the title (its text the page's phrase) or, where the words give the link its own phrase, on the Read
-   more row, which then carries that phrase */
 .hav-card :is(h2, h3) a::after, .hav-card a.hav-more::after { content: ""; position: absolute; inset: 0; z-index: 1; }
 .hav-words > p { max-width: 34em; margin-top: 6px; font-size: var(--cap); line-height: 1.45; }
-/* What we do's Read more row: a white hairline at 30%, the words at the left, the site's arrow at the far end */
 .hav-more { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px;
-  border-top: 1px solid rgb(255 255 255 / .3); font: 400 var(--cap)/1.2 var(--f); color: var(--on-dark); }
+border-top: 1px solid rgb(255 255 255 / .3); font: 400 var(--cap)/1.2 var(--f); color: var(--on-dark); }
 .hav-more .i { width: 18px; height: 18px; color: currentColor; transition: transform .18s var(--ease); }
 .hav-card a:focus-visible { outline: none; }
 .hav-card:has(a:focus-visible) { outline: 3px solid var(--focus); outline-offset: 3px; }
 @media (hover: hover) {
-  .hav-card:hover .hav-ph img { scale: 1.03; }
-  .hav-card:hover .hav-more .i { transform: translateX(3px); }
+.hav-card:hover .hav-ph img { scale: 1.03; }
+.hav-card:hover .hav-more .i { transform: translateX(3px); }
 }
 @media (prefers-reduced-motion: reduce) { .hav-ph img { transition: none; } }
-
-
-/* a quote under the cards (a member whose words end with one): the theme's quote type, the name as a caption */
 .hav-quote { margin: 28px 0 0; }
 .hav-quote blockquote { margin: 0; font-size: var(--lede); line-height: 1.5; color: var(--ink); }
 .hav-quote figcaption { margin-top: 6px; }
-
-/* Under the photo (preview's Words switch): a white card, the photo across its top at 2:1, the words under it in the page's colours */
 .hav--under .hav-card { min-height: 0; padding-top: 0; grid-template-rows: auto 1fr; overflow: hidden;
-  background: var(--surface); color: var(--ink); }
-.hav--under .hav-words { display: flex; flex-direction: column; justify-content: flex-end; }   /* the words stand on the card's foot here
-   too, so the titles' last lines, the lines and the links sit level across a row */
+background: var(--surface); color: var(--ink); }
+.hav--under .hav-words { display: flex; flex-direction: column; justify-content: flex-end; }
 .hav--under .hav-ph { position: relative; z-index: auto; aspect-ratio: 2 / 1; border-radius: 0; }
 .hav--under .hav-card::after { display: none; }
 .hav--under .hav-words { padding: 20px 20px 22px; }
 .hav--under .hav-card :is(h2, h3) { color: var(--heading); }
 .hav--under .hav-more { border-top-color: var(--line); color: var(--link); }
-
-/* under 992px the line goes under the heading (What we do's) */
 @media (max-width: 991px) {
-  .hav-head { grid-template-columns: minmax(0, 1fr); row-gap: 16px; }
-  .hav-head .sec-lede { max-width: 60ch; }
+.hav-head { grid-template-columns: minmax(0, 1fr); row-gap: 16px; }
+.hav-head .sec-lede { max-width: 60ch; }
 }
-
-/* phones: one row you swipe, from screen edge to screen edge, the next card showing 44px; the cards taller (4:5 at least), the top 58%
-   of the width clear photo */
 @media (max-width: 760px) {
-  .hav-in { --hav-space: 24px; }
-  .hav-grid { display: flex; margin-inline: calc(-1 * var(--edge)); padding: 0 var(--edge); overflow-x: auto; overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory; scroll-padding-inline: var(--edge); scrollbar-width: none; }
-  .hav-grid::-webkit-scrollbar { display: none; }
-  .hav-card { --hav-w: min(320px, 100cqw - var(--hav-gap) - 44px); --hav-clear: 58cqw; flex: 0 0 var(--hav-w); min-height: calc(var(--hav-w) * 5 / 4); padding-top: var(--hav-clear);
-    scroll-snap-align: start; }
-  .hav-ph img { object-position: var(--hav-x, 50%) 50%; }
-  .hav-words { padding-inline: 16px; padding-bottom: 16px; }
-  .hav--under .hav-card { min-height: 0; }
-  .hav--under .hav-words { padding: 16px 16px 18px; }
+.hav-in { --hav-space: 24px; }
+.hav-grid { display: flex; margin-inline: calc(-1 * var(--edge)); padding: 0 var(--edge); overflow-x: auto; overscroll-behavior-x: contain;
+scroll-snap-type: x mandatory; scroll-padding-inline: var(--edge); scrollbar-width: none; }
+.hav-grid::-webkit-scrollbar { display: none; }
+.hav-card { --hav-w: min(320px, 100cqw - var(--hav-gap) - 44px); --hav-clear: 58cqw; flex: 0 0 var(--hav-w); min-height: calc(var(--hav-w) * 5 / 4); padding-top: var(--hav-clear);
+scroll-snap-align: start; }
+.hav-ph img { object-position: var(--hav-x, 50%) 50%; }
+.hav-words { padding-inline: 16px; padding-bottom: 16px; }
+.hav--under .hav-card { min-height: 0; }
+.hav--under .hav-words { padding: 16px 16px 18px; }
 }
-
 @media (forced-colors: active) {
-  .hav-card { outline: 1px solid CanvasText; }
+.hav-card { outline: 1px solid CanvasText; }
 }
-
-/* Eyebrow titles (.hav--brow; Vegas, 8 Oct 2026, on #window-repair-glass: "i dont want them to feel so empty inside maybe have ther fade on the top
-   and bottom so there is content spread out more in the cards", then "show me the top part using the eyebrow design for the header", then "ship",
-   for the members whose card titles are H2s; preview design/hav-card-inside; and on Replacing old gutters, whose titles are H3s, Vegas: "give this
-   section the eyebrow title look ... like this" with a screenshot of #gutter-repair-hail, so the rules take either). The words split into two plates
-   with her photo clear between them:
-   - at the top, the card's title as the site's section eyebrow, theme.css's tag in its form for dark ground (a white face, ink words; 13px capitals,
-     700, +.08em, the 4px corner, 28.5px tall on one line as the theme's). The face is on the title's span (.hav-tag, written by family.py) with
-     box-decoration-break, so a title that wraps on a phone stacks as two tags hugging their words, 4px apart, never one wide block;
-   - at the foot, the line and the Read more row as they were;
-   - between them at least 64px of clear photo (48px on phones) when a narrow card grows; the card keeps its shape otherwise.
-   Two fades, his rule for cards with words at the top (the How it works cards' .hwa--top): the hero's stops scaled to each plate, a top one from 80%
-   (the How it works top fade's 74% plus a little) over --hav-t, and the foot one over --hav-f. The section's script measures both plates, 12px and
-   20px past their words (the fallbacks hold without it). Measured on the preview: lines 5.18:1 and Read more 11.53:1 at worst over 1440 to 390. */
 .hav--brow { --hav-mid: 64px; }
 .hav--brow .hav-card { --hav-t: 96px; --hav-f: 170px; padding-top: 0; align-content: stretch; }
 .hav--brow .hav-words { display: grid; grid-template-rows: auto minmax(var(--hav-mid), 1fr) auto auto; padding: 20px; }
@@ -150,25 +74,23 @@
 .hav--brow .hav-more { grid-row: 4; }
 .hav--brow .hav-card :is(h2, h3) { justify-self: start; max-width: 100%; font: 700 var(--small)/32px var(--f); letter-spacing: .08em; }
 .hav--brow .hav-tag { padding: 6px 10px 6.5px 11px; border-radius: var(--r); background: #FFFFFF; color: var(--heading);
-  -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+-webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .hav--brow .hav-card::after { background:
-  linear-gradient(to bottom,
-    color-mix(in srgb, var(--heading) 80%, transparent) 0,
-    color-mix(in srgb, var(--heading) 70%, transparent) calc(var(--hav-t) * .65),
-    color-mix(in srgb, var(--heading) 25%, transparent) calc(var(--hav-t) * 1.3),
-    transparent calc(var(--hav-t) * 1.6)),
-  linear-gradient(to top,
-    color-mix(in srgb, var(--heading) 94%, transparent) 0,
-    color-mix(in srgb, var(--heading) 78%, transparent) calc(var(--hav-f) * .65),
-    color-mix(in srgb, var(--heading) 25%, transparent) calc(var(--hav-f) * 1.3),
-    transparent calc(var(--hav-f) * 1.6)); }
+linear-gradient(to bottom,
+color-mix(in srgb, var(--heading) 80%, transparent) 0,
+color-mix(in srgb, var(--heading) 70%, transparent) calc(var(--hav-t) * .65),
+color-mix(in srgb, var(--heading) 25%, transparent) calc(var(--hav-t) * 1.3),
+transparent calc(var(--hav-t) * 1.6)),
+linear-gradient(to top,
+color-mix(in srgb, var(--heading) 94%, transparent) 0,
+color-mix(in srgb, var(--heading) 78%, transparent) calc(var(--hav-f) * .65),
+color-mix(in srgb, var(--heading) 25%, transparent) calc(var(--hav-f) * 1.3),
+transparent calc(var(--hav-f) * 1.6)); }
 @media (max-width: 760px) {
-  .hav--brow { --hav-mid: 48px; }
-  .hav--brow .hav-words { padding: 16px; }
-  /* a title's phones-only short form (family.py MEMBERS short=): the words around it hidden here, kept in the page (Vegas, 8 Oct 2026, on
-     "Rotted fascia behind the gutter": "shortened down to rotted fascia so it can fit on one line", then Black streaks and Gutter guards) */
-  .hav-tail { display: none; }
+.hav--brow { --hav-mid: 48px; }
+.hav--brow .hav-words { padding: 16px; }
+.hav-tail { display: none; }
 }
-.hav-alt { display: none; }   /* a phones-only title in words of its own (family.py MEMBERS short=, "Insurance claim help") */
+.hav-alt { display: none; }
 @media (max-width: 760px) { .hav-long { display: none; } .hav-alt { display: inline; } }
 @media (forced-colors: active) { .hav--brow .hav-tag { border: 1px solid CanvasText; } }

@@ -1,184 +1,91 @@
-/* #gutter-repair-reviews: the homepage reviews' design (#home-why-premier's section.css, copied whole below by design/copied-designs/make.py)
-   with this section's words, reviews and photos. */
-
-/* ---------- from the board: section.css ---------- */
-/* #home-why-premier, Trusted by Lubbock homeowners (take 2): the section's layout, shared by the three cards. Colour,
-   type, corners and the link are theme.css's; each card's own form is card-<name>.css.
-   Layout 2 of /refs round 1 (Vegas, 4 Oct 2026: "build 2"; "the reference is good for the scrolling"): Mr. Handyman's
-   rows, measured at 1440: cards 445 wide and 20 apart in two rows, the heading centred above. Each row carries one of
-   her photos (Touchy Coffee's tile; Vegas: "add another photo to the bottom"). No pause button (Vegas: "also no pauseb
-   utton"): the rows stop while pointed at, while the region has keyboard focus, and on a tap. The rating chip is the
-   theme's .g-chip (the gloss chip, Vegas 4 Oct: "ship 3"), the same in every hero. */
-
 .hr { --hr-card: 440px; --hr-photo: 300px; --rv-gap: 20px; overflow: hidden; }
-
-/* the heading, the line and her rating, centred */
 .hr-head { display: grid; justify-items: center; text-align: center; }
 .hr-head .sec-lede { margin-inline: auto; }
-.hr-rating { margin-top: 20px; }   /* placed here; its look is theme.css's .g-chip (Vegas, 4 Oct: "ship 3") */
-
-/* the rows: full bleed, every card stretched to the tallest in its row; the region takes focus so a keyboard can stop it */
-.hr-rows { margin-top: 52px; outline: none; --rv-pad: var(--edge); }   /* --rv-pad: the phone row's first card starts on the page's column */
+.hr-rating { margin-top: 20px; }
+.hr-rows { margin-top: 52px; outline: none; --rv-pad: var(--edge); }
 .hr-rows:focus-visible { box-shadow: inset 0 0 0 3px var(--focus); }
 .hr .hr-rows .rv-lane + .rv-lane { margin-top: -8px; }
-.hr .hr-rows .rv-track { padding-block: 8px 24px; }   /* room above each row for a card's 4px lift, and under it for the shadow, which the row would clip
-                                                         (more specific than revolve.css's reset, which loads after) */
+.hr .hr-rows .rv-track { padding-block: 8px 24px; }
 .hr-card { display: flex; width: var(--hr-card); }
 .hr-review { flex: 1; display: flex; flex-direction: column; margin: 0; }
 .hr-review blockquote { margin: 0; }
 .hr-review .stars .i { width: 18px; height: 18px; }
-
-/* her photos, riding in the rows (Touchy Coffee's tile): the row's height, no words on them */
 .hr-photo { display: flex; width: var(--hr-photo); }
 .hr-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--hr-corner, var(--r));
-  box-shadow: 0 16px 24px -16px rgb(var(--shadow) / 0); transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
-/* pointed at, a card or a photo lifts 4px onto a soft shadow, as the services cards above do (Vegas, 4 Oct: "add a hover
-   animation to the cards and images where it slightly lifts it"); the rows stop while the pointer is over them */
+box-shadow: 0 16px 24px -16px rgb(var(--shadow) / 0); transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
 @media (hover: hover) {
-  .hr-photo:hover img { transform: translateY(-4px); box-shadow: 0 16px 24px -16px rgb(var(--shadow) / .5); }
+.hr-photo:hover img { transform: translateY(-4px); box-shadow: 0 16px 24px -16px rgb(var(--shadow) / .5); }
 }
-
 .hr-all { margin-top: 20px; text-align: center; }
-
 @media (max-width: 760px) {
-  .hr { --hr-card: 310px; --hr-photo: 220px; }
-  .hr-photo { display: none; }   /* the phone row is reviews only (Vegas, 6 Oct: "remove the photos from mobile reviews"); a hidden lazy photo is never fetched */
-  .hr-rows { margin-top: 36px; }
-  .hr-all { margin-top: 12px; }
+.hr { --hr-card: 310px; --hr-photo: 220px; }
+.hr-photo { display: none; }
+.hr-rows { margin-top: 36px; }
+.hr-all { margin-top: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { .hr-photo:hover img { transform: none; } }
-
-/* ---------- from the board: card-soft.css ---------- */
-/* Take 5 of the card, in the shipped buttons' design (Vegas, 5 Oct 2026, after the Soft pair shipped to every button: "show me the
-   cards form this section. just put one of the white one green one blue on a board and show me them with the design of that button
-   we shippped, since these came from the old button design"; then "give the cards a shine line on the top like the buttons have";
-   then "show me the review section with the current design and let me toggle with these cards"; then, with a screenshot of that
-   page set to Soft, her green, Cool, Grain Off and Photos Shadow, "ship this layout"). The preview, its numbers and its README are
-   design/review-cards-soft/ (http://premier-v2-review-cards-soft.idea.localhost:8787/section.html).
-   Take 3's card (card-depth.css: a fade from a lighter top, a patch of light, a 7% grain, a 1.5px edge and a 4px ledge, a rim and a
-   ring) was made like the old buttons. This one is made like the shipped ones (mvp/theme.css):
-   - the face: flat. White a hair cooler than white, her green (--act, the green button's face) and her logo navy (--second, the
-     blue button's face);
-   - the shine line: 1px along the top, white at 38% on the green and 28% on the blue (the buttons' own values), drawn 2px in from
-     the edge. The buttons' 2px transparent border puts it there (an inset shadow is drawn inside the border), so the line floats in
-     the face with a strip of face above it; the cards take the same 2px border (the first preview had none, and the line sat on the
-     edge itself and read as nothing). A white line cannot show on pure white, so the white card's face is take 3's white foot
-     (--call-foot, #EDF1F8) mixed 65% into white, #F3F6FA (words 11.3:1), and its line is white;
-   - the shadow: soft and in the card's own colour, the buttons' 10px 18px -8px at 60% made 16px 28px -12px: her deep green under the
-     green (55%), the deep navy under the blue (60%), the navy ink under the white (30%). Pointed at, the card still lifts 4px (take 3's
-     lift, as the services cards do) onto 22px 34px -12px;
-   - gone: the fade, the light patch, the 1.5px edge, the 4px ledge, the rim, the ring and the 7% grain (Vegas picked Grain Off);
-   - her photos in the rows take the same soft shadow, at rest and pointed at (Photos on Shadow);
-   - kept: the faces taking turns, the stars, the words, the name line, the corner and the 380px card (300 on phones). The old edge
-     and ledge became the 2px transparent border plus padding, so the words sit exactly where they did and every card is as tall.
-   White words on her exact green are 2.6:1 (take 3's green card measured 3.2:1 at its lightest, under the 4.5:1 a 20px line needs);
-   the preview showed that number with the one-step-deeper green (#43A434, 3.2:1) beside it, and he shipped her green. */
-
-.hr--depth { --hr-card: 380px; --hr-corner: var(--r-panel); }   /* 360 in take 2; 380 holds "Name, Google review" on one line for most names */
-/* one card size on every page that uses this design (Vegas, 7 Oct 2026: "hail jobs we've done needs to be the right size for the review
-   cards and photos its not like homes its inconsistent ... make sure other review sections dont have this problem"): a row was as tall as
-   its longest quote, so About's rows came out 248px, Hail damage's 308 and 222, and their photos took those heights. Now every card and
-   photo is the homepage's own height, measured at every width from 320 to 1920: 278px, and 267 where the rows merge on phones. A quote
-   has to fit it: design/about-people and design/copied-designs stop on one longer than the homepage's longest. */
+.hr--depth { --hr-card: 380px; --hr-corner: var(--r-panel); }
 .hr--depth { --hr-card-h: 278px; }
 .hr--depth .hr-card, .hr--depth .hr-photo { height: var(--hr-card-h); }
-
-/* the white face (the default): flat, a hair cooler than white so its white shine line shows */
 .hr--depth .hr-card {
-  --cd-face: color-mix(in srgb, var(--call) 35%, var(--call-foot)); --cd-light: inset 0 1px 0 rgb(255 255 255);
-  --cd-sh: 0 16px 28px -12px rgb(var(--shadow) / .30); --cd-sh-up: 0 22px 34px -12px rgb(var(--shadow) / .30);
-  --cd-star: var(--head); --cd-label: var(--heading); --cd-words: var(--ink); --cd-name: var(--heading); --cd-src: var(--muted); }   /* navy stars on white (Vegas, 4 Oct: "its weird
-     that the white card has only green stars"); the first site's light review cards had navy stars too */
-/* the white face with green stars: the white cards take turns, navy stars and green (Vegas, 4 Oct: "have some of the white
-   cards have the green stars some have the blue") */
+--cd-face: color-mix(in srgb, var(--call) 35%, var(--call-foot)); --cd-light: inset 0 1px 0 rgb(255 255 255);
+--cd-sh: 0 16px 28px -12px rgb(var(--shadow) / .30); --cd-sh-up: 0 22px 34px -12px rgb(var(--shadow) / .30);
+--cd-star: var(--head); --cd-label: var(--heading); --cd-words: var(--ink); --cd-name: var(--heading); --cd-src: var(--muted); }
 .hr--depth .hr-card--d { --cd-star: var(--star); }
-/* the navy face: the blue button's, her logo navy */
 .hr--depth .hr-card--a {
-  --cd-face: var(--second); --cd-light: inset 0 1px 0 rgb(255 255 255 / .28);
-  --cd-sh: 0 16px 28px -12px rgb(var(--second-shadow) / .6); --cd-sh-up: 0 22px 34px -12px rgb(var(--second-shadow) / .6);
-  --cd-star: var(--on-dark); --cd-label: var(--on-dark); --cd-words: rgb(255 255 255 / .92); --cd-name: var(--on-dark); --cd-src: rgb(255 255 255 / .72); }
-/* the green face: the green button's, her green. White words 2.6:1 (Vegas, 4 Oct: "also have the green card use white text not
-   dark"; green faces read as her button green, the preview showed the number) */
+--cd-face: var(--second); --cd-light: inset 0 1px 0 rgb(255 255 255 / .28);
+--cd-sh: 0 16px 28px -12px rgb(var(--second-shadow) / .6); --cd-sh-up: 0 22px 34px -12px rgb(var(--second-shadow) / .6);
+--cd-star: var(--on-dark); --cd-label: var(--on-dark); --cd-words: rgb(255 255 255 / .92); --cd-name: var(--on-dark); --cd-src: rgb(255 255 255 / .72); }
 .hr--depth .hr-card--c {
-  --cd-face: var(--act); --cd-light: inset 0 1px 0 rgb(255 255 255 / .38);
-  --cd-sh: 0 16px 28px -12px rgb(var(--act-shadow) / .55); --cd-sh-up: 0 22px 34px -12px rgb(var(--act-shadow) / .55);
-  --cd-star: var(--on-dark); --cd-label: var(--on-dark); --cd-words: var(--on-dark); --cd-name: var(--on-dark); --cd-src: rgb(255 255 255 / .9); }
-
+--cd-face: var(--act); --cd-light: inset 0 1px 0 rgb(255 255 255 / .38);
+--cd-sh: 0 16px 28px -12px rgb(var(--act-shadow) / .55); --cd-sh-up: 0 22px 34px -12px rgb(var(--act-shadow) / .55);
+--cd-star: var(--on-dark); --cd-label: var(--on-dark); --cd-words: var(--on-dark); --cd-name: var(--on-dark); --cd-src: rgb(255 255 255 / .9); }
 .hr--depth .hr-review { padding: calc(28px - .5px) calc(30px - .5px) calc(30px + 2px); border: 2px solid transparent; border-radius: var(--r-panel);
-  background: var(--cd-face); box-shadow: var(--cd-light), var(--cd-sh);
-  transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
-/* pointed at: the card lifts 4px onto a longer soft shadow, as the services cards do; the shine line stays */
+background: var(--cd-face); box-shadow: var(--cd-light), var(--cd-sh);
+transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
 @media (hover: hover) {
-  .hr--depth .hr-review:hover { transform: translateY(-4px); box-shadow: var(--cd-light), var(--cd-sh-up); }
+.hr--depth .hr-review:hover { transform: translateY(-4px); box-shadow: var(--cd-light), var(--cd-sh-up); }
 }
 @media (prefers-reduced-motion: reduce) { .hr--depth .hr-review:hover { transform: none; } }
 .hr--depth .hr-review .stars { gap: 6px; color: var(--cd-star); }
 .hr--depth .hr-review .stars .i { width: 30px; height: 30px; }
-/* the stars, the words, and the name on the foot as the first site's card has it: "Stacy Copeland, Google review", the
-   name bold, the rest regular (Vegas, 4 Oct: "have the layout like my card reference where the name is at the bottom
-   with the word google review"; the name had been a capitals label above the words, "no underlines under the names") */
 .hr--depth blockquote { margin-top: 18px; }
 .hr--depth blockquote p { font-size: var(--lede); line-height: 1.5; color: var(--cd-words); }
 .hr--depth .hr-foot { margin-top: auto; padding-top: 22px; font-size: var(--body); line-height: 1.35; }
 .hr--depth .hr-name { font-style: normal; font-weight: 700; color: var(--cd-name); }
 .hr--depth .hr-src { color: var(--cd-src); }
-.hr--depth .hr-nw { white-space: nowrap; }   /* a long name breaks before "Google review", never inside it */
-
-/* her photos in the rows take the cards' soft shadow (they had none at rest), the same at rest and pointed at; the lift is section.css's */
+.hr--depth .hr-nw { white-space: nowrap; }
 .hr--depth .hr-photo img { box-shadow: 0 16px 28px -12px rgb(var(--shadow) / .30); }
 @media (hover: hover) { .hr--depth .hr-photo:hover img { box-shadow: 0 22px 34px -12px rgb(var(--shadow) / .30); } }
-
-/* the rows' room: the soft shadow reaches 32px under a card at rest and 40px lifted, where take 3's reached 24px, and a row clips what
-   runs past its own box. So the room under each row's cards goes from 24px to 44px, the second row moves up the same 20px (-8px
-   becomes -28px) and the link under the rows takes the 20px back (20px becomes 0, and 12px becomes -8px on phones, where the rows
-   merge into one): the rows stay 24px apart and the section is exactly as tall as it was (1066.4px at 1710, 694.6px at 390). */
 .hr--depth .hr-rows .rv-track { padding-block: 8px 44px; }
 .hr--depth .hr-rows .rv-lane + .rv-lane { margin-top: -28px; }
 .hr--depth .hr-all { margin-top: 0; }
-
 @media (max-width: 760px) {
-  .hr--depth { --hr-card: 300px; --hr-card-h: 267px; }
-  .hr--depth .hr-review { padding: calc(22px - .5px) calc(24px - .5px) calc(24px + 2px); }
-  .hr--depth .hr-review .stars .i { width: 26px; height: 26px; }
-  .hr--depth blockquote p { font-size: inherit; }
-  .hr--depth .hr-foot { font-size: var(--ui); }
-  .hr--depth .hr-all { margin-top: -8px; }
+.hr--depth { --hr-card: 300px; --hr-card-h: 267px; }
+.hr--depth .hr-review { padding: calc(22px - .5px) calc(24px - .5px) calc(24px + 2px); }
+.hr--depth .hr-review .stars .i { width: 26px; height: 26px; }
+.hr--depth blockquote p { font-size: inherit; }
+.hr--depth .hr-foot { font-size: var(--ui); }
+.hr--depth .hr-all { margin-top: -8px; }
 }
 @media (forced-colors: active) { .hr--depth .hr-review { border-color: CanvasText; } }
-
-/* ---------- from the board: revolve.css ---------- */
-/* The reviews rows' motion (revolve.js has the behaviour): motion and overflow only, the look is section.css's.
-   No pause button (Vegas, 4 Oct): the rows stop for a mouse over them, keyboard focus on the region and a tap. */
-
-/* no script: each row is a plain row that scrolls by hand */
 [data-revolve="drift"] .rv-lane { overflow-x: auto; overscroll-behavior-x: contain; }
 [data-revolve="drift"] .rv-track { display: flex; width: max-content; margin: 0; padding: 0; list-style: none; }
 [data-revolve="drift"] .rv-track > * { flex: none; margin-right: var(--rv-gap, 20px); }
-
-/* with the script: the rows move for ever, the top one left and the bottom one right */
 [data-revolve="drift"][data-rv-on]:not(.rv-still) .rv-lane { overflow: hidden; }
 [data-revolve="drift"][data-rv-on]:not(.rv-still) .rv-track { will-change: transform;
-  animation: rv-left var(--rv-dur, 60s) linear infinite; }
+animation: rv-left var(--rv-dur, 60s) linear infinite; }
 [data-revolve="drift"][data-rv-on]:not(.rv-still) .rv-track[data-dir="right"] { animation-name: rv-right; }
 @keyframes rv-left  { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(calc(-1 * var(--rv-len, 0px)), 0, 0); } }
 @keyframes rv-right { from { transform: translate3d(calc(-1 * var(--rv-len, 0px)), 0, 0); } to { transform: translate3d(0, 0, 0); } }
-/* stopped (pointer, focus, a tap, off screen): as specific as the rule above and after it, or its animation shorthand
-   would set the play state back to running */
 [data-revolve="drift"][data-rv-on]:not(.rv-still).rv-paused .rv-track { animation-play-state: paused; }
-
-/* holding still (reduced motion): the rows scroll by hand and snap to a card */
 [data-revolve="drift"].rv-still .rv-lane { scroll-snap-type: x proximity; }
 [data-revolve="drift"].rv-still .rv-track > * { scroll-snap-align: start; }
-
 @media (prefers-reduced-motion: reduce) {
-  [data-revolve="drift"] .rv-track { animation: none !important; }
+[data-revolve="drift"] .rv-track { animation: none !important; }
 }
-
-/* phones (data-merge and under; revolve.js adds .rv-swipe and .rv-still): one row you swipe, not a drift (Vegas, 6 Oct: "make the
-   reviews section on mobile swipeable isntead of scroll animation"). It snaps to each card, the first one on the page's column
-   (--rv-pad, set by the section) and the next one peeking in; no bar, no arrows (the site's swipe rows have none). */
 [data-revolve="drift"].rv-swipe .rv-lane { scroll-snap-type: x mandatory; scroll-padding-inline: var(--rv-pad, 0px);
-  scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 [data-revolve="drift"].rv-swipe .rv-lane::-webkit-scrollbar { display: none; }
 [data-revolve="drift"].rv-swipe .rv-track { padding-inline: var(--rv-pad, 0px); }
 [data-revolve="drift"].rv-swipe .rv-track > :last-child { margin-right: 0; }
