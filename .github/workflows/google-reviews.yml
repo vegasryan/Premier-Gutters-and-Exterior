@@ -1,0 +1,44 @@
+# Google review count: once a day, read her Business Profile's review count and star rating, and if either changed, write them into every
+# page and push, so Netlify publishes the site (one production deploy, 15 credits, only on a day the number moves).
+# Source: ~/Desktop/Premier Gutters v2/deploy/google-reviews/ (google-reviews.yml, update.py, README.md). Run it by hand from the
+# repo's Actions tab (Run workflow) to check now.
+name: Google review count
+
+on:
+  schedule:
+    - cron: '17 12 * * *'   # every day at 12:17 UTC: 6:17 am in Lubbock in winter, 7:17 am in summer
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: google-reviews
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read the count from Google and stamp the pages if it changed
+        id: reviews
+        env:
+          GBP_CLIENT_ID: ${{ secrets.GBP_CLIENT_ID }}
+          GBP_CLIENT_SECRET: ${{ secrets.GBP_CLIENT_SECRET }}
+          GBP_REFRESH_TOKEN: ${{ secrets.GBP_REFRESH_TOKEN }}
+          GBP_LOCATION: ${{ secrets.GBP_LOCATION }}
+        run: python3 .github/reviews/update.py check .
+
+      - name: Commit and push (Netlify publishes it unless the message says skip)
+        if: steps.reviews.outputs.commit == 'true'
+        env:
+          MESSAGE: ${{ steps.reviews.outputs.message }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -q -m "$MESSAGE"
+          git push origin HEAD:main
