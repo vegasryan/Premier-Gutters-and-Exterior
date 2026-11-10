@@ -30,6 +30,7 @@ jobs:
           GBP_CLIENT_SECRET: ${{ secrets.GBP_CLIENT_SECRET }}
           GBP_REFRESH_TOKEN: ${{ secrets.GBP_REFRESH_TOKEN }}
           GBP_LOCATION: ${{ secrets.GBP_LOCATION }}
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
         run: python3 .github/reviews/update.py check .
 
       - name: Commit and push (Netlify publishes it unless the message says skip)
